@@ -1,0 +1,15 @@
+# Sorry, folks. Too specific to be in a public repo
+Portraits
+
+# Binaries I don't want in
+bin
+obj
+*.obj
+*.exe
+
+# Copyright issues
+Pre-Assets/3rd
+
+
+# Too large
+GenScript/MkLvUpTable.html
