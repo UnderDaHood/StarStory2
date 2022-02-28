@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Star Story II - Foe Editor - Coded by: Jeroen P. Broks" Height="679.821" Width="967.143">
+        ResizeMode="NoResize"
+        Title="Star Story II - Foe Editor - Coded by: Jeroen P. Broks" Height="981.786" Width="1345.715">
     <Window.Background>
         <ImageBrush ImageSource="B1.PNG"/>
     </Window.Background>
