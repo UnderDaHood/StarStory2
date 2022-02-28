@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,10 +60,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="..\..\..\..\..\..\VisualStudio\TrickyUnits\Dirry.cs">
+      <Link>Units\Dirry.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\..\VisualStudio\TrickyUnits\FileList.cs">
+      <Link>Units\FileList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\..\VisualStudio\TrickyUnits\Fmt.cs">
+      <Link>Units\Fmt.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\..\VisualStudio\TrickyUnits\FormConfirm.cs">
+      <Link>Units\FormConfirm.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\..\VisualStudio\TrickyUnits\GINIE.cs">
+      <Link>Units\GINIE.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\..\VisualStudio\TrickyUnits\mkl.cs">
+      <Link>Units\mkl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\..\VisualStudio\TrickyUnits\qstr.cs">
+      <Link>Units\qstr.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\..\VisualStudio\TrickyUnits\qstream.cs">
+      <Link>Units\qstream.cs</Link>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data.cs" />
     <Compile Include="Lics.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
