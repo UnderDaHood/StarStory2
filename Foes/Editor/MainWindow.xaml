@@ -7,27 +7,35 @@
 		mc:Ignorable="d"
 		ResizeMode="NoResize"
 		Title="Star Story II - Foe Editor - Coded by: Jeroen P. Broks" Height="981.786" Width="1345.715">
-	<Window.Background>
-		<ImageBrush ImageSource="B1.PNG"/>
-	</Window.Background>
-	<Grid>
-		<ListBox x:Name="FoeList" HorizontalAlignment="Left" Height="873" Margin="28,24,0,0" VerticalAlignment="Top" Width="216" Background="{x:Null}" Foreground="#FF00B4FF"/>
-		<Button x:Name="NewFoe" Content="+" HorizontalAlignment="Left" Height="45" Margin="28,902,0,0" VerticalAlignment="Top" Width="50" FontSize="18" IsEnabled="False" Click="NewFoe_Click">
-			<Button.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="Lime" Offset="0"/>
-					<GradientStop Color="#FFB4FF00" Offset="1"/>
-				</LinearGradientBrush>
-			</Button.Background>
-		</Button>
-		<TextBox x:Name="NewFoeFileName" HorizontalAlignment="Left" Height="41" Margin="83,902,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontSize="20" TextChanged="NewFoeFileName_TextChanged">
-			<TextBox.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="Lime" Offset="0"/>
-					<GradientStop Color="Black" Offset="1"/>
-				</LinearGradientBrush>
-			</TextBox.Background>
-		</TextBox>
+    <Window.Background>
+        <ImageBrush ImageSource="B1.PNG"/>
+    </Window.Background>
+    <Grid>
+        <ListBox x:Name="FoeList" HorizontalAlignment="Left" Height="873" Margin="28,24,0,0" VerticalAlignment="Top" Width="216" Background="{x:Null}" Foreground="#FF00B4FF" SelectionChanged="FoeList_SelectionChanged"/>
+        <Button x:Name="NewFoe" Content="+" HorizontalAlignment="Left" Height="45" Margin="28,902,0,0" VerticalAlignment="Top" Width="50" FontSize="18" IsEnabled="False" Click="NewFoe_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Lime" Offset="0"/>
+                    <GradientStop Color="#FFB4FF00" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBox x:Name="NewFoeFileName" HorizontalAlignment="Left" Height="41" Margin="83,902,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontSize="20" TextChanged="NewFoeFileName_TextChanged">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Lime" Offset="0"/>
+                    <GradientStop Color="Black" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+        </TextBox>
+        <TabControl x:Name="MainTab" HorizontalAlignment="Left" Height="919" Margin="249,24,0,0" VerticalAlignment="Top" Width="1081" Background="{x:Null}" BorderBrush="#FF005AAC" Foreground="#FF064B64">
+            <TabItem Header="TabItem">
+                <Grid/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
 
-	</Grid>
+    </Grid>
 </Window>
