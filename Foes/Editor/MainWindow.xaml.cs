@@ -51,6 +51,7 @@ namespace StarStory2_Foe_Editor {
 			InitializeComponent();
 			GetFoeList();
 			Data.RegFoeList(FoeList);
+			MainTab.Visibility = Visibility.Hidden;
 		}
 
 		void GetFoeList() {
@@ -89,6 +90,15 @@ namespace StarStory2_Foe_Editor {
 			NewFoeFileName.Text = "";
 			QuickStream.SaveString(fname, $"[alg]\nCreationTime={DateTime.Now}\nCreationFile={fname}\n[meta]\nName={qstr.StripDir(txt)}\n");
 			GetFoeList();
+		}
+
+		private void FoeList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+			if (FoeList.SelectedItem == null) {
+				MainTab.Visibility = Visibility.Hidden;
+				return;
+			}
+			MainTab.Visibility = Visibility.Visible;
+			Data.UpdateTextBoxes();
 		}
 	}
 }
