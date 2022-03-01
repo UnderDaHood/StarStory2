@@ -50,6 +50,7 @@ namespace StarStory2_Foe_Editor {
 		public MainWindow() {
 			InitializeComponent();
 			GetFoeList();
+			Data.RegFoeList(FoeList);
 		}
 
 		void GetFoeList() {
