@@ -102,6 +102,7 @@ namespace StarStory2_Foe_Editor {
 					IT.Key.Text = R.Data[IT.Value.Category, IT.Value.VarName];
 				}
 			}
+			DontChange = false;
 		}
 
 		static ListBox FoeList;
