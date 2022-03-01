@@ -61,6 +61,8 @@ namespace StarStory2_Foe_Editor {
 			foreach(var f in L) {
 				if (f.ToUpper() != "README.MD") FoeList.Items.Add(f);
 			}
+			Data.UpdateTextBoxes();
+			MainTab.Visibility = Visibility.Hidden;
 		}
 
 		private void NewFoeFileName_TextChanged(object sender, TextChangedEventArgs e) {
