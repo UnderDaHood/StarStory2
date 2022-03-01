@@ -94,7 +94,7 @@ namespace StarStory2_Foe_Editor {
 					return;                
 			}
 			NewFoeFileName.Text = "";
-			QuickStream.SaveString(fname, $"[alg]\nCreationTime={DateTime.Now}\nCreationFile={fname}\n[meta]\nName={qstr.StripDir(txt)}\n");
+			QuickStream.SaveString(fname, $"[alg]\nCreationTime={DateTime.Now}\nCreationFile={fname}\n[meta]\nName={qstr.StripDir(txt)}\nVocalTag={txt}\nNormSprite=GFX/Combat/Foe/{txt}.png\nNegaSprite=NormSprite=GFX/Combat/Foe/{txt}.Negative.png");
 			GetFoeList();
 		}
 
