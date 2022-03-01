@@ -54,6 +54,7 @@ namespace StarStory2_Foe_Editor {
 			MainTab.Visibility = Visibility.Hidden;
 			Data.RegTextBox(TextFoeName, "Name");
 			Data.RegTextBox(TextFoeDescription, "Description");
+			Data.RegTextBox(TextVocalTag, "VocalTag");
 		}
 
 		void GetFoeList() {
