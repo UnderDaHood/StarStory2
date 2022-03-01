@@ -94,6 +94,7 @@ namespace StarStory2_Foe_Editor {
 						txt = txt.Replace($"{(char)i}", $"<<<<{i}>>>>");
 				}
 				R.Data[T.Category, T.VarName] = txt;
+				R.Modified = true;
 			} catch(Exception e) {
 				Confirm.Annoy($"An error occurred!\n\n{e.Message}\n\n\nFoe: {Foe}");
 			}
@@ -108,7 +109,7 @@ namespace StarStory2_Foe_Editor {
 					var txt = R.Data[IT.Value.Category, IT.Value.VarName];
 					if (IT.Key.AcceptsReturn) {
 						for (byte i = 255; i > 0; i--) txt = txt.Replace($"<<<<{i}>>>>", $"{(char)i}");
-                    }
+					}
 					IT.Key.Text = txt;
 				}
 			}
