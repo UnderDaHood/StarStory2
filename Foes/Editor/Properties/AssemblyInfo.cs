@@ -33,12 +33,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WpfApp1")]
+[assembly: AssemblyTitle("Star Story II - Foe Editor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WpfApp1")]
-[assembly: AssemblyCopyright("Copyright ??  2022")]
+[assembly: AssemblyProduct("Star Story II")]
+[assembly: AssemblyCopyright("Copyright (c) 2022 Jeroen P. Broks")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
