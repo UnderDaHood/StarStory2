@@ -52,6 +52,8 @@ namespace StarStory2_Foe_Editor {
 			GetFoeList();
 			Data.RegFoeList(FoeList);
 			MainTab.Visibility = Visibility.Hidden;
+			Data.RegTextBox(TextFoeName, "Name");
+			Data.RegTextBox(TextFoeDescription, "Description");
 		}
 
 		void GetFoeList() {
@@ -69,6 +71,8 @@ namespace StarStory2_Foe_Editor {
 			var txt = NewFoeFileName.Text;
 			NewFoe.IsEnabled = txt != "";
 		}
+
+		private void RegTexBoxChange(object sender, TextChangedEventArgs e) => Data.ActTextBox((TextBox)sender);
 
 		private void NewFoe_Click(object sender, RoutedEventArgs e) {
 			var txt = NewFoeFileName.Text;
@@ -100,7 +104,10 @@ namespace StarStory2_Foe_Editor {
 				return;
 			}
 			MainTab.Visibility = Visibility.Visible;
+			TextFileName.Text = Data.Foe;
 			Data.UpdateTextBoxes();
 		}
+
+	  
 	}
 }

@@ -29,8 +29,20 @@
             </TextBox.Background>
         </TextBox>
         <TabControl x:Name="MainTab" HorizontalAlignment="Left" Height="919" Margin="249,24,0,0" VerticalAlignment="Top" Width="1081" Background="{x:Null}" BorderBrush="#FF005AAC" Foreground="#FF064B64">
-            <TabItem Header="TabItem">
-                <Grid/>
+            <TabItem Header="Meta Data">
+                <Grid>
+                    <Image HorizontalAlignment="Left" Height="175" Margin="10,10,0,0" VerticalAlignment="Top" Width="192" Source="Mascotte.png">
+                        <Image.OpacityMask>
+                            <ImageBrush ImageSource="Mascotte.png"/>
+                        </Image.OpacityMask>
+                    </Image>
+                    <Label Content="File:" HorizontalAlignment="Left" Height="28" Margin="207,10,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <TextBox IsReadOnly="True" x:Name="TextFileName" HorizontalAlignment="Left" Height="28" Margin="417,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF"/>
+                    <Label Content="Name:" HorizontalAlignment="Left" Height="28" Margin="207,43,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <TextBox IsReadOnly="False" x:Name="TextFoeName" HorizontalAlignment="Left" Height="28" Margin="417,43,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
+                    <Label Content="Description:" HorizontalAlignment="Left" Height="28" Margin="207,76,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <TextBox IsReadOnly="False" AcceptsReturn="True" x:Name="TextFoeDescription" HorizontalAlignment="Left" Height="109" Margin="417,76,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
+                </Grid>
             </TabItem>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>
