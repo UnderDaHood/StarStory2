@@ -87,9 +87,15 @@ namespace StarStory2_Foe_Editor {
 				if (Foe == "" || DontChange) return;
 				var T = AutoTexBox[TB];
 				var R = GetRec(Foe);
-				R.Data[T.Category, T.VarName] = TB.Text;
+				var txt = TB.Text;
+				if (TB.AcceptsReturn) {
+					for (byte i = 255; i > 0; i--) 
+						if ((i<35 && i!=32) || i>122)
+						txt = txt.Replace($"{(char)i}", $"<<<<{i}>>>>");
+				}
+				R.Data[T.Category, T.VarName] = txt;
 			} catch(Exception e) {
-				Confirm.Annoy($"An error occurred!\n\n{e.Message}\n");
+				Confirm.Annoy($"An error occurred!\n\n{e.Message}\n\n\nFoe: {Foe}");
 			}
 		}
 
@@ -99,16 +105,21 @@ namespace StarStory2_Foe_Editor {
 				IT.Key.IsEnabled = Foe != "";
 				if (Foe != "") {
 					var R = GetRec(Foe);
-					IT.Key.Text = R.Data[IT.Value.Category, IT.Value.VarName];
+					var txt = R.Data[IT.Value.Category, IT.Value.VarName];
+					if (IT.Key.AcceptsReturn) {
+						for (byte i = 255; i > 0; i--) txt = txt.Replace($"<<<<{i}>>>>", $"{(char)i}");
+                    }
+					IT.Key.Text = txt;
 				}
 			}
 			DontChange = false;
 		}
 
+
 		static ListBox FoeList;
 		static public string Foe {
 			get {
-				if (FoeList.SelectedItem == null) return "";
+				if (FoeList==null || FoeList.SelectedItem == null) return "";
 				return FoeList.SelectedItem.ToString();
 			}
 		}
