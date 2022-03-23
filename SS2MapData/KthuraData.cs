@@ -42,6 +42,8 @@ namespace SS2MapData {
 		public Kthura TheMap { private set; get; } = null;
 		Dictionary<string, byte[]> Unknown = new Dictionary<string, byte[]>();
 		public GINIE Layers = GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
+		public GINIE Foes = GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
+		public GINIE Treasures = GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
 		//GINIE Layers => SS2MapData.Layers.Data; //GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
 
 		static public KthuraData Current { private set; get; } = null;
@@ -60,6 +62,7 @@ namespace SS2MapData {
 		}
 
 		void Load() {
+			GC.Collect(); // I must be sure all old data has been saved and disposed or data loss can occur due to conflicts.
 			var J = JCR6.Dir(file);
 			TheMap = Kthura.Load(J);
 			foreach(var E in J.Entries.Keys) {
@@ -70,9 +73,15 @@ namespace SS2MapData {
 					case "LAYERS":
 						Layers.FromBytes(J.JCR_B("LAYERS"));
 						break;
+					case "TREASURE":
+						Treasures.FromBytes(J.JCR_B("TREASURE"));
+						break;
+					case "FOES":
+						Treasures.FromBytes(J.JCR_B("FOES"));
+						break;
 					default:
 						Debug.WriteLine($"Unknown data: {E}");
-						Unknown[E] = J.JCR_B(E);
+						Unknown[J.Entries[E].Entry] = J.JCR_B(E);
 						break;
 				}
 			}
@@ -84,6 +93,9 @@ namespace SS2MapData {
 			KthuraSave.Save(TheMap,J,"","zlib",Author,Notes);
 			void SaveGINIE(GINIE G, string Entry) => J.AddBytes(G.ToBytes(), Entry, "zlib", Author, Notes);
 			SaveGINIE(Layers, "Layers");
+			SaveGINIE(Foes, "Foes");
+			SaveGINIE(Treasures, "Treasure");
+			foreach (var k in Unknown) J.AddBytes(k.Value, k.Key, "zlib", Author, Notes);
 			J.Close();
 		}
 		~KthuraData() {
