@@ -59,6 +59,7 @@ namespace SS2MapData {
 			Layers.MW = this;
 			Layers.Register(TxtLayTitle, "Title");
 			Layers.Register(CheckNoEncounter, "NoEcounters", Layers.Type.Checkbox);
+			Layers.Register(TxtLayAltArena, "AltArena");
 		}
 		#endregion
 
