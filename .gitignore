@@ -17,3 +17,9 @@ Pre-Assets/3rd
 # Too large
 GenScript/MkLvUpTable.html
 Foes/Editor/Mascotte.png
+
+
+# Stuff not to be put here
+Font Check/*
+!Font Check/*.bb
+
