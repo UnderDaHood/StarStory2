@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.03.24
+// Version: 22.03.30
 // EndLic
 using System;
 using System.Collections.Generic;
@@ -35,7 +35,9 @@ using TrickyUnits;
 namespace SS2MapData {
 	class Config {
 		const string rawKthura = "Scyndi:Projects/Applications/Apollo/Games/Star Story 2/src/Tricky Story/Kthura/";
+		const string rawScript = "Scyndi:Projects/Applications/Apollo/Games/Star Story 2/src/Tricky Script/.BehaviorSource/";
 		static public string KthuraDir => Dirry.AD(rawKthura);
+		static public string ScriptDir => Dirry.AD(rawScript);
 
 		static Config() {
 			Debug.WriteLine("Initiating Dirry Alt Drives!"); Dirry.InitAltDrives(); 

@@ -21,13 +21,14 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.03.24
+// Version: 22.03.31
 // EndLic
 
 using NSKthura;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using TrickyUnits;
@@ -44,6 +45,7 @@ namespace SS2MapData {
 		public GINIE Layers = GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
 		public GINIE Foes = GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
 		public GINIE Treasures = GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
+		public string BehaviorSource = "";
 		//GINIE Layers => SS2MapData.Layers.Data; //GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
 
 		static public KthuraData Current { private set; get; } = null;
@@ -65,7 +67,16 @@ namespace SS2MapData {
 			GC.Collect(); // I must be sure all old data has been saved and disposed or data loss can occur due to conflicts.
 			var J = JCR6.Dir(file);
 			TheMap = Kthura.Load(J);
-			foreach(var E in J.Entries.Keys) {
+			if (File.Exists($"{Config.ScriptDir}{pathlessfile}.aqs"))
+				Behavior.SourceBox.Text = QuickStream.LoadString($"{Config.ScriptDir}{pathlessfile}.aqs");
+			else
+				Behavior.SourceBox.Text = $"; Behavior Apollo Quick Script for '{file}'\n; Created {DateTime.Now}\n\nInclude Basis.aqs\n\nChunk Load\n\tcall CSay,\"Welcome to {pathlessfile}\"\n\n";
+			if (!File.Exists($"{Config.ScriptDir}Basis.aqs")) {
+				Debug.WriteLine("Creating Basis.aqs");
+				Directory.CreateDirectory(Config.ScriptDir);
+				QuickStream.SaveString($"{Config.ScriptDir}Basis.aqs", Behavior.Basis);
+			}
+			foreach (var E in J.Entries.Keys) {
 				switch (E) {
 					case "DATA":
 					case "OBJECTS":
@@ -79,6 +90,9 @@ namespace SS2MapData {
 					case "FOES":
 						Treasures.FromBytes(J.JCR_B("FOES"));
 						break;
+					case "BEHAVIOR":
+						Debug.WriteLine("Behavior data present, but not needed for the editor!");
+						break;
 					default:
 						Debug.WriteLine($"Unknown data: {E}");
 						Unknown[J.Entries[E].Entry] = J.JCR_B(E);
@@ -88,16 +102,18 @@ namespace SS2MapData {
 			Meta.Load();
 		}
 
-		void Save() {
+		public void Save(bool compilebox=false) {
 			var J = new TJCRCreate(file);
-			KthuraSave.Save(TheMap,J,"","zlib",Author,Notes);
+			KthuraSave.Save(TheMap, J, "", "zlib", Author, Notes);
 			void SaveGINIE(GINIE G, string Entry) => J.AddBytes(G.ToBytes(), Entry, "zlib", Author, Notes);
 			SaveGINIE(Layers, "Layers");
 			SaveGINIE(Foes, "Foes");
 			SaveGINIE(Treasures, "Treasure");
+			Behavior.Compile(this, J, $"{Config.ScriptDir}{pathlessfile}.aqs", compilebox);
 			foreach (var k in Unknown) J.AddBytes(k.Value, k.Key, "zlib", Author, Notes);
 			J.Close();
 		}
+
 		~KthuraData() {
 			Debug.WriteLine($"Saving Kthura Map: {file}");
 			Save();

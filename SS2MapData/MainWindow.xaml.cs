@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.03.24
+// Version: 22.03.30
 // EndLic
 
 using System;
@@ -56,10 +56,12 @@ namespace SS2MapData {
 			Meta.Register(BoxTitle, "Title");
 			Meta.Register(BoxMapLevel, "MapLevel", true);
 			Meta.Register(BoxArena, "Arena");
+			Meta.Register(BoxMusic, "Music");
 			Layers.MW = this;
 			Layers.Register(TxtLayTitle, "Title");
 			Layers.Register(CheckNoEncounter, "NoEcounters", Layers.Type.Checkbox);
 			Layers.Register(TxtLayAltArena, "AltArena");
+			Behavior.SourceBox = Behavior_Source;
 		}
 		#endregion
 
@@ -109,12 +111,22 @@ namespace SS2MapData {
 			Layers.Receive();
 		}
 
-        private void LayUpdate(object sender, TextChangedEventArgs e) {
-			Layers.Update(sender);
-        }
-
-        private void LayUpdate(object sender, RoutedEventArgs e) {
+		private void LayUpdate(object sender, TextChangedEventArgs e) {
 			Layers.Update(sender);
 		}
+
+		private void LayUpdate(object sender, RoutedEventArgs e) {
+			Layers.Update(sender);
+		}
+
+		private void Behavior_Source_TextChanged(object sender, TextChangedEventArgs e) {
+			//Behavior.source = Behavior_Source.Text;
+			if (KthuraData.Current != null)
+				KthuraData.Current.BehaviorSource = Behavior_Source.Text;
+		}
+
+        private void CompileAndSave_Click(object sender, RoutedEventArgs e) {
+			KthuraData.Current.Save(true);
+        }
     }
 }

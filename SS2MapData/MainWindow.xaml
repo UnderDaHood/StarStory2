@@ -30,6 +30,8 @@
 					<TextBox x:Name="BoxMapLevel" HorizontalAlignment="Left" Height="35" Margin="199,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
 					<Label Content="Arena:" HorizontalAlignment="Left" Height="35" Margin="11,115,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
 					<TextBox x:Name="BoxArena" HorizontalAlignment="Left" Height="35" Margin="199,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
+					<Label Content="Music:" HorizontalAlignment="Left" Height="35" Margin="11,150,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+					<TextBox x:Name="BoxMusic" HorizontalAlignment="Left" Height="35" Margin="199,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Layers">
@@ -63,9 +65,9 @@
 								</LinearGradientBrush>
 							</CheckBox.Background>
 						</CheckBox>
-                        <Label Margin="-5,87,583,450" Content="Alternate Arena:" Foreground="Yellow" />
-                        <TextBox Margin="181,87,0,450" x:Name="TxtLayAltArena" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
-                    </Grid>
+						<Label Margin="-5,87,583,450" Content="Alternate Arena:" Foreground="Yellow" />
+						<TextBox Margin="181,87,0,450" x:Name="TxtLayAltArena" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+					</Grid>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Foes">
@@ -86,7 +88,28 @@
 				</TabItem.Background>
 				<Grid Background="#00000000"/>
 			</TabItem>
-<!-- (Just kept here for template purposes)
+			<TabItem Header="Behavior">
+				<TabItem.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFFFB400" Offset="0"/>
+						<GradientStop Color="#FF0F0b00" Offset="1"/>
+					</LinearGradientBrush>
+				</TabItem.Background>
+				<Grid Background="#00000000">
+					<TextBox x:Name="Behavior_Source" HorizontalAlignment="Left" Height="553" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="966" Foreground="#FFC8B4FF" AcceptsReturn="True" TextChanged="Behavior_Source_TextChanged">
+						<TextBox.Background>
+							<ImageBrush ImageSource="Dark.png"/>
+						</TextBox.Background>
+					</TextBox>
+					<Button x:Name="CompileAndSave" Margin="10,563,10,0" FontFamily="Segoe Script" Content="Save And Compile" Foreground="#FDFFFFFF" FontSize="18" Click="CompileAndSave_Click">
+						<Button.Background>
+							<ImageBrush ImageSource="Fractal Flower.jpg" Stretch="UniformToFill"/>
+						</Button.Background>
+					</Button>
+				</Grid>
+			</TabItem>
+
+			<!-- (Just kept here for template purposes)
 						<TabItem Header="Foes">
 				<TabItem.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
