@@ -22,4 +22,5 @@ Foes/Editor/Mascotte.png
 # Stuff not to be put here
 Font Check/*
 !Font Check/*.bb
-
+MakeMiniFont/fnt
+MakeMiniFont/*.jfbf
