@@ -30,9 +30,16 @@
 					<TextBox x:Name="BoxMapLevel" HorizontalAlignment="Left" Height="35" Margin="199,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
 					<Label Content="Arena:" HorizontalAlignment="Left" Height="35" Margin="11,115,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
 					<TextBox x:Name="BoxArena" HorizontalAlignment="Left" Height="35" Margin="199,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
-					<Label Content="Music:" HorizontalAlignment="Left" Height="35" Margin="11,150,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+					<Label Content="Music:" HorizontalAlignment="Left" Height="35" Margin="11,151,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
 					<TextBox x:Name="BoxMusic" HorizontalAlignment="Left" Height="35" Margin="199,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
-				</Grid>
+					<Label Content="Script:" HorizontalAlignment="Left" Height="35" Margin="11,185,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+                    <CheckBox x:Name="ChkBoxApolloQuickScript" Margin="199,185,566,385" Content="ApolloQuickScript" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
+                    <CheckBox x:Name="ChkBoxNeilMapScript" Margin="420,185,345,385" Content="Neil MapScript" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
+                    <Label Content="Callbacks:" HorizontalAlignment="Left" Height="35" Margin="11,220,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+                    <CheckBox x:Name="ChkBoxUpdate" Margin="199,220,566,350" Content="Update" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
+                    <CheckBox x:Name="ChkBoxPreDraw" Margin="420,220,345,350" Content="Pre Draw" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
+                    <CheckBox x:Name="ChkBoxPostDraw" Margin="641,220,124,350" Content="Post Draw" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
+                </Grid>
 			</TabItem>
 			<TabItem Header="Layers">
 				<TabItem.Background>
@@ -67,6 +74,26 @@
 						</CheckBox>
 						<Label Margin="-5,87,583,450" Content="Alternate Arena:" Foreground="Yellow" />
 						<TextBox Margin="181,87,0,450" x:Name="TxtLayAltArena" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+						<Label Margin="0,116,578,421" Content="Scroll Bounderies:" Foreground="Yellow" />
+						<TextBox Margin="181,116,523,421" x:Name="Txt_ScrollMinX" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+						<TextBox Margin="236,116,470,421" x:Name="Txt_ScrollMinY" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+						<TextBox Margin="312,116,396,421" x:Name="Txt_ScrollMaxX" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate" RenderTransformOrigin="0.5,0.5">
+						</TextBox>
+						<TextBox Margin="362,116,344,421" x:Name="Txt_ScrollMaxY" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate" RenderTransformOrigin="0.5,0.5">
+						</TextBox>
+						<TextBox Margin="450,116,265,421" x:Name="Txt_ScrollCenX" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+						<TextBox Margin="494,116,216,421" x:Name="Txt_ScrollCenY" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+						<Button x:Name="ScanScrollBoundaries" Content="Scan" Margin="586,116,10,424" Click="ScanScrollBoundaries_Click">
+							<Button.Foreground>
+								<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+									<GradientStop Color="#FFFFB400" Offset="0"/>
+									<GradientStop Color="#FFFFFFB4" Offset="1"/>
+								</LinearGradientBrush>
+							</Button.Foreground>
+							<Button.Background>
+								<ImageBrush ImageSource="Fractal Flower.jpg"/>
+							</Button.Background>
+						</Button>
 					</Grid>
 				</Grid>
 			</TabItem>

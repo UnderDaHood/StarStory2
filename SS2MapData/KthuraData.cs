@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.03.31
+// Version: 22.04.05
 // EndLic
 
 using NSKthura;
@@ -31,6 +31,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using TrickyUnits;
 using UseJCR6;
 
@@ -68,7 +69,7 @@ namespace SS2MapData {
 			var J = JCR6.Dir(file);
 			TheMap = Kthura.Load(J);
 			if (File.Exists($"{Config.ScriptDir}{pathlessfile}.aqs"))
-				Behavior.SourceBox.Text = QuickStream.LoadString($"{Config.ScriptDir}{pathlessfile}.aqs");
+				Behavior.SourceBox.Text = QuickStream.LoadString($"{Config.ScriptDir}{pathlessfile}.aqs").Trim();
 			else
 				Behavior.SourceBox.Text = $"; Behavior Apollo Quick Script for '{file}'\n; Created {DateTime.Now}\n\nInclude Basis.aqs\n\nChunk Load\n\tcall CSay,\"Welcome to {pathlessfile}\"\n\n";
 			if (!File.Exists($"{Config.ScriptDir}Basis.aqs")) {
@@ -112,6 +113,60 @@ namespace SS2MapData {
 			Behavior.Compile(this, J, $"{Config.ScriptDir}{pathlessfile}.aqs", compilebox);
 			foreach (var k in Unknown) J.AddBytes(k.Value, k.Key, "zlib", Author, Notes);
 			J.Close();
+		}
+
+		public struct rect {
+			public long sx;
+			public long sy;
+			public long ex;
+			public long ey;
+			public rect(int fuckyou) { sx = 0; sy = 0; ex = 0; ey = 0; }
+
+		}
+		public rect ScanScrollBoundaries() {
+			var ret = new rect(0);
+			var l = SS2MapData.Layers.Selected;
+			var Lay = TheMap.Layers[l];
+			var forcedalready = false;
+			foreach(var o in Lay.Objects) {
+				switch (o.Tag.ToUpper()) {
+					case "SCROLLMIN":
+					case "SCROLLMINI":
+						//ret.sx = Math.Max(ret.sx, o.x);
+						//ret.sy = Math.Max(ret.sy, o.y);
+						if (ret.sx!=0 || ret.sy!=0) if (forcedalready) Confirm.Annoy("Duplicate min scroll", "WARNING!", MessageBoxIcon.Warning);
+						ret.sx = o.x;
+						ret.sy = o.y;
+						break;
+					case "SCROLLMAX":
+					case "SCROLLMAXI": {
+							if (forcedalready) Confirm.Annoy("Duplicate max scroll","WARNING!",MessageBoxIcon.Warning);
+							forcedalready = true;
+							ret.ex = o.x;
+							ret.ey = o.y;
+						}
+						break;
+					default: {
+							switch (o.kind) {
+								case "Rect":
+								case "TiledArea":
+								case "StretchedArea":
+								case "Zone":
+									if (!forcedalready) {
+										ret.ex = Math.Max(ret.ex,o.x + o.w);
+										ret.ey = Math.Max(ret.ey,o.y + o.h);
+									}
+									break;
+								default:
+									ret.ex = Math.Max(ret.ex, o.x );
+									ret.ey = Math.Max(ret.ey, o.y );
+									break;
+							}
+						}
+						break;						
+				}
+			}
+			return ret;
 		}
 
 		~KthuraData() {

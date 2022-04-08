@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.03.24
+// Version: 22.04.05
 // EndLic
 
 using System;
@@ -35,19 +35,32 @@ using TrickyUnits;
 namespace SS2MapData {
 	class Meta {
 		static Dictionary<TextBox, Meta> _Register = new Dictionary<TextBox, Meta>();
+		static Dictionary<CheckBox, Meta> _CheckBoxRegister = new Dictionary<CheckBox, Meta>();
 
 		static public void Register(TextBox tb,string field,bool IntOnly=false) {
 			_Register[tb] = new Meta(tb, field,IntOnly);
 		}
 
-		readonly public TextBox TextB;
+		static public void Register(CheckBox tb,string field, bool defaulttrue = false) {
+			_CheckBoxRegister[tb] = new Meta(tb, field, defaulttrue);
+		}
+
+		readonly public TextBox TextB = null;
+		readonly public CheckBox ChkB = null;
 		readonly public string Field;
 		readonly public bool IntOnly;
+		readonly public bool DefBoolValue=false;
 
 		private Meta(TextBox tb,string fld,bool _IntOnly) {
 			TextB = tb;
 			Field = fld;
 			IntOnly = _IntOnly;
+		}
+
+		private Meta(CheckBox cb,string fld,bool defaulttrue = false) {
+			ChkB = cb;
+			Field = fld;
+			DefBoolValue = defaulttrue;
 		}
 
 		static  bool NoUpdate = false;
@@ -59,12 +72,24 @@ namespace SS2MapData {
 				if (!KthuraData.Current.TheMap.MetaData.ContainsKey(a.Field)) KthuraData.Current.TheMap.MetaData[a.Field] = "";
 				if (a.IntOnly) a.TextB.Text = $"{qstr.ToInt(KthuraData.Current.TheMap.MetaData[a.Field])}"; else a.TextB.Text = KthuraData.Current.TheMap.MetaData[a.Field];
 			}
+			foreach(var b in _CheckBoxRegister.Values) {
+				if ((!KthuraData.Current.TheMap.MetaData.ContainsKey(b.Field)) || KthuraData.Current.TheMap.MetaData[b.Field].Trim()=="") KthuraData.Current.TheMap.MetaData[b.Field] = qstr.YesNo(b.DefBoolValue);
+				b.ChkB.IsChecked = KthuraData.Current.TheMap.MetaData[b.Field].Trim().ToUpper() == "YES";
+			}
 			NoUpdate = false;
 		}
 
 		static public void Update(TextBox tb) {
 			var e = _Register[tb];
 			KthuraData.Current.TheMap.MetaData[e.Field] = tb.Text;
+		}
+
+		static public void Update(CheckBox cb) {
+			var e = _CheckBoxRegister[cb];
+			if ((bool)cb.IsChecked)
+				KthuraData.Current.TheMap.MetaData[e.Field] = "Yes";
+			else
+				KthuraData.Current.TheMap.MetaData[e.Field] = "No";
 		}
 
 

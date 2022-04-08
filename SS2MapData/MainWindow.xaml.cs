@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.03.30
+// Version: 22.04.05
 // EndLic
 
 using System;
@@ -57,10 +57,21 @@ namespace SS2MapData {
 			Meta.Register(BoxMapLevel, "MapLevel", true);
 			Meta.Register(BoxArena, "Arena");
 			Meta.Register(BoxMusic, "Music");
+			Meta.Register(ChkBoxApolloQuickScript, "UseAQS", true);
+			Meta.Register(ChkBoxNeilMapScript, "UseNeil");
+			Meta.Register(ChkBoxUpdate, "CallbackUpdate");
+			Meta.Register(ChkBoxPreDraw, "CallbackPreDraw");
+			Meta.Register(ChkBoxPostDraw, "CallbackPostDraw");
 			Layers.MW = this;
 			Layers.Register(TxtLayTitle, "Title");
 			Layers.Register(CheckNoEncounter, "NoEcounters", Layers.Type.Checkbox);
 			Layers.Register(TxtLayAltArena, "AltArena");
+			Layers.Register(Txt_ScrollMinX, "Scroll_MinX");
+			Layers.Register(Txt_ScrollMinY, "Scroll_MinY");
+			Layers.Register(Txt_ScrollMaxX, "Scroll_MaxX");
+			Layers.Register(Txt_ScrollMaxY, "Scroll_MaxY");
+			Layers.Register(Txt_ScrollCenX, "Scroll_CenX");
+			Layers.Register(Txt_ScrollCenY, "Scroll_CenY");
 			Behavior.SourceBox = Behavior_Source;
 		}
 		#endregion
@@ -125,8 +136,24 @@ namespace SS2MapData {
 				KthuraData.Current.BehaviorSource = Behavior_Source.Text;
 		}
 
-        private void CompileAndSave_Click(object sender, RoutedEventArgs e) {
+		private void CompileAndSave_Click(object sender, RoutedEventArgs e) {
 			KthuraData.Current.Save(true);
-        }
-    }
+		}
+
+		private void ScanScrollBoundaries_Click(object sender, RoutedEventArgs e) {
+			var res = KthuraData.Current.ScanScrollBoundaries();
+			var cx = res.sx + ((res.ex - res.sx) / 2);
+			var cy = res.sy + ((res.ey - res.sy) / 2);
+			Txt_ScrollMinX.Text = res.sx.ToString();
+			Txt_ScrollMinY.Text = res.sy.ToString();
+			Txt_ScrollMaxX.Text = res.ex.ToString();
+			Txt_ScrollMaxY.Text = res.ey.ToString();
+			Txt_ScrollCenX.Text = cx.ToString();
+			Txt_ScrollCenY.Text = cy.ToString();
+		}
+
+		private void MetaCheckBox_Checked(object sender, RoutedEventArgs e) {
+			Meta.Update((CheckBox)sender);
+		}
+	}
 }
