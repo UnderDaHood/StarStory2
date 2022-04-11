@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.05
+// Version: 22.04.09
 // EndLic
 
 using NSKthura;
@@ -51,6 +51,13 @@ namespace SS2MapData {
 
 		static public KthuraData Current { private set; get; } = null;
 
+		public void KillBehavior(byte[] bh=null) {
+			void K(string k) { if (Unknown.ContainsKey(k)) Unknown.Remove(k); }
+			K("Behavior");
+			K("BEHAVIOR");
+			if (bh != null) Unknown["Behavior"] = bh;
+		}
+			
 
 		static KthuraData() {
 			JCR6_zlib.Init();
@@ -91,9 +98,10 @@ namespace SS2MapData {
 					case "FOES":
 						Treasures.FromBytes(J.JCR_B("FOES"));
 						break;
-					case "BEHAVIOR":
+					/*case "BEHAVIOR":
 						Debug.WriteLine("Behavior data present, but not needed for the editor!");
 						break;
+					//*/
 					default:
 						Debug.WriteLine($"Unknown data: {E}");
 						Unknown[J.Entries[E].Entry] = J.JCR_B(E);
@@ -110,7 +118,7 @@ namespace SS2MapData {
 			SaveGINIE(Layers, "Layers");
 			SaveGINIE(Foes, "Foes");
 			SaveGINIE(Treasures, "Treasure");
-			Behavior.Compile(this, J, $"{Config.ScriptDir}{pathlessfile}.aqs", compilebox);
+			/*if (compilebox)*/ Behavior.Compile(this, J, $"{Config.ScriptDir}{pathlessfile}.aqs", compilebox);
 			foreach (var k in Unknown) J.AddBytes(k.Value, k.Key, "zlib", Author, Notes);
 			J.Close();
 		}
