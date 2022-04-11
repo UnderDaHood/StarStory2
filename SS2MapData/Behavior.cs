@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.03.31
+// Version: 22.04.09
 // EndLic
 
 using System;
@@ -64,7 +64,6 @@ Chunk PostDraw
 		static public void Compile(KthuraData KD,TJCRCreate J,string f,bool box) {
 			var source = KD.BehaviorSource;
 			var bstream = J.NewEntry("Behavior");
-			var compiled = AQSCompiler.Compile(source,f);
 			var qstream = new QuickStream(bstream.GetStream);
 			var cors = source.Split('\n');
 			var corb = new StringBuilder();
@@ -81,7 +80,10 @@ Chunk PostDraw
 			QuickStream.SaveString(f,$"{corb}");
 			//QuickStream.SaveString(f, source);
 			//Debug.WriteLine($"<src>\n{source}</src>\n<corb>{corb}\n</corb>");
+			if (!box) return;
+			var compiled = AQSCompiler.Compile(source,f);
 			compiled.WriteOut(qstream);
+			KD.KillBehavior(bstream.GetStream.ToArray());
 			qstream.Close();
 			bstream.Close();
 			if (!compiled.Success) {
