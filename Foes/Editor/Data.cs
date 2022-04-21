@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 22.03.01
+// version: 22.04.18
 // EndLic
 
 using System;
@@ -61,7 +61,7 @@ namespace StarStory2_Foe_Editor {
 		}
 		static SortedDictionary<string, SS2FRec> Records = new SortedDictionary<string, SS2FRec>();
 
-		static SS2FRec GetRec(string f) {
+		public static SS2FRec GetRec(string f) {
 			string uf = f.ToUpper();
 			if (!Records.ContainsKey(uf)) {
 				Debug.WriteLine($"Getting data for not yet loaded record: {uf}!");
@@ -87,7 +87,7 @@ namespace StarStory2_Foe_Editor {
 				if (Foe == "" || DontChange) return;
 				var T = AutoTexBox[TB];
 				var R = GetRec(Foe);
-				var txt = TB.Text;
+				var txt = TB.Text.Replace("\r",""); // Only Unix based line endings.
 				if (TB.AcceptsReturn) {
 					for (byte i = 255; i > 0; i--) 
 						if ((i<35 && i!=32) || i>122)
@@ -113,6 +113,12 @@ namespace StarStory2_Foe_Editor {
 					IT.Key.Text = txt;
 				}
 			}
+			/*
+			foreach(var IT in Stats.Register) {
+				var R = GetRec(Foe);
+				IT.Key.Text = $"{R.Data[$"STAT.{IT.Value.k}", $"{IT.Value.s.Stat}"]}";
+			}
+			*/
 			DontChange = false;
 		}
 
