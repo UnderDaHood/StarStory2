@@ -4,3 +4,20 @@ CREATIONTIME=3/1/2022 9:43:06 AM
 [META]
 DESCRIPTION=I am just testing all this crap.<<<<13>>>><<<<10>>>>I really don't know if it works the way it should, but we'll see<<<<33>>>>
 NAME=Test Foe #1
+[RESISTELEMENT]
+DARKHEALING=0
+DARKNESS=3
+EARTH=3
+FLAME=3
+FROST=3
+HEALING=6
+LIGHT=3
+THUNDER=3
+WATER=3
+WIND=3
+[AI]
+*list:ACTIONS
+*end
+[ITEMS]
+*list:LIST
+*end
