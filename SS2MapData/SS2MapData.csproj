@@ -212,6 +212,7 @@
     </Compile>
     <Compile Include="Behavior.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Door.cs" />
     <Compile Include="KthuraData.cs" />
     <Compile Include="Layers.cs" />
     <Compile Include="MainWindow.xaml.cs">
