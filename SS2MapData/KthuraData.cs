@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.09
+// Version: 22.04.20
 // EndLic
 
 using NSKthura;
@@ -39,6 +39,13 @@ namespace SS2MapData {
 	class KthuraData {
 		const string Author = "Jeroen P. Broks";
 		const string Notes = "Part of the Star Story universe or the Phantasar universe. Copyrighted and owned by Jeroen P. Broks. This file may only be distributed with an official UNMODIFIED version of the game and not be extracted from the game";
+		public const string _IAADir = "Scyndi:Projects/Applications/Apollo/Games/Star Story 2/src/Tricky Script/Data/IAA/";
+		public const string _FoeDir = "Scyndi:Projects/Applications/Apollo/Games/Star Story 2/Dev/Foes/Data";
+		public static string IAADir => Dirry.AD(_IAADir);
+		public static string FoeDir => Dirry.AD(_FoeDir);
+		public static string[] ItemFiles;
+		public static string[] FoeFiles;
+
 		readonly string pathlessfile;
 		public string file => $"{Config.KthuraDir}{pathlessfile}";
 		public Kthura TheMap { private set; get; } = null;
@@ -46,8 +53,19 @@ namespace SS2MapData {
 		public GINIE Layers = GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
 		public GINIE Foes = GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
 		public GINIE Treasures = GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
+		public CDoor Door = null;
 		public string BehaviorSource = "";
 		//GINIE Layers => SS2MapData.Layers.Data; //GINIE.FromSource($"[sys]\nCreated={DateTime.Now}\nAuthor={Author}\n");
+		public bool HasItem(string item) => Treasures.List("Main", "List").Contains(item.ToUpper());
+		public bool HasFoe(string foe)=>Foes.List("Main","List").Contains(foe.ToUpper());
+
+		public void HasItem(string item, bool value) {
+			if (value && (!HasItem(item)))
+				Treasures.ListAdd("Main", "List", item.ToUpper());
+			else if (!value)
+				Treasures.ListRemove("Main", "List", item.ToUpper());
+			//Treasures["Main", "ListUpdate"] = $"{DateTime.Now}";
+		}
 
 		static public KthuraData Current { private set; get; } = null;
 
@@ -62,14 +80,22 @@ namespace SS2MapData {
 		static KthuraData() {
 			JCR6_zlib.Init();
 			JCR6_lzma.Init();
+			Dirry.InitAltDrives();
+			Debug.WriteLine($"Reading {_IAADir}");
+			ItemFiles = FileList.GetDir(IAADir);
+			Debug.WriteLine($"Reading {_FoeDir}");
+			FoeFiles = FileList.GetTree(FoeDir);
 		}
 
 		KthuraData(string f) {
 			pathlessfile = f;
 			Debug.WriteLine($"Loading Kthura Map: {file}");
 			Current = this;
+			Door = new CDoor(this);
 			Load();
 		}
+
+		public override string ToString() => $"KthuraData: {pathlessfile}";
 
 		void Load() {
 			GC.Collect(); // I must be sure all old data has been saved and disposed or data loss can occur due to conflicts.
@@ -85,40 +111,65 @@ namespace SS2MapData {
 				QuickStream.SaveString($"{Config.ScriptDir}Basis.aqs", Behavior.Basis);
 			}
 			foreach (var E in J.Entries.Keys) {
-				switch (E) {
-					case "DATA":
-					case "OBJECTS":
-						break; // Kthura can handle this by itself 
-					case "LAYERS":
-						Layers.FromBytes(J.JCR_B("LAYERS"));
-						break;
-					case "TREASURE":
-						Treasures.FromBytes(J.JCR_B("TREASURE"));
-						break;
-					case "FOES":
-						Treasures.FromBytes(J.JCR_B("FOES"));
-						break;
-					/*case "BEHAVIOR":
-						Debug.WriteLine("Behavior data present, but not needed for the editor!");
-						break;
-					//*/
-					default:
-						Debug.WriteLine($"Unknown data: {E}");
-						Unknown[J.Entries[E].Entry] = J.JCR_B(E);
-						break;
+				try {
+					switch (E) {
+						case "DATA":
+						case "OBJECTS":
+							break; // Kthura can handle this by itself 
+						case "LAYERS":
+							Layers.FromBytes(J.JCR_B("LAYERS"));
+							break;
+						case "TREASURE":
+							//Treasures.FromBytes(J.JCR_B("TREASURE"));
+							Confirm.Annoy("Treasure data was in bytecode, but that is a bit buggy, so I had to destroy this data!");
+							break;
+						case "TREASURES":
+							Treasures = GINIE.FromSource(J.JCR_B("TREASURES"));
+							break;
+						case "FOES":
+							//Treasures.FromBytes(J.JCR_B("FOES"));
+							//Confirm.Annoy("Foes data was in bytecode, but that is a bit buggy, so I had to destroy this data!");
+							//break;
+							// May fall through. Old code no longer important!
+						case "RENCFOES": // Part of a fix 						
+							Foes = GINIE.FromSource(J.JCR_B(E));
+							break;
+						case "DOORS":
+							//Door.Data.Auto(J.JCR_B("DOORS"));
+							Door.LoadData(J);
+							break;
+						/*case "BEHAVIOR":
+							Debug.WriteLine("Behavior data present, but not needed for the editor!");
+							break;
+						//*/
+						default:
+							Debug.WriteLine($"Unknown data: {E}");
+							Unknown[J.Entries[E].Entry] = J.JCR_B(E);
+							break;
+					}
+				} catch (Exception e) {
+#if DEBUG
+					Confirm.Annoy($"Error on the way!\n\n{e.Message}\n\n{e.StackTrace}", "ERROR", MessageBoxIcon.Error);
+#else
+					Confirm.Annoy($"Error on the way!\n\n{e.Message}", "ERROR", MessageBoxIcon.Error);
+#endif
 				}
 			}
 			Meta.Load();
+			MainWindow.MySelf.UpdateItems();
+			MainWindow.MySelf.UpdateFoes();
 		}
 
 		public void Save(bool compilebox=false) {
 			var J = new TJCRCreate(file);
 			KthuraSave.Save(TheMap, J, "", "zlib", Author, Notes);
 			void SaveGINIE(GINIE G, string Entry) => J.AddBytes(G.ToBytes(), Entry, "zlib", Author, Notes);
+			void SaveGINIES(GINIE g, string Entry) => J.AddString(g.ToSource(), Entry, "zlib", Author, Notes);
 			SaveGINIE(Layers, "Layers");
-			SaveGINIE(Foes, "Foes");
-			SaveGINIE(Treasures, "Treasure");
-			/*if (compilebox)*/ Behavior.Compile(this, J, $"{Config.ScriptDir}{pathlessfile}.aqs", compilebox);
+			SaveGINIES(Foes, "Foes");
+			SaveGINIES(Treasures, "Treasures");
+			SaveGINIES(Door.Data, "Doors");
+			/*if (compilebox)*/ //Behavior.Compile(this, J, $"{Config.ScriptDir}{pathlessfile}.aqs", compilebox);
 			foreach (var k in Unknown) J.AddBytes(k.Value, k.Key, "zlib", Author, Notes);
 			J.Close();
 		}
