@@ -21,11 +21,12 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.05
+// Version: 22.04.20
 // EndLic
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,9 +34,14 @@ using System.Windows.Controls;
 using TrickyUnits;
 
 namespace SS2MapData {
+
 	class Meta {
+		public enum MetaAlt { Meta, Item, Foe};
+
 		static Dictionary<TextBox, Meta> _Register = new Dictionary<TextBox, Meta>();
 		static Dictionary<CheckBox, Meta> _CheckBoxRegister = new Dictionary<CheckBox, Meta>();
+		
+		static public Dictionary<TextBox,Meta> GetRegister => _Register;
 
 		static public void Register(TextBox tb,string field,bool IntOnly=false) {
 			_Register[tb] = new Meta(tb, field,IntOnly);
@@ -51,10 +57,22 @@ namespace SS2MapData {
 		readonly public bool IntOnly;
 		readonly public bool DefBoolValue=false;
 
+		readonly public MetaAlt Alt = MetaAlt.Meta; 
+		
+
 		private Meta(TextBox tb,string fld,bool _IntOnly) {
 			TextB = tb;
 			Field = fld;
-			IntOnly = _IntOnly;
+			IntOnly = _IntOnly;			
+			if (qstr.Prefixed(fld.ToUpper(), "ITEM:")){
+				Field = fld.Substring(5);
+				Alt = MetaAlt.Item;
+			}
+			if (qstr.Prefixed(fld.ToUpper(), "FOE:")) {
+				Field = fld.Substring(4);
+				Alt = MetaAlt.Foe;
+			}
+			Debug.WriteLine($"Registered textbox for field {Field} as type {Alt}");
 		}
 
 		private Meta(CheckBox cb,string fld,bool defaulttrue = false) {
@@ -68,20 +86,75 @@ namespace SS2MapData {
 		static public void Load() {
 			if (KthuraData.Current == null) return;
 			NoUpdate = true;
-			foreach(var a in _Register.Values) {
-				if (!KthuraData.Current.TheMap.MetaData.ContainsKey(a.Field)) KthuraData.Current.TheMap.MetaData[a.Field] = "";
-				if (a.IntOnly) a.TextB.Text = $"{qstr.ToInt(KthuraData.Current.TheMap.MetaData[a.Field])}"; else a.TextB.Text = KthuraData.Current.TheMap.MetaData[a.Field];
+			foreach (var a in _Register.Values) {
+				switch (a.Alt) {
+					case MetaAlt.Meta:
+						if (!KthuraData.Current.TheMap.MetaData.ContainsKey(a.Field)) KthuraData.Current.TheMap.MetaData[a.Field] = "";
+						if (a.IntOnly) a.TextB.Text = $"{qstr.ToInt(KthuraData.Current.TheMap.MetaData[a.Field])}"; else a.TextB.Text = KthuraData.Current.TheMap.MetaData[a.Field];
+						break;
+					case MetaAlt.Item: {
+							var EI = MainWindow.MySelf.EditItem;
+							if (EI != "") {
+								if (KthuraData.Current.Treasures[$"ITEM:{EI}", a.Field] == "") KthuraData.Current.Treasures[$"ITEM:{EI}", a.Field] = "1";
+								//if (a.IntOnly) a.TextB.Text = $"{qstr.ToInt(KthuraData.Current.TheMap.MetaData[a.Field])}"; else a.TextB.Text = KthuraData.Current.TheMap.MetaData[a.Field];
+								a.TextB.Text = $"{qstr.ToInt(KthuraData.Current.Treasures[$"ITEM:{EI}", a.Field])}";
+							} else { Debug.WriteLine($"I cannot retrieve field {a.Field}. There doesn't seem to be an item selected"); }
+						}
+						break;
+					case MetaAlt.Foe: {
+							var EI = MainWindow.MySelf.EditFoe;
+							if (EI != "") {
+								if (KthuraData.Current.Foes[$"Foe:{EI}", a.Field] == "") KthuraData.Current.Foes[$"Foe:{EI}", a.Field] = "1";
+								//if (a.IntOnly) a.TextB.Text = $"{qstr.ToInt(KthuraData.Current.TheMap.MetaData[a.Field])}"; else a.TextB.Text = KthuraData.Current.TheMap.MetaData[a.Field];
+								a.TextB.Text = $"{qstr.ToInt(KthuraData.Current.Foes[$"Foe:{EI}", a.Field])}";
+							} else { Debug.WriteLine($"I cannot retrieve field {a.Field}. There doesn't seem to be an item selected"); }
+						}
+						break;
+					default:
+						Confirm.Annoy($"No alteration(TB) action known for {a.Alt}! ({a.Field}");
+						break;
+				}
 			}
 			foreach(var b in _CheckBoxRegister.Values) {
-				if ((!KthuraData.Current.TheMap.MetaData.ContainsKey(b.Field)) || KthuraData.Current.TheMap.MetaData[b.Field].Trim()=="") KthuraData.Current.TheMap.MetaData[b.Field] = qstr.YesNo(b.DefBoolValue);
-				b.ChkB.IsChecked = KthuraData.Current.TheMap.MetaData[b.Field].Trim().ToUpper() == "YES";
+				switch (b.Alt) {
+					case MetaAlt.Meta:
+						if ((!KthuraData.Current.TheMap.MetaData.ContainsKey(b.Field)) || KthuraData.Current.TheMap.MetaData[b.Field].Trim() == "") KthuraData.Current.TheMap.MetaData[b.Field] = qstr.YesNo(b.DefBoolValue);
+						b.ChkB.IsChecked = KthuraData.Current.TheMap.MetaData[b.Field].Trim().ToUpper() == "YES";
+						break;
+					default:
+						Confirm.Annoy($"No alteration(CB) action known for {b.Alt}! ({b.Field}");
+						break;
+				}
 			}
 			NoUpdate = false;
 		}
 
 		static public void Update(TextBox tb) {
+			if (!_Register.ContainsKey(tb)) {
+				//Confirm.Annoy($"TextBox {tb.Name} could not be found in the register","Internal error",System.Windows.Forms.MessageBoxIcon.Error); 
+				Debug.WriteLine($"Skipped {tb.Name} as it's not (yet) in the register");
+				return; 
+			}
 			var e = _Register[tb];
-			KthuraData.Current.TheMap.MetaData[e.Field] = tb.Text;
+			switch (e.Alt) {
+				case MetaAlt.Meta:
+					KthuraData.Current.TheMap.MetaData[e.Field] = tb.Text;
+					break;
+				case MetaAlt.Item: {
+						var EI = MainWindow.MySelf.EditItem;
+						if (EI != "") KthuraData.Current.Treasures[$"Item:{EI}", e.Field] = tb.Text;
+					}
+					break;
+				case MetaAlt.Foe: {
+						var EI = MainWindow.MySelf.EditFoe;
+						if (EI != "") KthuraData.Current.Foes[$"Foe:{EI}", e.Field] = tb.Text;
+					}
+					break;
+				default:
+					Confirm.Annoy($"No (edit)alteration(TB) action known for {e.Alt}! ({e.Field}");
+					break;
+
+			}
 		}
 
 		static public void Update(CheckBox cb) {
@@ -90,6 +163,7 @@ namespace SS2MapData {
 				KthuraData.Current.TheMap.MetaData[e.Field] = "Yes";
 			else
 				KthuraData.Current.TheMap.MetaData[e.Field] = "No";
+			Debug.WriteLine($"MetaData field '{e.Field}' set to '{KthuraData.Current.TheMap.MetaData[e.Field]}'");
 		}
 
 
