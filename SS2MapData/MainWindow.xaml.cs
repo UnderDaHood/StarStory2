@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.05
+// Version: 22.04.20
 // EndLic
 
 using System;
@@ -39,6 +39,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrickyUnits;
 
 namespace SS2MapData {
 	/// <summary>
@@ -46,8 +47,15 @@ namespace SS2MapData {
 	/// </summary>
 	public partial class MainWindow : Window {
 
+		public static MainWindow MySelf { get; private set; }
+
+		public Visibility MyVis(bool k) { if (k) return Visibility.Visible; else return Visibility.Hidden; }
+
+		void AutoItemShow() { ItemSettingsGrid.Visibility = MyVis(ItemYes.SelectedItem != null); }
+
 		#region Init
 		public MainWindow() {
+			MySelf = this;
 			InitializeComponent();
 			GridLayer.Visibility = Visibility.Hidden;
 			GetMaps();
@@ -73,6 +81,46 @@ namespace SS2MapData {
 			Layers.Register(Txt_ScrollCenX, "Scroll_CenX");
 			Layers.Register(Txt_ScrollCenY, "Scroll_CenY");
 			Behavior.SourceBox = Behavior_Source;
+			CDoor.Lijst = ListBox_Doors;
+			//CDoor.Register(Door_Tag, "!Tag");
+			CDoor.Register(Door_Collection, "Collection");
+			CDoor.Register(Door_MoveX, "MoveX");
+			CDoor.Register(Door_MoveY, "MoveY");
+			CDoor.Register(Door_Frames, "Frames");
+			CDoor.Register(Door_Open, "Open");
+			CDoor.Register(Door_AudioOpen, "AudioOpen");
+			CDoor.Register(Door_AudioClose, "AudioClose");
+			DoorGrid();
+
+			// Item linkups
+			Meta.Register(MinCycle1, "ITEM:MinCycle1");
+			Meta.Register(MinCycle2, "ITEM:MinCycle2");
+			Meta.Register(MinCycle3, "ITEM:MinCycle3");
+			Meta.Register(TreasureRate1, "ITEM:Rate1");
+			Meta.Register(TreasureRate2, "ITEM:Rate2");
+			Meta.Register(TreasureRate3, "ITEM:Rate3");
+
+			// Foes
+			Meta.Register(FoeMinCycle1, "FOE:MinCycle1");
+			Meta.Register(FoeMinCycle2, "FOE:MinCycle2");
+			Meta.Register(FoeMinCycle3, "FOE:MinCycle3");
+			Meta.Register(FoeOMinLevel1, "FOE:MinLevel1");
+			Meta.Register(FoeOMinLevel2, "FOE:Minlevel2");
+			Meta.Register(FoeOMinLevel3, "FOE:Minlevel3");
+			Meta.Register(FoeOMaxLevel1, "FOE:MaxLevel1");
+			Meta.Register(FoeOMaxLevel2, "FOE:Maxlevel2");
+			Meta.Register(FoeOMaxLevel3, "FOE:Maxlevel3");
+			Meta.Register(FoeRate1, "FOE:Rate1");
+			Meta.Register(FoeRate2, "FOE:Rate2");
+			Meta.Register(FoeRate3, "FOE:Rate3");
+
+			Meta.Register(FoeAMinLevel1, "Foe_MinLevel1");
+			Meta.Register(FoeAMinLevel2, "Foe_Minlevel2");
+			Meta.Register(FoeAMinLevel3, "Foe_Minlevel3");
+			Meta.Register(FoeAMaxLevel1, "Foe_MaxLevel1");
+			Meta.Register(FoeAMaxLevel2, "Foe_Maxlevel2");
+			Meta.Register(FoeAMaxLevel3, "Foe_Maxlevel3");
+
 		}
 		#endregion
 
@@ -100,7 +148,9 @@ namespace SS2MapData {
 			TabVisible();
 			BoxMap.Text = Config.SelectedMap;
 			KthuraData.Switch(Config.SelectedMap);
-			GetLayers();
+			ListBox_Doors.Visibility = Visibility.Hidden;
+			GridDoor.Visibility = Visibility.Hidden;
+			GetLayers();			
 		}
 
 		private void MetaChanged(object sender, TextChangedEventArgs e) => Meta.Update((TextBox)sender);
@@ -154,6 +204,156 @@ namespace SS2MapData {
 
 		private void MetaCheckBox_Checked(object sender, RoutedEventArgs e) {
 			Meta.Update((CheckBox)sender);
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e) {
+			KthuraData.Current.Door.Scan();
+			ListBox_Doors.Visibility = Visibility.Visible;
+		}
+
+		public void DoorGrid() {
+			if (ListBox_Doors.SelectedItem != null) {
+				GridDoor.Visibility = Visibility.Visible;
+				var ID = qstr.Split(ListBox_Doors.SelectedItem.ToString(), "::");
+				Door_Layer.Text = ID[0].Substring(7).Trim();
+				Door_Tag.Text = ID[1];
+				KthuraData.Current.Door.Sync(ListBox_Doors.SelectedItem.ToString());
+			} else
+				GridDoor.Visibility = Visibility.Hidden;
+		}
+
+		private void ListBox_Doors_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+			DoorGrid();
+		}
+
+		private void Door_TB_TextChanged(object sender, TextChangedEventArgs e) {
+			KthuraData.Current.Door.Update((TextBox)sender, ListBox_Doors.SelectedItem.ToString());
+		}
+
+		private void Doors_DestroyAll_Click(object sender, RoutedEventArgs e) {
+			if (Confirm.Yes("This will destroy all existing doors data in order to scan anew.\nSome vital data can be destroyed in this process.\n\nAre you sure?")) {
+				KthuraData.Current.Door.Data.Clear();
+				Button_Click(sender, e);
+			}
+		}
+
+		private void ItemYes_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+			Meta.Load();
+			AutoItemShow();
+		}
+
+		public void UpdateItems() {
+			ItemYes.Items.Clear();
+			ItemNo.Items.Clear();				
+			foreach(var i in KthuraData.ItemFiles) {
+				if (qstr.Prefixed(i,"ITM_") || qstr.Prefixed(i, "JWL_")) {
+					var item = qstr.StripExt(i).Trim().ToUpper();
+#if DEBUG
+					Debug.WriteLine($"Do we have a {item}? {KthuraData.Current.HasItem(item)}");
+#endif
+					if (KthuraData.Current.HasItem(item))
+						ItemYes.Items.Add(item);
+					else
+						ItemNo.Items.Add(item);
+				}
+			}
+			AutoItemShow();
+		}
+
+		
+
+		public void UpdateFoes() {
+			FoeYes.Items.Clear();
+			FoeNo.Items.Clear();
+			foreach(var i in KthuraData.FoeFiles) {
+				if (i.ToUpper() != "README.MD") {
+					Debug.WriteLine($"Foe '{i}' available {KthuraData.Current.HasFoe(i)} in '{KthuraData.Current}'");
+					if (KthuraData.Current.HasFoe(i))
+						FoeYes.Items.Add(i);
+					else
+						FoeNo.Items.Add(i);
+				}
+			}
+		}
+
+		private void AddItem_Click(object sender, RoutedEventArgs e) {
+			var SelItem = ItemNo.SelectedItem; if (SelItem == null) { Debug.WriteLine("Nothing to add"); return; }
+			var Item = $"{SelItem}";
+			Debug.WriteLine($"Adding item: {Item}");
+			KthuraData.Current.HasItem(Item, true);
+			UpdateItems();			
+		}
+
+		private void RemItem_Click(object sender, RoutedEventArgs e) {
+			var SelItem = ItemYes.SelectedItem; if (SelItem == null) return;
+			var Item = $"{SelItem}";
+			KthuraData.Current.HasItem(Item, false);
+			UpdateItems();
+		}
+
+		public string EditItem {
+			get {
+				var SelItem = ItemYes.SelectedItem; if (SelItem == null) return "";
+				return SelItem.ToString();
+			}
+		}
+
+		public string EditFoe {
+			get {
+				var SelFoe = FoeYes.SelectedItem; if (SelFoe == null) return "";
+				return SelFoe.ToString();
+			}
+		}
+
+		Dictionary<bool, TextBox[]> LevelEnable;
+		private void OwnLevelCheck(object sender=null, RoutedEventArgs e=null) {
+			var SelItem = FoeYes.SelectedItem;
+			
+			if (LevelEnable == null) { 
+				LevelEnable = new Dictionary<bool, TextBox[]>();
+				LevelEnable[true] = new TextBox[] { FoeOMaxLevel1, FoeOMaxLevel2, FoeOMaxLevel3, FoeOMinLevel1, FoeOMinLevel2, FoeOMinLevel3 };
+				LevelEnable[false] = new TextBox[] { FoeAMaxLevel1, FoeAMaxLevel2, FoeAMaxLevel3, FoeAMinLevel1, FoeAMinLevel2, FoeAMinLevel3 };
+			}
+			var ch = FoeOwnlevel.IsChecked;
+			foreach (var item in LevelEnable) {
+				foreach(var texb in item.Value) {
+					texb.IsEnabled = ch == item.Key;
+				}
+			}
+			if (SelItem != null) {
+				KthuraData.Current.Foes[$"Foe:{SelItem}", "UseOwnLevels"] = $"{ch}";
+			}			
+		}
+
+		private void AddFoe_Click(object sender, RoutedEventArgs e) {
+			var SelItem = FoeNo.SelectedItem;
+			if (SelItem != null) {
+				KthuraData.Current.Foes.ListAddNew("Main", "List", $"{SelItem}".ToUpper());
+			}
+			UpdateFoes();
+		}
+
+		private void RemFoe_Click(object sender, RoutedEventArgs e) {
+			var SelItem = FoeYes.SelectedItem;
+			if (SelItem != null) {
+				KthuraData.Current.Foes.ListRemove("Main", "List", $"{SelItem}".ToUpper());
+			}
+			UpdateFoes();
+			AutoEnableFoes();
+		}
+
+		public void AutoEnableFoes() {
+			var SelItem = FoeYes.SelectedItem;
+			var Goed = SelItem != null;
+			/*
+			foreach (var tb in Meta.GetRegister.Values) {
+				if (tb.Alt == Meta.MetaAlt.Foe) {
+					tb.TextB.IsEnabled = Goed;
+					tb.TextB.Text=KthuraData.Current.Foes[$"Foe:{SelItem}", tb.Field];
+				}
+			}
+			*/
+			FoeSettingsGrid.Visibility = MyVis(Goed);
 		}
 	}
 }
