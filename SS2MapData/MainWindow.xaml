@@ -1,4 +1,29 @@
-﻿<Window x:Class="SS2MapData.MainWindow"
+<!-- License block
+SS2 MapData Editor
+Main Window
+
+
+
+(c) Jeroen P. Broks, 2022
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Please note that some references to data like pictures or audio, do not automatically
+fall under this licenses. Mostly this is noted in the respective files.
+
+Version: 22.04.20
+End License block -->
+<Window x:Class="SS2MapData.MainWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,137 +31,283 @@
 		xmlns:local="clr-namespace:SS2MapData"
 		mc:Ignorable="d"
 		Title="Star Story - Map Additional Data - Editor" Height="694.225" Width="1188.766" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-	<Window.Background>
-		<!-- The creator of the background fractal is NOT known to me. It was taken from a public domain site! -->
-		<ImageBrush ImageSource="Fractal.jpg"/>
-	</Window.Background>
-	<Grid>
-		<ListBox x:Name="ListMaps" HorizontalAlignment="Left" Height="607" Margin="10,36,0,0" VerticalAlignment="Top" Width="154" Foreground="#F8FFFF00" Background="#82000000" SelectionChanged="ListMaps_SelectionChanged"/>
-		<Label Content="Maps:" HorizontalAlignment="Left" Height="26" Margin="10,5,0,0" VerticalAlignment="Top" Width="154" Foreground="#FFFF6400"/>
-		<TabControl x:Name="MainTab" HorizontalAlignment="Left" Height="633" Margin="181,10,0,0" VerticalAlignment="Top" Width="992" Background="#7F000000">
-			<TabItem Header="Meta">
-				<TabItem.Background>
-					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-						<GradientStop Color="#FFFFB400" Offset="0"/>
-						<GradientStop Color="#FF0F0b00" Offset="1"/>
-					</LinearGradientBrush>
-				</TabItem.Background>
-				<Grid Background="#00000000">
-					<Label Content="Map:" HorizontalAlignment="Left" Height="35" Margin="11,10,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
-					<TextBox x:Name="BoxMap" HorizontalAlignment="Left" Height="35" Margin="199,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="True" Background="#66000000" Foreground="White"/>
-					<Label Content="Title:" HorizontalAlignment="Left" Height="35" Margin="11,45,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
-					<TextBox x:Name="BoxTitle" HorizontalAlignment="Left" Height="35" Margin="199,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
-					<Label Content="Map Level:" HorizontalAlignment="Left" Height="35" Margin="11,80,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
-					<TextBox x:Name="BoxMapLevel" HorizontalAlignment="Left" Height="35" Margin="199,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
-					<Label Content="Arena:" HorizontalAlignment="Left" Height="35" Margin="11,115,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
-					<TextBox x:Name="BoxArena" HorizontalAlignment="Left" Height="35" Margin="199,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
-					<Label Content="Music:" HorizontalAlignment="Left" Height="35" Margin="11,151,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
-					<TextBox x:Name="BoxMusic" HorizontalAlignment="Left" Height="35" Margin="199,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
-					<Label Content="Script:" HorizontalAlignment="Left" Height="35" Margin="11,185,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
-                    <CheckBox x:Name="ChkBoxApolloQuickScript" Margin="199,185,566,385" Content="ApolloQuickScript" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
-                    <CheckBox x:Name="ChkBoxNeilMapScript" Margin="420,185,345,385" Content="Neil MapScript" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
+    <Window.Background>
+        <!-- The creator of the background fractal is NOT known to me. It was taken from a public domain site! -->
+        <ImageBrush ImageSource="Fractal.jpg"/>
+    </Window.Background>
+    <Grid>
+        <ListBox x:Name="ListMaps" HorizontalAlignment="Left" Height="607" Margin="10,36,0,0" VerticalAlignment="Top" Width="154" Foreground="#F8FFFF00" Background="#82000000" SelectionChanged="ListMaps_SelectionChanged"/>
+        <Label Content="Maps:" HorizontalAlignment="Left" Height="26" Margin="10,5,0,0" VerticalAlignment="Top" Width="154" Foreground="#FFFF6400"/>
+        <TabControl x:Name="MainTab" HorizontalAlignment="Left" Height="633" Margin="181,10,0,0" VerticalAlignment="Top" Width="992" Background="#7F000000">
+            <TabItem Header="Meta">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFFFB400" Offset="0"/>
+                        <GradientStop Color="#FF0F0b00" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Background="#00000000">
+                    <Label Content="Map:" HorizontalAlignment="Left" Height="35" Margin="11,10,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+                    <TextBox x:Name="BoxMap" HorizontalAlignment="Left" Height="35" Margin="199,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="True" Background="#66000000" Foreground="White"/>
+                    <Label Content="Title:" HorizontalAlignment="Left" Height="35" Margin="11,45,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+                    <TextBox x:Name="BoxTitle" HorizontalAlignment="Left" Height="35" Margin="199,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
+                    <Label Content="Map Level:" HorizontalAlignment="Left" Height="35" Margin="11,80,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+                    <TextBox x:Name="BoxMapLevel" HorizontalAlignment="Left" Height="35" Margin="199,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
+                    <Label Content="Arena:" HorizontalAlignment="Left" Height="35" Margin="11,115,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+                    <TextBox x:Name="BoxArena" HorizontalAlignment="Left" Height="35" Margin="199,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
+                    <Label Content="Music:" HorizontalAlignment="Left" Height="35" Margin="11,151,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+                    <TextBox x:Name="BoxMusic" HorizontalAlignment="Left" Height="35" Margin="199,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
+                    <Label Content="Script:" HorizontalAlignment="Left" Height="35" Margin="11,185,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+                    <CheckBox x:Name="ChkBoxApolloQuickScript" Margin="199,185,566,385" Content="ApolloQuickScript" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked" Unchecked="MetaCheckBox_Checked"/>
+                    <CheckBox x:Name="ChkBoxNeilMapScript" Margin="420,185,345,385" Content="Neil MapScript" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked" Unchecked="MetaCheckBox_Checked"/>
                     <Label Content="Callbacks:" HorizontalAlignment="Left" Height="35" Margin="11,220,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
-                    <CheckBox x:Name="ChkBoxUpdate" Margin="199,220,566,350" Content="Update" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
-                    <CheckBox x:Name="ChkBoxPreDraw" Margin="420,220,345,350" Content="Pre Draw" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
-                    <CheckBox x:Name="ChkBoxPostDraw" Margin="641,220,124,350" Content="Post Draw" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked"/>
+                    <CheckBox x:Name="ChkBoxUpdate" Margin="199,220,566,350" Content="Update" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked" Unchecked="MetaCheckBox_Checked"/>
+                    <CheckBox x:Name="ChkBoxPreDraw" Margin="420,220,345,350" Content="Pre Draw" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked" Unchecked="MetaCheckBox_Checked"/>
+                    <CheckBox x:Name="ChkBoxPostDraw" Margin="641,220,124,350" Content="Post Draw" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked" Unchecked="MetaCheckBox_Checked"/>
                 </Grid>
-			</TabItem>
-			<TabItem Header="Layers">
-				<TabItem.Background>
-					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-						<GradientStop Color="#FFFFB400" Offset="0"/>
-						<GradientStop Color="#FF0F0b00" Offset="1"/>
-					</LinearGradientBrush>
-				</TabItem.Background>
-				<Grid Background="#00000000">
-					<Label Content="Layers:" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="170" Foreground="#FFFF6400"/>
-					<ListBox x:Name="ListLayers" HorizontalAlignment="Left" Height="536" Margin="10,43,0,0" VerticalAlignment="Top" Width="170" Background="#7F000000" SelectionChanged="ListLayers_SelectionChanged">
-						<ListBox.Foreground>
-							<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-								<GradientStop Color="#FF00B4FF" Offset="0"/>
-								<GradientStop Color="White" Offset="1"/>
-							</LinearGradientBrush>
-						</ListBox.Foreground>
-					</ListBox>
-					<Grid x:Name="GridLayer" HorizontalAlignment="Left" Height="566" Margin="208,13,0,0" VerticalAlignment="Top" Width="759">
-						<Label Margin="0,0,578,537" Content="Layer:" Foreground="Yellow" />
-						<TextBox Margin="181,0,0,537" x:Name="TxtLayer" Background="#7F000000" Foreground="White" IsReadOnly="True"/>
-						<Label Margin="0,29,578,508" Content="Title:" Foreground="Yellow" />
-						<TextBox Margin="181,29,0,508" x:Name="TxtLayTitle" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
-						<Label Margin="0,58,578,479" Content="No Encounters:" Foreground="Yellow" />
-						<CheckBox x:Name="CheckNoEncounter" Margin="181,58,0,479" Content="Encounters Blocked" Foreground="#FF00B4FF" Checked="LayUpdate" >
-							<CheckBox.Background>
-								<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-									<GradientStop Color="Blue" Offset="0"/>
-									<GradientStop Color="#FF00B4FF" Offset="1"/>
-								</LinearGradientBrush>
-							</CheckBox.Background>
-						</CheckBox>
-						<Label Margin="-5,87,583,450" Content="Alternate Arena:" Foreground="Yellow" />
-						<TextBox Margin="181,87,0,450" x:Name="TxtLayAltArena" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
-						<Label Margin="0,116,578,421" Content="Scroll Bounderies:" Foreground="Yellow" />
-						<TextBox Margin="181,116,523,421" x:Name="Txt_ScrollMinX" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
-						<TextBox Margin="236,116,470,421" x:Name="Txt_ScrollMinY" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
-						<TextBox Margin="312,116,396,421" x:Name="Txt_ScrollMaxX" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate" RenderTransformOrigin="0.5,0.5">
-						</TextBox>
-						<TextBox Margin="362,116,344,421" x:Name="Txt_ScrollMaxY" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate" RenderTransformOrigin="0.5,0.5">
-						</TextBox>
-						<TextBox Margin="450,116,265,421" x:Name="Txt_ScrollCenX" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
-						<TextBox Margin="494,116,216,421" x:Name="Txt_ScrollCenY" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
-						<Button x:Name="ScanScrollBoundaries" Content="Scan" Margin="586,116,10,424" Click="ScanScrollBoundaries_Click">
-							<Button.Foreground>
-								<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-									<GradientStop Color="#FFFFB400" Offset="0"/>
-									<GradientStop Color="#FFFFFFB4" Offset="1"/>
-								</LinearGradientBrush>
-							</Button.Foreground>
-							<Button.Background>
-								<ImageBrush ImageSource="Fractal Flower.jpg"/>
-							</Button.Background>
-						</Button>
-					</Grid>
-				</Grid>
-			</TabItem>
-			<TabItem Header="Foes">
-				<TabItem.Background>
-					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-						<GradientStop Color="#FFFFB400" Offset="0"/>
-						<GradientStop Color="#FF0F0b00" Offset="1"/>
-					</LinearGradientBrush>
-				</TabItem.Background>
-				<Grid Background="#00000000"/>
-			</TabItem>
-			<TabItem Header="Random Treasure">
-				<TabItem.Background>
-					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-						<GradientStop Color="#FFFFB400" Offset="0"/>
-						<GradientStop Color="#FF0F0b00" Offset="1"/>
-					</LinearGradientBrush>
-				</TabItem.Background>
-				<Grid Background="#00000000"/>
-			</TabItem>
-			<TabItem Header="Behavior">
-				<TabItem.Background>
-					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-						<GradientStop Color="#FFFFB400" Offset="0"/>
-						<GradientStop Color="#FF0F0b00" Offset="1"/>
-					</LinearGradientBrush>
-				</TabItem.Background>
-				<Grid Background="#00000000">
-					<TextBox x:Name="Behavior_Source" HorizontalAlignment="Left" Height="553" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="966" Foreground="#FFC8B4FF" AcceptsReturn="True" TextChanged="Behavior_Source_TextChanged">
-						<TextBox.Background>
-							<ImageBrush ImageSource="Dark.png"/>
-						</TextBox.Background>
-					</TextBox>
-					<Button x:Name="CompileAndSave" Margin="10,563,10,0" FontFamily="Segoe Script" Content="Save And Compile" Foreground="#FDFFFFFF" FontSize="18" Click="CompileAndSave_Click">
-						<Button.Background>
-							<ImageBrush ImageSource="Fractal Flower.jpg" Stretch="UniformToFill"/>
-						</Button.Background>
-					</Button>
-				</Grid>
-			</TabItem>
+            </TabItem>
+            <TabItem Header="Layers">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFFFB400" Offset="0"/>
+                        <GradientStop Color="#FF0F0b00" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Background="#00000000">
+                    <Label Content="Layers:" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="170" Foreground="#FFFF6400"/>
+                    <ListBox x:Name="ListLayers" HorizontalAlignment="Left" Height="536" Margin="10,43,0,0" VerticalAlignment="Top" Width="170" Background="#7F000000" SelectionChanged="ListLayers_SelectionChanged">
+                        <ListBox.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00B4FF" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ListBox.Foreground>
+                    </ListBox>
+                    <Grid x:Name="GridLayer" HorizontalAlignment="Left" Height="566" Margin="208,13,0,0" VerticalAlignment="Top" Width="759">
+                        <Label Margin="0,0,578,537" Content="Layer:" Foreground="Yellow" />
+                        <TextBox Margin="181,0,0,537" x:Name="TxtLayer" Background="#7F000000" Foreground="White" IsReadOnly="True"/>
+                        <Label Margin="0,29,578,508" Content="Title:" Foreground="Yellow" />
+                        <TextBox Margin="181,29,0,508" x:Name="TxtLayTitle" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+                        <Label Margin="0,58,578,479" Content="No Encounters:" Foreground="Yellow" />
+                        <CheckBox x:Name="CheckNoEncounter" Margin="181,58,0,479" Content="Encounters Blocked" Foreground="#FF00B4FF" Checked="LayUpdate" >
+                            <CheckBox.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="Blue" Offset="0"/>
+                                    <GradientStop Color="#FF00B4FF" Offset="1"/>
+                                </LinearGradientBrush>
+                            </CheckBox.Background>
+                        </CheckBox>
+                        <Label Margin="-5,87,583,450" Content="Alternate Arena:" Foreground="Yellow" />
+                        <TextBox Margin="181,87,0,450" x:Name="TxtLayAltArena" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+                        <Label Margin="0,116,578,421" Content="Scroll Bounderies:" Foreground="Yellow" />
+                        <TextBox Margin="181,116,523,421" x:Name="Txt_ScrollMinX" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+                        <TextBox Margin="236,116,470,421" x:Name="Txt_ScrollMinY" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+                        <TextBox Margin="312,116,396,421" x:Name="Txt_ScrollMaxX" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate" RenderTransformOrigin="0.5,0.5">
+                        </TextBox>
+                        <TextBox Margin="362,116,344,421" x:Name="Txt_ScrollMaxY" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate" RenderTransformOrigin="0.5,0.5">
+                        </TextBox>
+                        <TextBox Margin="450,116,265,421" x:Name="Txt_ScrollCenX" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+                        <TextBox Margin="494,116,216,421" x:Name="Txt_ScrollCenY" Background="#7F000000" Foreground="White" IsReadOnly="False" TextChanged="LayUpdate"/>
+                        <Button x:Name="ScanScrollBoundaries" Content="Scan" Margin="586,116,10,424" Click="ScanScrollBoundaries_Click">
+                            <Button.Foreground>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFFFB400" Offset="0"/>
+                                    <GradientStop Color="#FFFFFFB4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Foreground>
+                            <Button.Background>
+                                <ImageBrush ImageSource="Fractal Flower.jpg"/>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Foes">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFFFB400" Offset="0"/>
+                        <GradientStop Color="#FF0F0b00" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Background="#00000000">
+                    <ListBox HorizontalAlignment="Left" Height="290" Margin="10,10,0,0" VerticalAlignment="Top" Width="410" x:Name="FoeNo" Background="#7F190000" BorderBrush="#FFB40000" Foreground="Red"/>
+                    <ListBox HorizontalAlignment="Left" Height="290" Margin="562,10,0,0" VerticalAlignment="Top" Width="414" x:Name="FoeYes" Background="#7F001900" BorderBrush="#FF00AD00" Foreground="Lime" SelectionChanged="ItemYes_SelectionChanged"/>
+                    <Button Content="&#x2192;" HorizontalAlignment="Left" Margin="420,10,0,0" VerticalAlignment="Top" Width="142" Height="140" x:Name="AddFoe" BorderBrush="#00000000" FontSize="48" Click="AddFoe_Click">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Lime" Offset="0"/>
+                                <GradientStop Color="#3F001900" Offset="0.995"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Content="&#x2190;" HorizontalAlignment="Left" Margin="420,150,0,0" VerticalAlignment="Top" Width="142" Height="150" x:Name="RemFoe" BorderBrush="#00000000" FontSize="48" Click="RemFoe_Click">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Red" Offset="0"/>
+                                <GradientStop Color="#3F190000" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Grid Margin="0,305,0,0" x:Name="FoeSettingsGrid">
+                        <Label Content="Easy Mode" Margin="197,10,682,265" Foreground="#FFFFFF04"/>
+                        <Label Content="Casual Mode" Margin="304,10,575,265" Foreground="#FFFFFF04"/>
+                        <Label Content="Hard Mode" Margin="411,10,468,265" Foreground="#FFFFFF04" />
+                        <Label Content="Minimal Cycle" Margin="14,31,790,244" Foreground="#FFFFFF04"/>
+                        <TextBox x:Name="FoeMinCycle1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="196,35,0,0" Foreground="#FF00FF00" Background="#7F000f00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeMinCycle2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="303,35,0,0" Foreground="#FFFF9600" Background="#7F0f0e00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeMinCycle3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="410,35,0,0" Foreground="#FFFF0000" Background="#7F0f0000" TextChanged="MetaChanged"/>
+                        <Label Content="Rate" Margin="14,56,790,219" Foreground="#FFFFFF04"/>
+                        <TextBox x:Name="FoeRate1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="196,58,0,0" Foreground="#FF00FF00" Background="#7F000f00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeRate2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="303,58,0,0" Foreground="#FFFF9600" Background="#7F0f0e00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeRate3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="410,58,0,0" Foreground="#FFFF0000" Background="#7F0f0000" TextChanged="MetaChanged"/>
+                        <RadioButton Content="Own Level" Margin="14,86,469,189" Foreground="#FFFFFF04" GroupName="FoeLevelChoice" x:Name="FoeOwnlevel" Checked="OwnLevelCheck"/>
+                        <Label Content="Minimum" Margin="14,104,790,171" Foreground="#FFFFFF04"/>
+                        <TextBox x:Name="FoeOMinLevel1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="196,104,0,0" Foreground="#FF00FF00" Background="#7F000f00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeOMinLevel2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="303,104,0,0" Foreground="#FFFF9600" Background="#7F0f0e00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeOMinLevel3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="411,104,0,0" Foreground="#FFFF0000" Background="#7F0f0000" TextChanged="MetaChanged"/>
+                        <Label Content="Maximum" Margin="14,129,790,146" Foreground="#FFFFFF04"/>
+                        <TextBox x:Name="FoeOMaxLevel1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="196,127,0,0" Foreground="#FF00FF00" Background="#7F000f00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeOMaxLevel2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="304,127,0,0" Foreground="#FFFF9600" Background="#7F0f0e00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeOMaxLevel3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="410,127,0,0" Foreground="#FFFF0000" Background="#7F0f0000" TextChanged="MetaChanged"/>
+                        <RadioButton Checked="OwnLevelCheck" x:Name="FoeAllLevel" GroupName="FoeLevelChoice" Content="All Level" Margin="14,155,455,120" Foreground="#FFFFFF04"/>
+                        <Label Content="Minimum" Margin="14,175,790,100" Foreground="#FFFFFF04"/>
+                        <TextBox x:Name="FoeAMinLevel1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="196,176,0,0" Foreground="#FF00FF00" Background="#7F000f00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeAMinLevel2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="303,175,0,0" Foreground="#FFFF9600" Background="#7F0f0e00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeAMinLevel3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="410,176,0,0" Foreground="#FFFF0000" Background="#7F0f0000" TextChanged="MetaChanged"/>
+                        <Label Content="Maximum" Margin="14,200,790,75" Foreground="#FFFFFF04"/>
+                        <TextBox x:Name="FoeAMaxLevel1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="196,198,0,0" Foreground="#FF00FF00" Background="#7F000f00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeAMaxLevel2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="303,198,0,0" Foreground="#FFFF9600" Background="#7F0f0e00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="FoeAMaxLevel3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="410,198,0,0" Foreground="#FFFF0000" Background="#7F0f0000" TextChanged="MetaChanged"/>
 
-			<!-- (Just kept here for template purposes)
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Random Treasure">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFFFB400" Offset="0"/>
+                        <GradientStop Color="#FF0F0b00" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Background="#00000000">
+                    <ListBox HorizontalAlignment="Left" Height="290" Margin="10,10,0,0" VerticalAlignment="Top" Width="410" x:Name="ItemNo" Background="#7F190000" BorderBrush="#FFB40000" Foreground="Red"/>
+                    <ListBox HorizontalAlignment="Left" Height="290" Margin="562,10,0,0" VerticalAlignment="Top" Width="414" x:Name="ItemYes" Background="#7F001900" BorderBrush="#FF00AD00" Foreground="Lime" SelectionChanged="ItemYes_SelectionChanged"/>
+                    <Button Content="&#x2192;" HorizontalAlignment="Left" Margin="420,10,0,0" VerticalAlignment="Top" Width="142" Height="140" x:Name="AddItem" BorderBrush="#00000000" FontSize="48" Click="AddItem_Click">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Lime" Offset="0"/>
+                                <GradientStop Color="#3F001900" Offset="0.995"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Content="&#x2190;" HorizontalAlignment="Left" Margin="420,150,0,0" VerticalAlignment="Top" Width="142" Height="150" x:Name="RemItem" BorderBrush="#00000000" FontSize="48" Click="RemItem_Click">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Red" Offset="0"/>
+                                <GradientStop Color="#3F190000" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Grid Margin="0,305,0,0" x:Name="ItemSettingsGrid">
+                        <Label Content="Easy Mode" Margin="197,10,682,265" Foreground="#FFFFFF04"/>
+                        <Label Content="Casual Mode" Margin="304,10,575,265" Foreground="#FFFFFF04"/>
+                        <Label Content="Hard Mode" Margin="411,10,468,265" Foreground="#FFFFFF04" />
+                        <Label Content="Minimal Cycle" Margin="10,31,794,244" Foreground="#FFFFFF04"/>
+                        <TextBox x:Name="MinCycle1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="196,35,0,0" Foreground="#FF00FF00" Background="#7F000f00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="MinCycle2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="303,35,0,0" Foreground="#FFFF9600" Background="#7F0f0e00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="MinCycle3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="410,35,0,0" Foreground="#FFFF0000" Background="#7F0f0000" TextChanged="MetaChanged"/>
+                        <Label Content="Rate" Margin="14,56,790,219" Foreground="#FFFFFF04"/>
+                        <TextBox x:Name="TreasureRate1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="196,58,0,0" Foreground="#FF00FF00" Background="#7F000f00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="TreasureRate2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="303,58,0,0" Foreground="#FFFF9600" Background="#7F0f0e00" TextChanged="MetaChanged"/>
+                        <TextBox x:Name="TreasureRate3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="107" Margin="410,58,0,0" Foreground="#FFFF0000" Background="#7F0f0000" TextChanged="MetaChanged"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Doors">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFFFB400" Offset="0"/>
+                        <GradientStop Color="#FF0F0b00" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Background="#00000000">
+                    <ListBox Margin="0,0,788,89" x:Name="ListBox_Doors" SelectionChanged="ListBox_Doors_SelectionChanged">
+                        <ListBox.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFFFB400" Offset="0"/>
+                                <GradientStop Color="Yellow" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ListBox.Foreground>
+                        <ListBox.Background>
+                            <ImageBrush ImageSource="Dark.png"/>
+                        </ListBox.Background>
+                    </ListBox>
+                    <Button x:Name="Doors_DestroyAll" Content="Complete Rescan" Margin="0,515,788,45" Click="Doors_DestroyAll_Click">
+                        <Button.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF191200" Offset="0"/>
+                                <GradientStop Color="Yellow" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Foreground>
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFFF6400" Offset="0"/>
+                                <GradientStop Color="Red" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Content="Scan for doors" Margin="0,560,0,0" Foreground="Yellow" FontFamily="Segoe UI Black" FontSize="18" Click="Button_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Fractal Flower.jpg"/>
+                        </Button.Background>
+                    </Button>
+                    <Grid x:Name="GridDoor" Margin="216,0,0,50" >
+                        <Label Content="Object Tag" Foreground="Yellow" Margin="10,0,616,521"></Label>
+                        <TextBox x:Name="Door_Tag" IsReadOnly="True" Margin="154,0,351,521" Background="#7F000000" Foreground="#FFFFB400"/>
+                        <Label Content="Layer" Foreground="Yellow" Margin="472,0,220,521"></Label>
+                        <TextBox x:Name="Door_Layer" IsReadOnly="True" Margin="555,0,10,521" Background="#7F000000" Foreground="#FFFFB400"/>
+                        <Label Content="Collection" Foreground="Yellow" Margin="10,34,616,487"></Label>
+                        <TextBox x:Name="Door_Collection" IsReadOnly="True" Margin="154,34,0,487" Background="#7F000000" Foreground="#FFFFB400" TextChanged="Door_TB_TextChanged"/>
+                        <Label Content="Move" Foreground="Yellow" Margin="10,68,616,453"></Label>
+                        <TextBox x:Name="Door_MoveX" IsReadOnly="False" Margin="154,68,525,453" Background="#7F000000" Foreground="#00FBFF" TextChanged="Door_TB_TextChanged"/>
+                        <TextBox x:Name="Door_MoveY" IsReadOnly="False" Margin="245,68,434,453" Background="#7F000000" Foreground="#00FBFF" TextChanged="Door_TB_TextChanged"/>
+                        <Label Content="Frames" Foreground="Yellow" Margin="370,68,324,453"/>
+                        <TextBox x:Name="Door_Frames" IsReadOnly="False" Margin="446,68,233,453" Background="#7F000000" Foreground="#00FBFF" TextChanged="Door_TB_TextChanged"/>
+                        <Label Content="Opened by default" Foreground="Yellow" Margin="10,102,616,419"></Label>
+                        <TextBox x:Name="Door_Open" IsReadOnly="False" Margin="154,102,0,419" Background="#7F000000" Foreground="#FFFFB400" TextChanged="Door_TB_TextChanged"/>
+                        <Label Content="Audio Open" Foreground="Yellow" Margin="10,136,616,385"></Label>
+                        <TextBox x:Name="Door_AudioOpen" IsReadOnly="False" Margin="154,136,0,385" Background="#7F000000" Foreground="#FFFFB400" TextChanged="Door_TB_TextChanged"/>
+                        <Label Content="Audio Close" Foreground="Yellow" Margin="10,170,616,351"></Label>
+                        <TextBox x:Name="Door_AudioClose" IsReadOnly="False" Margin="154,170,0,351" Background="#7F000000" Foreground="#FFFFB400" TextChanged="Door_TB_TextChanged"/>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Behavior">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFFFB400" Offset="0"/>
+                        <GradientStop Color="#FF0F0b00" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Background="#00000000">
+                    <TextBox x:Name="Behavior_Source" HorizontalAlignment="Left" Height="553" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="966" Foreground="#FFC8B4FF" AcceptsReturn="True" TextChanged="Behavior_Source_TextChanged" IsEnabled="False">
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="Dark.png"/>
+                        </TextBox.Background>
+                    </TextBox>
+                    <Button IsEnabled="False" x:Name="CompileAndSave" Margin="10,563,10,0" FontFamily="Segoe Script" Content="Save And Compile" Foreground="#FDFFFFFF" FontSize="18" Click="CompileAndSave_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Fractal Flower.jpg" Stretch="UniformToFill"/>
+                        </Button.Background>
+                    </Button>
+                </Grid>
+            </TabItem>
+
+            <!-- (Just kept here for template purposes)
 						<TabItem Header="Foes">
 				<TabItem.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -148,7 +319,7 @@
 			</TabItem>
 
 			-->
-		</TabControl>
+        </TabControl>
 
-	</Grid>
+    </Grid>
 </Window>
