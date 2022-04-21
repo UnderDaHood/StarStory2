@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EleRes.cs" />
+    <Compile Include="IAA.cs" />
+    <Compile Include="Stats.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -127,6 +130,36 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Mascotte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fractal2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Yorno.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="abstract-fractal-background-15.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ashley.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="6797422-green-space-wallpaper.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Doctor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Salp%27r%27drita.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SPACE_NEBULA_STARS.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Scyndi Pyama Alpha.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
