@@ -38,3 +38,7 @@ Foes/Editor/Scyndi Pyama Alpha.png
 Foes/Editor/Salp'r'drita.png
 Foes/Editor/Yorno.png
 *.pyc
+
+
+# No backups
+*.bb_bak*
