@@ -3,6 +3,7 @@ CREATIONFILE=E:/Projects/Applications/Apollo/Games/Star Story 2/Dev/Foes/Data/zz
 CREATIONTIME=3/1/2022 11:11:25 AM
 [META]
 DESCRIPTION=MOAR<<<<13>>>><<<<10>>>>TESTING<<<<13>>>><<<<10>>>>HERE<<<<33>>>><<<<13>>>><<<<10>>>><<<<9>>>>Test Test Test<<<<13>>>><<<<10>>>>Test<<<<33>>>>
+HUMANOID=TRUE
 NAME=Test Foe #2
 VOCALTAG=Test de la test
 [RESISTELEMENT]

@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 22.04.18
+// version: 22.04.25
 // EndLic
 
 using System;
@@ -78,8 +78,11 @@ namespace StarStory2_Foe_Editor {
 			internal RegRec(string CT, string VN) { Category = CT; VarName = VN; }
 		}
 		static Dictionary<TextBox, RegRec> AutoTexBox = new Dictionary<TextBox, RegRec>();
+		static Dictionary<CheckBox, RegRec> AutoChkBox = new Dictionary<CheckBox, RegRec>();
 		static public void RegTextBox(TextBox TB,string VN) { AutoTexBox[TB] = new RegRec(VN); }
 		static public void RegTextBox(TextBox TB, string CT, string VN) { AutoTexBox[TB] = new RegRec(CT,VN); }
+		static public void RegCheckBox(CheckBox CB, string CT, string VN) { AutoChkBox[CB] = new RegRec(CT, VN); }
+		static public void RegCheckBox(CheckBox CB, string VN) { AutoChkBox[CB] = new RegRec(VN); } 
 
 		static bool DontChange = false;
 		static public void ActTextBox(TextBox TB) {
@@ -100,6 +103,23 @@ namespace StarStory2_Foe_Editor {
 			}
 		}
 
+		static public void ActCheckBox(CheckBox TB)
+		{
+			try
+			{
+				if (Foe == "" || DontChange) return;
+				var T = AutoChkBox[TB];
+				var R = GetRec(Foe);
+				//var txt = TB.Text.Replace("\r", ""); // Only Unix based line endings.
+				R.Data[T.Category, T.VarName] = TB.IsChecked.ToString().ToUpper();
+				R.Modified = true;
+			}
+			catch (Exception e)
+			{
+				Confirm.Annoy($"An error occurred!\n\n{e.Message}\n\n\nFoe: {Foe}");
+			}
+		}
+
 		static public void UpdateTextBoxes() {
 			DontChange = true;
 			foreach(var IT in AutoTexBox) {
@@ -113,6 +133,16 @@ namespace StarStory2_Foe_Editor {
 					IT.Key.Text = txt;
 				}
 			}
+
+			foreach (var IT in AutoChkBox) {
+				IT.Key.IsEnabled = Foe != "";
+				if (Foe != "") 	{
+					var R = GetRec(Foe);
+					var txt = R.Data[IT.Value.Category, IT.Value.VarName];
+					IT.Key.IsChecked = txt.Trim().ToUpper() == "TRUE";
+				}
+			}
+
 			/*
 			foreach(var IT in Stats.Register) {
 				var R = GetRec(Foe);
@@ -140,6 +170,5 @@ namespace StarStory2_Foe_Editor {
 		static public string Dir => Dirry.AD("Scyndi:Projects/Applications/Apollo/Games/Star Story 2/Dev/Foes/Data");
 		static public void RegFoeList(ListBox FL) { FoeList = FL; }
 
-
-	}
+    }
 }

@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Please note that some references to data like pictures or audio, do not automatically
 fall under this licenses. Mostly this is noted in the respective files.
 
-Version: 22.04.20
+Version: 22.04.24
 End License block -->
 <Window x:Class="SS2MapData.MainWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -64,6 +64,8 @@ End License block -->
                     <CheckBox x:Name="ChkBoxUpdate" Margin="199,220,566,350" Content="Update" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked" Unchecked="MetaCheckBox_Checked"/>
                     <CheckBox x:Name="ChkBoxPreDraw" Margin="420,220,345,350" Content="Pre Draw" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked" Unchecked="MetaCheckBox_Checked"/>
                     <CheckBox x:Name="ChkBoxPostDraw" Margin="641,220,124,350" Content="Post Draw" Foreground="#FFFFFFB4" Checked="MetaCheckBox_Checked" Unchecked="MetaCheckBox_Checked"/>
+                    <Label Content="Alt Combat Music:" HorizontalAlignment="Left" Height="35" Margin="10,255,0,0" VerticalAlignment="Top" Width="188" Foreground="Yellow"/>
+                    <TextBox x:Name="AltCombatMusic" HorizontalAlignment="Left" Height="35" Margin="198,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="765" IsReadOnly="False" Background="#66000000" Foreground="White" TextChanged="MetaChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Layers">

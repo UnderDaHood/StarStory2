@@ -2,7 +2,9 @@
 CREATIONFILE=E:/Projects/Applications/Apollo/Games/Star Story 2/Dev/Foes/Data/ZZTest/Test
 CREATIONTIME=3/1/2022 9:43:06 AM
 [META]
+BOSS=TRUE
 DESCRIPTION=I am just testing all this crap.<<<<13>>>><<<<10>>>>I really don't know if it works the way it should, but we'll see<<<<33>>>>
+HUMANOID=FALSE
 NAME=Test Foe #1
 [RESISTELEMENT]
 DARKHEALING=0

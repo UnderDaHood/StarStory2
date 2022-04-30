@@ -34,10 +34,12 @@ SK1=Worst
 SK2=Random
 SK3=Random
 [META]
-DESCRIPTION=These critters can be found everywhere.<<<<10>>>>They can be really nasty.
+BOSS=FALSE
+DESCRIPTION=These critters can be found anywher and everywhere.<<<<10>>>>They can be really nasty.
+HUMANOID=FALSE
 NAME=Rat
-NEGASPRITE=GFX/Combat/Foe/Gen/Rat.Negative.png
-NORMSPRITE=GFX/Combat/Foe/Gen/Rat.png
+NEGASPRITE=GFX/Combat/Foes/Gen/Rat.Negative.png
+NORMSPRITE=GFX/Combat/Foes/Gen/Rat.png
 VOCALTAG=Gen/Rat
 [RESISTELEMENT]
 DARKHEALING=0

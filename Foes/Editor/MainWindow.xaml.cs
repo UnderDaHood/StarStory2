@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.18
+// Version: 22.04.25
 // EndLic
 
 using System;
@@ -61,6 +61,8 @@ namespace StarStory2_Foe_Editor {
 			Data.RegTextBox(TextVocalTag, "VocalTag");
 			Data.RegTextBox(TextImage, "NormSprite");
 			Data.RegTextBox(TextImageNeg, "NegaSprite");
+			Data.RegCheckBox(ChkIsBoss, "Boss");
+			Data.RegCheckBox(Humanoid, "Humanoid");
 			new Stats("Power", S_MinPower, S_MaxPower, S_Sk1Power, S_Sk2Power, S_Sk3Power);
 			new Stats("Endurance", S_MinEndurance, S_MaxEndurance, S_Sk1Endurance, S_Sk2Endurance, S_Sk3Endurance);
 			new Stats("Will", S_MinWill, S_MaxWill, S_Sk1Will, S_Sk2Will, S_Sk3Will);
@@ -156,7 +158,7 @@ namespace StarStory2_Foe_Editor {
 					return;
 			}
 			NewFoeFileName.Text = "";
-			QuickStream.SaveString(fname, $"[alg]\nCreationTime={DateTime.Now}\nCreationFile={fname}\n[meta]\nName={qstr.StripDir(txt)}\nVocalTag={txt}\nNormSprite=GFX/Combat/Foe/{txt}.png\nNegaSprite=GFX/Combat/Foe/{txt}.Negative.png\n[luck]\nsk1=Random\nsk2=Random\nsk3=Random\n[ai]\nscript=Default\n");
+			QuickStream.SaveString(fname, $"[alg]\nCreationTime={DateTime.Now}\nCreationFile={fname}\n[meta]\nName={qstr.StripDir(txt)}\nVocalTag={txt}\nNormSprite=GFX/Combat/Foes/{txt}.png\nNegaSprite=GFX/Combat/Foes/{txt}.Negative.png\n[luck]\nsk1=Random\nsk2=Random\nsk3=Random\n[ai]\nscript=Default\n");
 			GetFoeList();
 		}
 
@@ -198,7 +200,8 @@ namespace StarStory2_Foe_Editor {
 		private void AblDo_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 			IAA.AIAutoEnable();
 			var Lst = (ListBox)sender;
-			var SelItem = Lst.SelectedItem.ToString();
+			var SelItem = Lst.SelectedItem;
+			//var SelItemS = $"{SelItem}";
 			var D = Data.GetRec(Data.Foe);
 			if (SelItem != null) {
 				foreach(var v in IAA.AIFields.Values) {
@@ -257,5 +260,7 @@ namespace StarStory2_Foe_Editor {
 		}
 
 		private void ItemDo_SelectionChanged(object sender, SelectionChangedEventArgs e) => AblDo_SelectionChanged(sender, e);
+
+		private void RegChkChange(object sender, RoutedEventArgs e) => Data.ActCheckBox((CheckBox)sender);
 	}
 }

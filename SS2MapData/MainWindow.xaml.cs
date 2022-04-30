@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.20
+// Version: 22.04.24
 // EndLic
 
 using System;
@@ -70,9 +70,10 @@ namespace SS2MapData {
 			Meta.Register(ChkBoxUpdate, "CallbackUpdate");
 			Meta.Register(ChkBoxPreDraw, "CallbackPreDraw");
 			Meta.Register(ChkBoxPostDraw, "CallbackPostDraw");
+			Meta.Register(AltCombatMusic, "AltCombatMusic");
 			Layers.MW = this;
 			Layers.Register(TxtLayTitle, "Title");
-			Layers.Register(CheckNoEncounter, "NoEcounters", Layers.Type.Checkbox);
+			Layers.Register(CheckNoEncounter, "NoEncounters", Layers.Type.Checkbox);
 			Layers.Register(TxtLayAltArena, "AltArena");
 			Layers.Register(Txt_ScrollMinX, "Scroll_MinX");
 			Layers.Register(Txt_ScrollMinY, "Scroll_MinY");
@@ -120,6 +121,7 @@ namespace SS2MapData {
 			Meta.Register(FoeAMaxLevel1, "Foe_MaxLevel1");
 			Meta.Register(FoeAMaxLevel2, "Foe_Maxlevel2");
 			Meta.Register(FoeAMaxLevel3, "Foe_Maxlevel3");
+			FoeSettingsGrid.Visibility = MyVis(false);
 
 		}
 		#endregion

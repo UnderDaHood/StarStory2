@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Please note that some references to data like pictures or audio, do not automatically
 fall under this licenses. Mostly this is noted in the respective files.
 
-Version: 22.04.18
+Version: 22.04.25
 End License block -->
 <Window x:Class="StarStory2_Foe_Editor.MainWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -32,151 +32,169 @@ End License block -->
 		mc:Ignorable="d"
 		ResizeMode="NoResize"
 		Title="Star Story II - Foe Editor - Coded by: Jeroen P. Broks" Height="981.786" Width="1345.715">
-	<Window.Background>
-		<ImageBrush ImageSource="B1.PNG"/>
-	</Window.Background>
-	<Grid>
-		<ListBox x:Name="FoeList" HorizontalAlignment="Left" Height="873" Margin="28,24,0,0" VerticalAlignment="Top" Width="216" Background="{x:Null}" Foreground="#FF00B4FF" SelectionChanged="FoeList_SelectionChanged"/>
-		<Button x:Name="NewFoe" Content="+" HorizontalAlignment="Left" Height="45" Margin="28,902,0,0" VerticalAlignment="Top" Width="50" FontSize="18" IsEnabled="False" Click="NewFoe_Click">
-			<Button.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="Lime" Offset="0"/>
-					<GradientStop Color="#FFB4FF00" Offset="1"/>
-				</LinearGradientBrush>
-			</Button.Background>
-		</Button>
-		<TextBox x:Name="NewFoeFileName" HorizontalAlignment="Left" Height="41" Margin="83,902,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontSize="20" TextChanged="NewFoeFileName_TextChanged">
-			<TextBox.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="Lime" Offset="0"/>
-					<GradientStop Color="Black" Offset="1"/>
-				</LinearGradientBrush>
-			</TextBox.Background>
-		</TextBox>
-		<TabControl x:Name="MainTab" HorizontalAlignment="Left" Height="919" Margin="249,24,0,0" VerticalAlignment="Top" Width="1081" Background="{x:Null}" BorderBrush="#FF005AAC" Foreground="#FF064B64">
-			<TabItem Header="Meta Data">
-				<Grid>
-					<Image HorizontalAlignment="Left" Height="175" Margin="10,10,0,0" VerticalAlignment="Top" Width="192" Source="Mascotte.png">
-						<Image.OpacityMask>
-							<ImageBrush ImageSource="Mascotte.png"/>
-						</Image.OpacityMask>
-					</Image>
-					<Label Content="File:" HorizontalAlignment="Left" Height="28" Margin="207,10,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
-					<TextBox IsReadOnly="True" x:Name="TextFileName" HorizontalAlignment="Left" Height="28" Margin="417,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF"/>
-					<Label Content="Name:" HorizontalAlignment="Left" Height="28" Margin="207,43,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
-					<TextBox IsReadOnly="False" x:Name="TextFoeName" HorizontalAlignment="Left" Height="28" Margin="417,43,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
-					<Label Content="Description:" HorizontalAlignment="Left" Height="28" Margin="207,76,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
-					<TextBox IsReadOnly="False" AcceptsReturn="True" x:Name="TextFoeDescription" HorizontalAlignment="Left" Height="109" Margin="417,76,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
-					<Label Content="Vocal Tag:" HorizontalAlignment="Left" Height="28" Margin="207,195,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
-					<TextBox IsReadOnly="False" x:Name="TextVocalTag" HorizontalAlignment="Left" Height="28" Margin="417,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
-					<Label Content="Combat Image:" HorizontalAlignment="Left" Height="28" Margin="207,228,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
-					<TextBox IsReadOnly="False" x:Name="TextImage" HorizontalAlignment="Left" Height="28" Margin="417,228,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
-					<Label Content="Combat Image: (negative)" HorizontalAlignment="Left" Height="28" Margin="207,261,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
-					<TextBox IsReadOnly="False" x:Name="TextImageNeg" HorizontalAlignment="Left" Height="28" Margin="417,261,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
-				</Grid>
-			</TabItem>
-			<TabItem Header="Statistics">
-				<Grid>
-					<Grid.Background>
-						<ImageBrush ImageSource="Fractal2.jpg"/>
-					</Grid.Background>
-					<!-- ReadOnly Var Stats = {"Power","Defense","Will","Resistance","Accuracy","Evasion","Speed"} -->
-					<Label Content="Min" Margin="214,0,765,868" Foreground="#FFC800FF"></Label>
-					<Label Content="Max" Margin="315,0,664,868" Foreground="#FFC800FF"></Label>
-					<Label Content="ModEasy" Margin="411,0,568,868" Foreground="#FFC800FF"></Label>
-					<Label Content="ModCasual" Margin="499,0,480,868" Foreground="#FFC800FF"></Label>
-					<Label Content="ModHard" Margin="600,0,379,868" Foreground="#FFC800FF"></Label>
-					<Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="Yorno.png" Margin="965,10,0,0"/>
-					<!-- Power -->
-					<Label Content="Power" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,832" />
-					<TextBox x:Name="S_MinPower" Margin="214,28,765,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_MaxPower" Margin="310,28,669,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk1Power" Margin="406,28,573,832" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk2Power" Margin="499,28,480,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk3Power" Margin="595,28,384,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<!-- Endurance -->
-					<Label Content="Endurance" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,801"  />
-					<TextBox x:Name="S_MinEndurance" Margin="214,59,765,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_MaxEndurance" Margin="310,59,669,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk1Endurance" Margin="406,59,573,801" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk2Endurance" Margin="499,59,480,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk3Endurance" Margin="595,59,384,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<!-- Will -->
-					<Label Content="Will" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,770"  />
-					<TextBox x:Name="S_MinWill" Margin="214,90,765,770" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_MaxWill" Margin="310,90,669,770" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk1Will" Margin="406,90,573,770" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk2Will" Margin="499,90,480,770" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk3Will" Margin="595,90,384,770" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<!-- Resistance -->
-					<Label Content="Resistance" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,739" />
-					<TextBox x:Name="S_MinResistance" Margin="214,121,765,739" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_MaxResistance" Margin="310,121,669,739" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk1Resistance" Margin="406,121,573,739" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk2Resistance" Margin="499,121,480,739" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk3Resistance" Margin="595,121,384,739" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+    <Window.Background>
+        <ImageBrush ImageSource="B1.PNG"/>
+    </Window.Background>
+    <Grid>
+        <ListBox x:Name="FoeList" HorizontalAlignment="Left" Height="873" Margin="28,24,0,0" VerticalAlignment="Top" Width="216" Background="{x:Null}" Foreground="#FF00B4FF" SelectionChanged="FoeList_SelectionChanged"/>
+        <Button x:Name="NewFoe" Content="+" HorizontalAlignment="Left" Height="45" Margin="28,902,0,0" VerticalAlignment="Top" Width="50" FontSize="18" IsEnabled="False" Click="NewFoe_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Lime" Offset="0"/>
+                    <GradientStop Color="#FFB4FF00" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBox x:Name="NewFoeFileName" HorizontalAlignment="Left" Height="41" Margin="83,902,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontSize="20" TextChanged="NewFoeFileName_TextChanged">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Lime" Offset="0"/>
+                    <GradientStop Color="Black" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+        </TextBox>
+        <TabControl x:Name="MainTab" HorizontalAlignment="Left" Height="919" Margin="249,24,0,0" VerticalAlignment="Top" Width="1081" Background="{x:Null}" BorderBrush="#FF005AAC" Foreground="#FF064B64">
+            <TabItem Header="Meta Data">
+                <Grid>
+                    <Image HorizontalAlignment="Left" Height="175" Margin="10,10,0,0" VerticalAlignment="Top" Width="192" Source="Mascotte.png">
+                        <Image.OpacityMask>
+                            <ImageBrush ImageSource="Mascotte.png"/>
+                        </Image.OpacityMask>
+                    </Image>
+                    <Label Content="File:" HorizontalAlignment="Left" Height="28" Margin="207,10,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <TextBox IsReadOnly="True" x:Name="TextFileName" HorizontalAlignment="Left" Height="28" Margin="417,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF"/>
+                    <Label Content="Name:" HorizontalAlignment="Left" Height="28" Margin="207,43,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <TextBox IsReadOnly="False" x:Name="TextFoeName" HorizontalAlignment="Left" Height="28" Margin="417,43,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
+                    <Label Content="Description:" HorizontalAlignment="Left" Height="28" Margin="207,76,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <TextBox IsReadOnly="False" AcceptsReturn="True" x:Name="TextFoeDescription" HorizontalAlignment="Left" Height="109" Margin="417,76,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
+                    <Label Content="Vocal Tag:" HorizontalAlignment="Left" Height="28" Margin="207,195,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <TextBox IsReadOnly="False" x:Name="TextVocalTag" HorizontalAlignment="Left" Height="28" Margin="417,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
+                    <Label Content="Combat Image:" HorizontalAlignment="Left" Height="28" Margin="207,228,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <TextBox IsReadOnly="False" x:Name="TextImage" HorizontalAlignment="Left" Height="28" Margin="417,228,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
+                    <Label Content="Combat Image: (negative)" HorizontalAlignment="Left" Height="28" Margin="207,261,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <TextBox IsReadOnly="False" x:Name="TextImageNeg" HorizontalAlignment="Left" Height="28" Margin="417,261,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="636" Background="#99000000" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
+                    <Label Content="Boss" HorizontalAlignment="Left" Height="28" Margin="207,294,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <CheckBox x:Name="ChkIsBoss" Checked="RegChkChange" Unchecked="RegChkChange" Margin="417,294,0,569">
+                        <CheckBox.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00B4FC" Offset="0.007"/>
+                                <GradientStop Color="#FF00BEFF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </CheckBox.Background>
+                    </CheckBox>
+                    <Label Content="Humanoid auto scale:" HorizontalAlignment="Left" Height="28" Margin="207,327,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF00B4FC"/>
+                    <CheckBox x:Name="Humanoid" Checked="RegChkChange" Unchecked="RegChkChange" Margin="417,327,0,536">
+                        <CheckBox.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00B4FC" Offset="0.007"/>
+                                <GradientStop Color="#FF00BEFF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </CheckBox.Background>
+                    </CheckBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Statistics">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Fractal2.jpg"/>
+                    </Grid.Background>
+                    <!-- ReadOnly Var Stats = {"Power","Defense","Will","Resistance","Accuracy","Evasion","Speed"} -->
+                    <Label Content="Min" Margin="214,0,765,868" Foreground="#FFC800FF"></Label>
+                    <Label Content="Max" Margin="315,0,664,868" Foreground="#FFC800FF"></Label>
+                    <Label Content="ModEasy" Margin="411,0,568,868" Foreground="#FFC800FF"></Label>
+                    <Label Content="ModCasual" Margin="499,0,480,868" Foreground="#FFC800FF"></Label>
+                    <Label Content="ModHard" Margin="600,0,379,868" Foreground="#FFC800FF"></Label>
+                    <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="Yorno.png" Margin="965,10,0,0"/>
+                    <!-- Power -->
+                    <Label Content="Power" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,832" />
+                    <TextBox x:Name="S_MinPower" Margin="214,28,765,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_MaxPower" Margin="310,28,669,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk1Power" Margin="406,28,573,832" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk2Power" Margin="499,28,480,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk3Power" Margin="595,28,384,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <!-- Endurance -->
+                    <Label Content="Endurance" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,801"  />
+                    <TextBox x:Name="S_MinEndurance" Margin="214,59,765,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_MaxEndurance" Margin="310,59,669,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk1Endurance" Margin="406,59,573,801" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk2Endurance" Margin="499,59,480,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk3Endurance" Margin="595,59,384,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <!-- Will -->
+                    <Label Content="Will" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,770"  />
+                    <TextBox x:Name="S_MinWill" Margin="214,90,765,770" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_MaxWill" Margin="310,90,669,770" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk1Will" Margin="406,90,573,770" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk2Will" Margin="499,90,480,770" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk3Will" Margin="595,90,384,770" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <!-- Resistance -->
+                    <Label Content="Resistance" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,739" />
+                    <TextBox x:Name="S_MinResistance" Margin="214,121,765,739" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_MaxResistance" Margin="310,121,669,739" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk1Resistance" Margin="406,121,573,739" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk2Resistance" Margin="499,121,480,739" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk3Resistance" Margin="595,121,384,739" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
 
-					<!-- Accuracy -->
-					<Label Content="Accuracy" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,708" />
-					<TextBox x:Name="S_MinAccuracy" Margin="214,152,765,708" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_MaxAccuracy" Margin="310,152,669,708" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk1Accuracy" Margin="406,152,573,708" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk2Accuracy" Margin="499,152,480,708" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk3Accuracy" Margin="595,152,384,708" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <!-- Accuracy -->
+                    <Label Content="Accuracy" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,708" />
+                    <TextBox x:Name="S_MinAccuracy" Margin="214,152,765,708" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_MaxAccuracy" Margin="310,152,669,708" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk1Accuracy" Margin="406,152,573,708" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk2Accuracy" Margin="499,152,480,708" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk3Accuracy" Margin="595,152,384,708" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
 
-					<!-- Evasion -->
-					<Label Content="Evasion" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,677" />
-					<TextBox x:Name="S_MinEvasion" Margin="214,183,765,677" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_MaxEvasion" Margin="310,183,669,677" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk1Evasion" Margin="406,183,573,677" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk2Evasion" Margin="499,183,480,677" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk3Evasion" Margin="595,183,384,677" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <!-- Evasion -->
+                    <Label Content="Evasion" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,677" />
+                    <TextBox x:Name="S_MinEvasion" Margin="214,183,765,677" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_MaxEvasion" Margin="310,183,669,677" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk1Evasion" Margin="406,183,573,677" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk2Evasion" Margin="499,183,480,677" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk3Evasion" Margin="595,183,384,677" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
 
-					<!-- Speed -->
-					<Label Content="Speed" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,646" />
-					<TextBox x:Name="S_MinSpeed" Margin="214,214,765,646" Background="#7F120019" Foreground="#FFB400FF" />
-					<TextBox x:Name="S_MaxSpeed" Margin="310,214,669,646" Background="#7F120019" Foreground="#FFB400FF" />
-					<TextBox x:Name="S_Sk1Speed" Margin="406,214,573,646" Background="#7f120019" Foreground="#FFB400FF" />
-					<TextBox x:Name="S_Sk2Speed" Margin="499,214,480,646" Background="#7F120019" Foreground="#FFB400FF" />
-					<TextBox x:Name="S_Sk3Speed" Margin="595,214,384,646" Background="#7F120019" Foreground="#FFB400FF" />
+                    <!-- Speed -->
+                    <Label Content="Speed" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,646" />
+                    <TextBox x:Name="S_MinSpeed" Margin="214,214,765,646" Background="#7F120019" Foreground="#FFB400FF" />
+                    <TextBox x:Name="S_MaxSpeed" Margin="310,214,669,646" Background="#7F120019" Foreground="#FFB400FF" />
+                    <TextBox x:Name="S_Sk1Speed" Margin="406,214,573,646" Background="#7f120019" Foreground="#FFB400FF" />
+                    <TextBox x:Name="S_Sk2Speed" Margin="499,214,480,646" Background="#7F120019" Foreground="#FFB400FF" />
+                    <TextBox x:Name="S_Sk3Speed" Margin="595,214,384,646" Background="#7F120019" Foreground="#FFB400FF" />
 
-					<!-- Luck -->
-					<Label Content="Luck" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,615"  />
-					<!--<TextBox x:Name="S_MinLuck" Margin="214,214,765,646" Background="#7F120019" Foreground="#FFB400FF" />-->
-					<!--<TextBox x:Name="S_MaxLuck" Margin="310,214,669,646" Background="#7F120019" Foreground="#FFB400FF" />-->
-					<TextBox x:Name="S_Sk1Luck" Margin="406,245,573,615" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk2Luck" Margin="499,245,480,615" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-					<TextBox x:Name="S_Sk3Luck" Margin="595,245,384,615" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <!-- Luck -->
+                    <Label Content="Luck" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,615"  />
+                    <!--<TextBox x:Name="S_MinLuck" Margin="214,214,765,646" Background="#7F120019" Foreground="#FFB400FF" />-->
+                    <!--<TextBox x:Name="S_MaxLuck" Margin="310,214,669,646" Background="#7F120019" Foreground="#FFB400FF" />-->
+                    <TextBox x:Name="S_Sk1Luck" Margin="406,245,573,615" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk2Luck" Margin="499,245,480,615" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk3Luck" Margin="595,245,384,615" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
 
-					<!-- Level -->
-					<Label Content="Level" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,569"  />
-					<TextBox x:Name="S_MinLevel" Margin="214,291,765,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
-					<TextBox x:Name="S_MaxLevel" Margin="310,291,669,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
-					<TextBox x:Name="S_Sk1Level" Margin="406,291,573,569" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden" />
-					<TextBox x:Name="S_Sk2Level" Margin="499,291,480,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden"/>
-					<TextBox x:Name="S_Sk3Level" Margin="595,291,384,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden"/>
+                    <!-- Level -->
+                    <Label Content="Level" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,569"  />
+                    <TextBox x:Name="S_MinLevel" Margin="214,291,765,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_MaxLevel" Margin="310,291,669,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_Sk1Level" Margin="406,291,573,569" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden" />
+                    <TextBox x:Name="S_Sk2Level" Margin="499,291,480,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden"/>
+                    <TextBox x:Name="S_Sk3Level" Margin="595,291,384,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden"/>
 
-				</Grid>
-			</TabItem>
+                </Grid>
+            </TabItem>
 
-			<TabItem Header="Resitance">
-				<Grid>
-					<Grid.Background>
-						<ImageBrush ImageSource="6797422-green-space-wallpaper.jpg"/>
-					</Grid.Background>
-					<Image Margin="10,10,905,761" Source="Salp'r'drita.png" Stretch="Fill"/>
-					<Label Content="Status Change Resistances" Foreground="Lime" Margin="175,10,27,854"/>
-					<Label Content="Bio" Foreground="Lime" Margin="170,37,843,827"/>
-					<Label Content="Will" Foreground="Lime" Margin="170,64,843,800"/>
-					<Label Content="Stamina" Foreground="Lime" Margin="170,91,843,773"/>
-					<TextBox x:Name="ResStatusBio" Foreground="#FFb4FF00" Background="#7F0b0f00" TextChanged="RegTexBoxChange" Margin="237,42,749,827" />
-					<TextBox x:Name="ResStatusWill" Foreground="#FFb4FF00" Background="#7F0b0f00" TextChanged="RegTexBoxChange" Margin="237,64,749,805" />
-					<TextBox x:Name="ResStatusStamina" Foreground="#FFb4FF00" Background="#7F0b0f00" TextChanged="RegTexBoxChange" Margin="237,86,749,783" />
-					<Label Content="%" Foreground="Lime" Margin="326,42,687,822"/>
-					<Label Content="%" Foreground="Lime" Margin="326,86,687,778"/>
-					<Label Content="%" Foreground="Lime" Margin="326,64,687,800"/>
+            <TabItem Header="Resitance">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="6797422-green-space-wallpaper.jpg"/>
+                    </Grid.Background>
+                    <Image Margin="10,10,905,761" Source="Salp'r'drita.png" Stretch="Fill"/>
+                    <Label Content="Status Change Resistances" Foreground="Lime" Margin="175,10,27,854"/>
+                    <Label Content="Bio" Foreground="Lime" Margin="170,37,843,827"/>
+                    <Label Content="Will" Foreground="Lime" Margin="170,64,843,800"/>
+                    <Label Content="Stamina" Foreground="Lime" Margin="170,91,843,773"/>
+                    <TextBox x:Name="ResStatusBio" Foreground="#FFb4FF00" Background="#7F0b0f00" TextChanged="RegTexBoxChange" Margin="237,42,749,827" />
+                    <TextBox x:Name="ResStatusWill" Foreground="#FFb4FF00" Background="#7F0b0f00" TextChanged="RegTexBoxChange" Margin="237,64,749,805" />
+                    <TextBox x:Name="ResStatusStamina" Foreground="#FFb4FF00" Background="#7F0b0f00" TextChanged="RegTexBoxChange" Margin="237,86,749,783" />
+                    <Label Content="%" Foreground="Lime" Margin="326,42,687,822"/>
+                    <Label Content="%" Foreground="Lime" Margin="326,86,687,778"/>
+                    <Label Content="%" Foreground="Lime" Margin="326,64,687,800"/>
 
-					<!--
+                    <!--
 					0> 255/  0/  0 > #FFFF0000 >> Fatal
 					1> 213/ 42/  0 > #FFD52A00 >> Super Weak
 					2> 170/ 85/  0 > #FFAA5500 >> Weak
@@ -185,198 +203,198 @@ End License block -->
 					5>  43/212/  0 > #FF2BD400 >> Immune
 					6>   0/255/  0 > #FF00FF00 >> Absorb
 					-->
-					<Label Content="Elemental Resistance" Foreground="Lime" Margin="10,159,669,705"/>
-					<Label Content="Flame" Foreground="Lime" Margin="10,186,1003,678"/>
-					<RadioButton x:Name="Flame0" GroupName="RFlame" Content="Fatal" Foreground="#FFFF0000" Margin="108,192,905,672" Checked="Ele_Checked" />
-					<RadioButton x:Name="Flame1" GroupName="RFlame" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,192,825,672" Checked="Ele_Checked" />
-					<RadioButton x:Name="Flame2" GroupName="RFlame" Content="Weak" Foreground="#FFAA5500" Margin="255,192,758,672" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Flame3" GroupName="RFlame" Content="--" Foreground="White" Margin="317,192,696,672" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Flame4" GroupName="RFlame" Content="Resist" Foreground="#FF55AA00" Margin="384,192,629,672" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Flame5" GroupName="RFlame" Content="Immune" Foreground="#FF2BD400" Margin="451,192,554,672" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Flame6" GroupName="RFlame" Content="Absorb" Foreground="#FF00FF00" Margin="526,192,479,672" Checked="Ele_Checked"/>
-					<Label Content="Wind" Foreground="Lime" Margin="10,213,1003,651"/>
-					<RadioButton x:Name="Wind0" GroupName="RWind" Content="Fatal" Foreground="#FFFF0000" Margin="108,219,905,645" Checked="Ele_Checked" />
-					<RadioButton x:Name="Wind1" GroupName="RWind" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,219,825,645" Checked="Ele_Checked" />
-					<RadioButton x:Name="Wind2" GroupName="RWind" Content="Weak" Foreground="#FFAA5500" Margin="255,219,758,645" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Wind3" GroupName="RWind" Content="--" Foreground="White" Margin="317,219,696,645" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Wind4" GroupName="RWind" Content="Resist" Foreground="#FF55AA00" Margin="384,219,629,645" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Wind5" GroupName="RWind" Content="Immune" Foreground="#FF2BD400" Margin="451,219,554,645" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Wind6" GroupName="RWind" Content="Absorb" Foreground="#FF00FF00" Margin="526,219,479,645" Checked="Ele_Checked"/>
-					<Label Content="Water" Foreground="Lime" Margin="10,240,1003,624"/>
-					<RadioButton x:Name="Water0" GroupName="RWater" Content="Fatal" Foreground="#FFFF0000" Margin="108,246,905,618" Checked="Ele_Checked" />
-					<RadioButton x:Name="Water1" GroupName="RWater" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,246,825,618" Checked="Ele_Checked" />
-					<RadioButton x:Name="Water2" GroupName="RWater" Content="Weak" Foreground="#FFAA5500" Margin="255,246,758,618" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Water3" GroupName="RWater" Content="--" Foreground="White" Margin="317,246,696,618" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Water4" GroupName="RWater" Content="Resist" Foreground="#FF55AA00" Margin="384,246,629,618" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Water5" GroupName="RWater" Content="Immune" Foreground="#FF2BD400" Margin="451,246,554,618" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Water6" GroupName="RWater" Content="Absorb" Foreground="#FF00FF00" Margin="526,246,479,618" Checked="Ele_Checked"/>
-					<Label Content="Earth" Foreground="Lime" Margin="10,267,1003,597"/>
-					<RadioButton x:Name="Earth0" GroupName="REarth" Content="Fatal" Foreground="#FFFF0000" Margin="108,273,905,591" Checked="Ele_Checked" />
-					<RadioButton x:Name="Earth1" GroupName="REarth" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,273,825,591" Checked="Ele_Checked" />
-					<RadioButton x:Name="Earth2" GroupName="REarth" Content="Weak" Foreground="#FFAA5500" Margin="255,273,758,591" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Earth3" GroupName="REarth" Content="--" Foreground="White" Margin="317,273,696,591" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Earth4" GroupName="REarth" Content="Resist" Foreground="#FF55AA00" Margin="384,273,629,591" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Earth5" GroupName="REarth" Content="Immune" Foreground="#FF2BD400" Margin="451,273,554,591" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Earth6" GroupName="REarth" Content="Absorb" Foreground="#FF00FF00" Margin="526,273,479,591" Checked="Ele_Checked"/>
+                    <Label Content="Elemental Resistance" Foreground="Lime" Margin="10,159,669,705"/>
+                    <Label Content="Flame" Foreground="Lime" Margin="10,186,1003,678"/>
+                    <RadioButton x:Name="Flame0" GroupName="RFlame" Content="Fatal" Foreground="#FFFF0000" Margin="108,192,905,672" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Flame1" GroupName="RFlame" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,192,825,672" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Flame2" GroupName="RFlame" Content="Weak" Foreground="#FFAA5500" Margin="255,192,758,672" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Flame3" GroupName="RFlame" Content="--" Foreground="White" Margin="317,192,696,672" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Flame4" GroupName="RFlame" Content="Resist" Foreground="#FF55AA00" Margin="384,192,629,672" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Flame5" GroupName="RFlame" Content="Immune" Foreground="#FF2BD400" Margin="451,192,554,672" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Flame6" GroupName="RFlame" Content="Absorb" Foreground="#FF00FF00" Margin="526,192,479,672" Checked="Ele_Checked"/>
+                    <Label Content="Wind" Foreground="Lime" Margin="10,213,1003,651"/>
+                    <RadioButton x:Name="Wind0" GroupName="RWind" Content="Fatal" Foreground="#FFFF0000" Margin="108,219,905,645" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Wind1" GroupName="RWind" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,219,825,645" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Wind2" GroupName="RWind" Content="Weak" Foreground="#FFAA5500" Margin="255,219,758,645" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Wind3" GroupName="RWind" Content="--" Foreground="White" Margin="317,219,696,645" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Wind4" GroupName="RWind" Content="Resist" Foreground="#FF55AA00" Margin="384,219,629,645" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Wind5" GroupName="RWind" Content="Immune" Foreground="#FF2BD400" Margin="451,219,554,645" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Wind6" GroupName="RWind" Content="Absorb" Foreground="#FF00FF00" Margin="526,219,479,645" Checked="Ele_Checked"/>
+                    <Label Content="Water" Foreground="Lime" Margin="10,240,1003,624"/>
+                    <RadioButton x:Name="Water0" GroupName="RWater" Content="Fatal" Foreground="#FFFF0000" Margin="108,246,905,618" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Water1" GroupName="RWater" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,246,825,618" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Water2" GroupName="RWater" Content="Weak" Foreground="#FFAA5500" Margin="255,246,758,618" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Water3" GroupName="RWater" Content="--" Foreground="White" Margin="317,246,696,618" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Water4" GroupName="RWater" Content="Resist" Foreground="#FF55AA00" Margin="384,246,629,618" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Water5" GroupName="RWater" Content="Immune" Foreground="#FF2BD400" Margin="451,246,554,618" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Water6" GroupName="RWater" Content="Absorb" Foreground="#FF00FF00" Margin="526,246,479,618" Checked="Ele_Checked"/>
+                    <Label Content="Earth" Foreground="Lime" Margin="10,267,1003,597"/>
+                    <RadioButton x:Name="Earth0" GroupName="REarth" Content="Fatal" Foreground="#FFFF0000" Margin="108,273,905,591" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Earth1" GroupName="REarth" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,273,825,591" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Earth2" GroupName="REarth" Content="Weak" Foreground="#FFAA5500" Margin="255,273,758,591" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Earth3" GroupName="REarth" Content="--" Foreground="White" Margin="317,273,696,591" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Earth4" GroupName="REarth" Content="Resist" Foreground="#FF55AA00" Margin="384,273,629,591" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Earth5" GroupName="REarth" Content="Immune" Foreground="#FF2BD400" Margin="451,273,554,591" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Earth6" GroupName="REarth" Content="Absorb" Foreground="#FF00FF00" Margin="526,273,479,591" Checked="Ele_Checked"/>
 
 
-					<Label Content="Frost" Foreground="Lime" Margin="10,311,1003,553"/>
-					<RadioButton x:Name="Frost0" GroupName="RFrost" Content="Fatal" Foreground="#FFFF0000" Margin="108,317,905,547" Checked="Ele_Checked" />
-					<RadioButton x:Name="Frost1" GroupName="RFrost" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,317,825,547" Checked="Ele_Checked" />
-					<RadioButton x:Name="Frost2" GroupName="RFrost" Content="Weak" Foreground="#FFAA5500" Margin="255,317,758,547" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Frost3" GroupName="RFrost" Content="--" Foreground="White" Margin="317,317,696,547" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Frost4" GroupName="RFrost" Content="Resist" Foreground="#FF55AA00" Margin="384,317,629,547" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Frost5" GroupName="RFrost" Content="Immune" Foreground="#FF2BD400" Margin="451,317,554,547" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Frost6" GroupName="RFrost" Content="Absorb" Foreground="#FF00FF00" Margin="526,317,479,547" Checked="Ele_Checked"/>
+                    <Label Content="Frost" Foreground="Lime" Margin="10,311,1003,553"/>
+                    <RadioButton x:Name="Frost0" GroupName="RFrost" Content="Fatal" Foreground="#FFFF0000" Margin="108,317,905,547" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Frost1" GroupName="RFrost" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,317,825,547" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Frost2" GroupName="RFrost" Content="Weak" Foreground="#FFAA5500" Margin="255,317,758,547" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Frost3" GroupName="RFrost" Content="--" Foreground="White" Margin="317,317,696,547" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Frost4" GroupName="RFrost" Content="Resist" Foreground="#FF55AA00" Margin="384,317,629,547" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Frost5" GroupName="RFrost" Content="Immune" Foreground="#FF2BD400" Margin="451,317,554,547" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Frost6" GroupName="RFrost" Content="Absorb" Foreground="#FF00FF00" Margin="526,317,479,547" Checked="Ele_Checked"/>
 
-					<Label Content="Thunder" Foreground="Lime" Margin="10,338,1003,526"/>
-					<RadioButton x:Name="Thunder0" GroupName="RThunder" Content="Fatal" Foreground="#FFFF0000" Margin="108,344,905,520" Checked="Ele_Checked" />
-					<RadioButton x:Name="Thunder1" GroupName="RThunder" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,344,825,520" Checked="Ele_Checked" />
-					<RadioButton x:Name="Thunder2" GroupName="RThunder" Content="Weak" Foreground="#FFAA5500" Margin="255,344,758,520" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Thunder3" GroupName="RThunder" Content="--" Foreground="White" Margin="317,344,696,520" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Thunder4" GroupName="RThunder" Content="Resist" Foreground="#FF55AA00" Margin="384,344,629,520" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Thunder5" GroupName="RThunder" Content="Immune" Foreground="#FF2BD400" Margin="451,344,554,520" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Thunder6" GroupName="RThunder" Content="Absorb" Foreground="#FF00FF00" Margin="526,344,479,520" Checked="Ele_Checked"/>
-					<Label Content="Light" Foreground="Lime" Margin="10,365,1003,499"/>
-					<RadioButton x:Name="Light0" GroupName="RLight" Content="Fatal" Foreground="#FFFF0000" Margin="108,371,905,493" Checked="Ele_Checked" />
-					<RadioButton x:Name="Light1" GroupName="RLight" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,371,825,493" Checked="Ele_Checked" />
-					<RadioButton x:Name="Light2" GroupName="RLight" Content="Weak" Foreground="#FFAA5500" Margin="255,371,758,493" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Light3" GroupName="RLight" Content="--" Foreground="White" Margin="317,371,696,493" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Light4" GroupName="RLight" Content="Resist" Foreground="#FF55AA00" Margin="384,371,629,493" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Light5" GroupName="RLight" Content="Immune" Foreground="#FF2BD400" Margin="451,371,554,493" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Light6" GroupName="RLight" Content="Absorb" Foreground="#FF00FF00" Margin="526,371,479,493" Checked="Ele_Checked"/>
+                    <Label Content="Thunder" Foreground="Lime" Margin="10,338,1003,526"/>
+                    <RadioButton x:Name="Thunder0" GroupName="RThunder" Content="Fatal" Foreground="#FFFF0000" Margin="108,344,905,520" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Thunder1" GroupName="RThunder" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,344,825,520" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Thunder2" GroupName="RThunder" Content="Weak" Foreground="#FFAA5500" Margin="255,344,758,520" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Thunder3" GroupName="RThunder" Content="--" Foreground="White" Margin="317,344,696,520" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Thunder4" GroupName="RThunder" Content="Resist" Foreground="#FF55AA00" Margin="384,344,629,520" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Thunder5" GroupName="RThunder" Content="Immune" Foreground="#FF2BD400" Margin="451,344,554,520" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Thunder6" GroupName="RThunder" Content="Absorb" Foreground="#FF00FF00" Margin="526,344,479,520" Checked="Ele_Checked"/>
+                    <Label Content="Light" Foreground="Lime" Margin="10,365,1003,499"/>
+                    <RadioButton x:Name="Light0" GroupName="RLight" Content="Fatal" Foreground="#FFFF0000" Margin="108,371,905,493" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Light1" GroupName="RLight" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,371,825,493" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Light2" GroupName="RLight" Content="Weak" Foreground="#FFAA5500" Margin="255,371,758,493" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Light3" GroupName="RLight" Content="--" Foreground="White" Margin="317,371,696,493" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Light4" GroupName="RLight" Content="Resist" Foreground="#FF55AA00" Margin="384,371,629,493" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Light5" GroupName="RLight" Content="Immune" Foreground="#FF2BD400" Margin="451,371,554,493" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Light6" GroupName="RLight" Content="Absorb" Foreground="#FF00FF00" Margin="526,371,479,493" Checked="Ele_Checked"/>
 
-					<Label Content="Darkness" Foreground="Lime" Margin="10,392,1003,472"/>
-					<RadioButton x:Name="Darkness0" GroupName="RDarkness" Content="Fatal" Foreground="#FFFF0000" Margin="108,398,905,466" Checked="Ele_Checked" />
-					<RadioButton x:Name="Darkness1" GroupName="RDarkness" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,398,825,466" Checked="Ele_Checked" />
-					<RadioButton x:Name="Darkness2" GroupName="RDarkness" Content="Weak" Foreground="#FFAA5500" Margin="255,403,758,461" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Darkness3" GroupName="RDarkness" Content="--" Foreground="White" Margin="317,398,696,466" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Darkness4" GroupName="RDarkness" Content="Resist" Foreground="#FF55AA00" Margin="384,398,629,466" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Darkness5" GroupName="RDarkness" Content="Immune" Foreground="#FF2BD400" Margin="451,398,554,466" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Darkness6" GroupName="RDarkness" Content="Absorb" Foreground="#FF00FF00" Margin="526,398,479,466" Checked="Ele_Checked"/>
+                    <Label Content="Darkness" Foreground="Lime" Margin="10,392,1003,472"/>
+                    <RadioButton x:Name="Darkness0" GroupName="RDarkness" Content="Fatal" Foreground="#FFFF0000" Margin="108,398,905,466" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Darkness1" GroupName="RDarkness" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,398,825,466" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Darkness2" GroupName="RDarkness" Content="Weak" Foreground="#FFAA5500" Margin="255,403,758,461" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Darkness3" GroupName="RDarkness" Content="--" Foreground="White" Margin="317,398,696,466" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Darkness4" GroupName="RDarkness" Content="Resist" Foreground="#FF55AA00" Margin="384,398,629,466" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Darkness5" GroupName="RDarkness" Content="Immune" Foreground="#FF2BD400" Margin="451,398,554,466" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Darkness6" GroupName="RDarkness" Content="Absorb" Foreground="#FF00FF00" Margin="526,398,479,466" Checked="Ele_Checked"/>
 
-					<Label Content="Healing" Foreground="Lime" Margin="10,439,1003,425"/>
-					<RadioButton x:Name="Healing0" GroupName="RHealing" Content="Fatal" Foreground="#FFFF0000" Margin="108,445,905,419" Checked="Ele_Checked" />
-					<RadioButton x:Name="Healing1" GroupName="RHealing" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,445,825,419" Checked="Ele_Checked" />
-					<RadioButton x:Name="Healing2" GroupName="RHealing" Content="Weak" Foreground="#FFAA5500" Margin="255,445,758,419" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Healing3" GroupName="RHealing" Content="--" Foreground="White" Margin="322,445,691,419" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Healing4" GroupName="RHealing" Content="Resist" Foreground="#FF55AA00" Margin="384,445,629,419" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Healing5" GroupName="RHealing" Content="Immune" Foreground="#FF2BD400" Margin="451,445,554,419" Checked="Ele_Checked"/>
-					<RadioButton x:Name="Healing6" GroupName="RHealing" Content="Absorb" Foreground="#FF00FF00" Margin="526,445,479,419" Checked="Ele_Checked"/>
-					<Label Content="DarkHealing" Foreground="Lime" Margin="10,466,981,398"/>
-					<RadioButton x:Name="DarkHealing0" GroupName="RDarkHealing" Content="Fatal" Foreground="#FFFF0000" Margin="108,472,905,392" Checked="Ele_Checked" />
-					<RadioButton x:Name="DarkHealing1" GroupName="RDarkHealing" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,472,825,392" Checked="Ele_Checked" />
-					<RadioButton x:Name="DarkHealing2" GroupName="RDarkHealing" Content="Weak" Foreground="#FFAA5500" Margin="255,472,758,392" Checked="Ele_Checked"/>
-					<RadioButton x:Name="DarkHealing3" GroupName="RDarkHealing" Content="--" Foreground="White" Margin="322,472,691,392" IsChecked="True" Checked="Ele_Checked"/>
-					<RadioButton x:Name="DarkHealing4" GroupName="RDarkHealing" Content="Resist" Foreground="#FF55AA00" Margin="384,472,629,392" Checked="Ele_Checked"/>
-					<RadioButton x:Name="DarkHealing5" GroupName="RDarkHealing" Content="Immune" Foreground="#FF2BD400" Margin="451,472,554,392" Checked="Ele_Checked"/>
-					<RadioButton x:Name="DarkHealing6" GroupName="RDarkHealing" Content="Absorb" Foreground="#FF00FF00" Margin="526,472,479,392" Checked="Ele_Checked"/>
+                    <Label Content="Healing" Foreground="Lime" Margin="10,439,1003,425"/>
+                    <RadioButton x:Name="Healing0" GroupName="RHealing" Content="Fatal" Foreground="#FFFF0000" Margin="108,445,905,419" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Healing1" GroupName="RHealing" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,445,825,419" Checked="Ele_Checked" />
+                    <RadioButton x:Name="Healing2" GroupName="RHealing" Content="Weak" Foreground="#FFAA5500" Margin="255,445,758,419" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Healing3" GroupName="RHealing" Content="--" Foreground="White" Margin="322,445,691,419" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Healing4" GroupName="RHealing" Content="Resist" Foreground="#FF55AA00" Margin="384,445,629,419" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Healing5" GroupName="RHealing" Content="Immune" Foreground="#FF2BD400" Margin="451,445,554,419" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="Healing6" GroupName="RHealing" Content="Absorb" Foreground="#FF00FF00" Margin="526,445,479,419" Checked="Ele_Checked"/>
+                    <Label Content="DarkHealing" Foreground="Lime" Margin="10,466,981,398"/>
+                    <RadioButton x:Name="DarkHealing0" GroupName="RDarkHealing" Content="Fatal" Foreground="#FFFF0000" Margin="108,472,905,392" Checked="Ele_Checked" />
+                    <RadioButton x:Name="DarkHealing1" GroupName="RDarkHealing" Content="UltraWeak" Foreground="#FFD52A00" Margin="170,472,825,392" Checked="Ele_Checked" />
+                    <RadioButton x:Name="DarkHealing2" GroupName="RDarkHealing" Content="Weak" Foreground="#FFAA5500" Margin="255,472,758,392" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="DarkHealing3" GroupName="RDarkHealing" Content="--" Foreground="White" Margin="322,472,691,392" IsChecked="True" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="DarkHealing4" GroupName="RDarkHealing" Content="Resist" Foreground="#FF55AA00" Margin="384,472,629,392" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="DarkHealing5" GroupName="RDarkHealing" Content="Immune" Foreground="#FF2BD400" Margin="451,472,554,392" Checked="Ele_Checked"/>
+                    <RadioButton x:Name="DarkHealing6" GroupName="RDarkHealing" Content="Absorb" Foreground="#FF00FF00" Margin="526,472,479,392" Checked="Ele_Checked"/>
 
-				</Grid>
-			</TabItem>
+                </Grid>
+            </TabItem>
 
-			<TabItem Header="AI">
-				<Grid>
-					<Grid.Background>
-						<ImageBrush ImageSource="abstract-fractal-background-15.jpg"/>
-					</Grid.Background>
-					<Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="10,10,0,0" Source="Ashley.png"/>
-					<ListBox x:Name="AblDont" Margin="163,0,545,650" Background="#7F320000" Foreground="Red" />
-					<ListBox x:Name="AblDo" Margin="609,0,99,650" Background="#7F003200" Foreground="Lime" SelectionChanged="AblDo_SelectionChanged" />
-					<Button x:Name="AddAbl" Content=">>" Margin="530,55,466,811" Click="AddAbl_Click">
-						<Button.Background>
-							<RadialGradientBrush>
-								<GradientStop Color="Black" Offset="1"/>
-								<GradientStop Color="Lime"/>
-							</RadialGradientBrush>
-						</Button.Background>
-					</Button>
-					<Button x:Name="RemAbl" Content="&lt;&lt;" Margin="530,80,466,786" Click="RemAbl_Click">
-						<Button.Background>
-							<RadialGradientBrush>
-								<GradientStop Color="Black" Offset="1"/>
-								<GradientStop Color="Red"/>
-							</RadialGradientBrush>
-						</Button.Background>
-					</Button>
-					<Label Content="Easy" HorizontalAlignment="Left" Margin="163,241,0,0" VerticalAlignment="Top" Width="116" Foreground="White" Background="#7F000000" />
-					<Label Content="Casual" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="284,241,0,0" Width="110" Foreground="White" Background="#7F000000" />
-					<Label Content="Hard" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="394,241,0,0" Width="115" Foreground="White" Background="#7F000000" />
-					<Label Content="Minimal level" HorizontalAlignment="Left" Margin="10,267,0,0" VerticalAlignment="Top" Width="149" Foreground="White" Background="#7F000000"/>
-					<TextBox x:Name="AblMinLevel1" HorizontalAlignment="Left" Height="24" Margin="164,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="AblMinLevel2" HorizontalAlignment="Left" Height="24" Margin="279,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="AblMinLevel3" HorizontalAlignment="Left" Height="24" Margin="394,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
-					<Label Content="Rate" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top" Width="149" Foreground="White" Background="#7F000000"/>
-					<TextBox x:Name="AblRate1" HorizontalAlignment="Left" Height="24" Margin="164,291,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="AblRate2" HorizontalAlignment="Left" Height="24" Margin="279,291,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="AblRate3" HorizontalAlignment="Left" Height="24" Margin="394,291,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
-					<Label Content="Target" HorizontalAlignment="Left" Margin="10,313,0,0" VerticalAlignment="Top" Width="149" Foreground="White" Background="#7F000000"/>
-					<TextBox x:Name="AblTarget1" HorizontalAlignment="Left" Height="24" Margin="164,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="AblTarget2" HorizontalAlignment="Left" Height="24" Margin="279,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="AblTarget3" HorizontalAlignment="Left" Height="24" Margin="394,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
-					<Label Content="AI" HorizontalAlignment="Left" Margin="10,406,0,0" VerticalAlignment="Top" Width="149" Foreground="White" Background="#7F000000"/>
-					<TextBox x:Name="AIScript" HorizontalAlignment="Left" Height="24" Margin="163,406,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="346" Background="#7F001219" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
+            <TabItem Header="AI">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="abstract-fractal-background-15.jpg"/>
+                    </Grid.Background>
+                    <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="10,10,0,0" Source="Ashley.png"/>
+                    <ListBox x:Name="AblDont" Margin="163,0,545,650" Background="#7F320000" Foreground="Red" />
+                    <ListBox x:Name="AblDo" Margin="609,0,99,650" Background="#7F003200" Foreground="Lime" SelectionChanged="AblDo_SelectionChanged" />
+                    <Button x:Name="AddAbl" Content=">>" Margin="530,55,466,811" Click="AddAbl_Click">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black" Offset="1"/>
+                                <GradientStop Color="Lime"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="RemAbl" Content="&lt;&lt;" Margin="530,80,466,786" Click="RemAbl_Click">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black" Offset="1"/>
+                                <GradientStop Color="Red"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Label Content="Easy" HorizontalAlignment="Left" Margin="163,241,0,0" VerticalAlignment="Top" Width="116" Foreground="White" Background="#7F000000" />
+                    <Label Content="Casual" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="284,241,0,0" Width="110" Foreground="White" Background="#7F000000" />
+                    <Label Content="Hard" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="394,241,0,0" Width="115" Foreground="White" Background="#7F000000" />
+                    <Label Content="Minimal level" HorizontalAlignment="Left" Margin="10,267,0,0" VerticalAlignment="Top" Width="149" Foreground="White" Background="#7F000000"/>
+                    <TextBox x:Name="AblMinLevel1" HorizontalAlignment="Left" Height="24" Margin="164,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="AblMinLevel2" HorizontalAlignment="Left" Height="24" Margin="279,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="AblMinLevel3" HorizontalAlignment="Left" Height="24" Margin="394,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
+                    <Label Content="Rate" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top" Width="149" Foreground="White" Background="#7F000000"/>
+                    <TextBox x:Name="AblRate1" HorizontalAlignment="Left" Height="24" Margin="164,291,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="AblRate2" HorizontalAlignment="Left" Height="24" Margin="279,291,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="AblRate3" HorizontalAlignment="Left" Height="24" Margin="394,291,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
+                    <Label Content="Target" HorizontalAlignment="Left" Margin="10,313,0,0" VerticalAlignment="Top" Width="149" Foreground="White" Background="#7F000000"/>
+                    <TextBox x:Name="AblTarget1" HorizontalAlignment="Left" Height="24" Margin="164,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="AblTarget2" HorizontalAlignment="Left" Height="24" Margin="279,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="AblTarget3" HorizontalAlignment="Left" Height="24" Margin="394,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
+                    <Label Content="AI" HorizontalAlignment="Left" Margin="10,406,0,0" VerticalAlignment="Top" Width="149" Foreground="White" Background="#7F000000"/>
+                    <TextBox x:Name="AIScript" HorizontalAlignment="Left" Height="24" Margin="163,406,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="346" Background="#7F001219" Foreground="#FF00B4FF" TextChanged="RegTexBoxChange"/>
 
-				</Grid>
-			</TabItem>
-			<TabItem Header="Item Drops &amp; Steals">
-				<Grid>
-					<Grid.Background>
-						<ImageBrush ImageSource="SPACE_NEBULA_STARS.jpg"/>
-					</Grid.Background>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Item Drops &amp; Steals">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="SPACE_NEBULA_STARS.jpg"/>
+                    </Grid.Background>
 
-					<ListBox x:Name="ItmDont" Margin="163,0,545,650" Background="#7F320000" Foreground="Red" />
-					<ListBox x:Name="ItmDo" Margin="609,0,99,650" Background="#7F003200" Foreground="Lime" SelectionChanged="ItemDo_SelectionChanged" />
-					<Button x:Name="AddItm" Content=">>" Margin="530,55,466,811" Click="AddItem">
-						<Button.Background>
-							<RadialGradientBrush>
-								<GradientStop Color="Black" Offset="1"/>
-								<GradientStop Color="Lime"/>
-							</RadialGradientBrush>
-						</Button.Background>
-					</Button>
-					<Button x:Name="RemItm" Content="&lt;&lt;" Margin="530,80,466,786" Click="RemoveItem">
-						<Button.Background>
-							<RadialGradientBrush>
-								<GradientStop Color="Black" Offset="1"/>
-								<GradientStop Color="Red"/>
-							</RadialGradientBrush>
-						</Button.Background>
-					</Button>
-					<Label Content="Easy" HorizontalAlignment="Left" Margin="331,246,0,0" VerticalAlignment="Top" Width="116" Foreground="White" Background="#7F000000" />
-					<Label Content="Casual" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="447,246,0,0" Width="110" Foreground="White" Background="#7F000000" />
-					<Label Content="Hard" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="557,246,0,0" Width="115" Foreground="White" Background="#7F000000" />
-					<Image Source="Scyndi Pyama Alpha.png" Margin="-84,-117,836,436"/>
-					<Label Content="Drop Min level" Foreground="White" Background="#7F000000" Margin="160,272,748,597" FontSize="10"/>
-					<TextBox x:Name="ItemDropMinLevel1" HorizontalAlignment="Left" Height="24" Margin="327,272,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="ItemDropMinLevel2" HorizontalAlignment="Left" Height="24" Margin="442,272,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="ItemDropMinLevel3" HorizontalAlignment="Left" Height="24" Margin="557,272,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
-					<Label Content="Drop Rate" Foreground="White" Background="#7F000000" Margin="160,294,748,575" FontSize="10"/>
-					<TextBox x:Name="ItemDropRate1" HorizontalAlignment="Left" Height="24" Margin="327,294,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="ItemDropRate2" HorizontalAlignment="Left" Height="24" Margin="442,296,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="ItemDropRate3" HorizontalAlignment="Left" Height="24" Margin="557,294,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
-					<Label Content="" Foreground="White" Margin="160,316,403,560" FontSize="10">
-						<Label.Background>
-							<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-								<GradientStop Color="Red" Offset="0.012"/>
-								<GradientStop Color="Lime" Offset="1"/>
-							</LinearGradientBrush>
-						</Label.Background>
-					</Label>
-					<Label Content="Steal Min level" Foreground="White" Background="#7F000000" Margin="160,331,748,533" FontSize="10"/>
-					<TextBox x:Name="ItemStealMinLevel1" HorizontalAlignment="Left" Height="24" Margin="327,333,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="ItemStealMinLevel2" HorizontalAlignment="Left" Height="24" Margin="442,333,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="ItemStealMinLevel3" HorizontalAlignment="Left" Height="24" Margin="557,331,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
-					<Label Content="Steal Rate" Foreground="White" Background="#7F000000" Margin="160,358,748,511" FontSize="10"/>
-					<TextBox x:Name="ItemStealRate1" HorizontalAlignment="Left" Height="24" Margin="327,355,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="ItemStealRate2" HorizontalAlignment="Left" Height="24" Margin="442,355,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
-					<TextBox x:Name="ItemStealRate3" HorizontalAlignment="Left" Height="24" Margin="557,355,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
+                    <ListBox x:Name="ItmDont" Margin="163,0,545,650" Background="#7F320000" Foreground="Red" />
+                    <ListBox x:Name="ItmDo" Margin="609,0,99,650" Background="#7F003200" Foreground="Lime" SelectionChanged="ItemDo_SelectionChanged" />
+                    <Button x:Name="AddItm" Content=">>" Margin="530,55,466,811" Click="AddItem">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black" Offset="1"/>
+                                <GradientStop Color="Lime"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="RemItm" Content="&lt;&lt;" Margin="530,80,466,786" Click="RemoveItem">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black" Offset="1"/>
+                                <GradientStop Color="Red"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Label Content="Easy" HorizontalAlignment="Left" Margin="331,246,0,0" VerticalAlignment="Top" Width="116" Foreground="White" Background="#7F000000" />
+                    <Label Content="Casual" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="447,246,0,0" Width="110" Foreground="White" Background="#7F000000" />
+                    <Label Content="Hard" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="557,246,0,0" Width="115" Foreground="White" Background="#7F000000" />
+                    <Image Source="Scyndi Pyama Alpha.png" Margin="-84,-117,836,436"/>
+                    <Label Content="Drop Min level" Foreground="White" Background="#7F000000" Margin="160,272,748,597" FontSize="10"/>
+                    <TextBox x:Name="ItemDropMinLevel1" HorizontalAlignment="Left" Height="24" Margin="327,272,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="ItemDropMinLevel2" HorizontalAlignment="Left" Height="24" Margin="442,272,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="ItemDropMinLevel3" HorizontalAlignment="Left" Height="24" Margin="557,272,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
+                    <Label Content="Drop Rate" Foreground="White" Background="#7F000000" Margin="160,294,748,575" FontSize="10"/>
+                    <TextBox x:Name="ItemDropRate1" HorizontalAlignment="Left" Height="24" Margin="327,294,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="ItemDropRate2" HorizontalAlignment="Left" Height="24" Margin="442,296,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="ItemDropRate3" HorizontalAlignment="Left" Height="24" Margin="557,294,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
+                    <Label Content="" Foreground="White" Margin="160,316,403,560" FontSize="10">
+                        <Label.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Red" Offset="0.012"/>
+                                <GradientStop Color="Lime" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Label.Background>
+                    </Label>
+                    <Label Content="Steal Min level" Foreground="White" Background="#7F000000" Margin="160,331,748,533" FontSize="10"/>
+                    <TextBox x:Name="ItemStealMinLevel1" HorizontalAlignment="Left" Height="24" Margin="327,333,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="ItemStealMinLevel2" HorizontalAlignment="Left" Height="24" Margin="442,333,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="ItemStealMinLevel3" HorizontalAlignment="Left" Height="24" Margin="557,331,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
+                    <Label Content="Steal Rate" Foreground="White" Background="#7F000000" Margin="160,358,748,511" FontSize="10"/>
+                    <TextBox x:Name="ItemStealRate1" HorizontalAlignment="Left" Height="24" Margin="327,355,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F001900" Foreground="Lime" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="ItemStealRate2" HorizontalAlignment="Left" Height="24" Margin="442,355,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F191200" Foreground="#FFFFB400" TextChanged="AITexBoxChange"/>
+                    <TextBox x:Name="ItemStealRate3" HorizontalAlignment="Left" Height="24" Margin="557,355,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115" Background="#7F190000" Foreground="Red" TextChanged="AITexBoxChange"/>
 
 
-				</Grid>
+                </Grid>
 
-			</TabItem>
-		</TabControl>
+            </TabItem>
+        </TabControl>
 
-	</Grid>
+    </Grid>
 </Window>
