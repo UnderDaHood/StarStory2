@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.13
+// Version: 22.05.13
 // EndLic
 
 using System;
@@ -49,6 +49,7 @@ namespace SS2MapData {
 		public List<string> DoorLayers => Data.List("Main", "Layers");
 
 		void AddNew(List<string> L, string item) {
+			if (L == DoorLayers) item = $"L:{item}";
 			if (!L.Contains(item)) L.Add(item);
 			L.Sort();
 		}
@@ -56,7 +57,7 @@ namespace SS2MapData {
 		public void LoadData(TJCRDIR J) {
 			Debug.WriteLine("Loading Doors Data");
 			Data = GINIE.FromSource(J.JCR_B("Doors"));
-        }
+		}
 
 		public void Scan() {
 			Lijst.Items.Clear();
