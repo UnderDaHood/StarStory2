@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotWoke", "NotWoke.csproj", "{DECCC1AE-E55F-4895-8A35-FE0910695D12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DECCC1AE-E55F-4895-8A35-FE0910695D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DECCC1AE-E55F-4895-8A35-FE0910695D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DECCC1AE-E55F-4895-8A35-FE0910695D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DECCC1AE-E55F-4895-8A35-FE0910695D12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43FEC64E-CDBA-4B02-9CDA-0C17BB620B37}
+	EndGlobalSection
+EndGlobal
