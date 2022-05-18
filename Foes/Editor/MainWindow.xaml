@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Please note that some references to data like pictures or audio, do not automatically
 fall under this licenses. Mostly this is noted in the respective files.
 
-Version: 22.04.25
+Version: 22.05.03
 End License block -->
 <Window x:Class="StarStory2_Foe_Editor.MainWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -113,12 +113,12 @@ End License block -->
                     <TextBox x:Name="S_Sk2Power" Margin="499,28,480,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
                     <TextBox x:Name="S_Sk3Power" Margin="595,28,384,832" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
                     <!-- Endurance -->
-                    <Label Content="Endurance" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,801"  />
-                    <TextBox x:Name="S_MinEndurance" Margin="214,59,765,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-                    <TextBox x:Name="S_MaxEndurance" Margin="310,59,669,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-                    <TextBox x:Name="S_Sk1Endurance" Margin="406,59,573,801" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-                    <TextBox x:Name="S_Sk2Endurance" Margin="499,59,480,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-                    <TextBox x:Name="S_Sk3Endurance" Margin="595,59,384,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <Label Content="Defense" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,801"  />
+                    <TextBox x:Name="S_MinDefense" Margin="214,59,765,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_MaxDefense" Margin="310,59,669,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk1Defense" Margin="406,59,573,801" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk2Defense" Margin="499,59,480,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk3Defense" Margin="595,59,384,801" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
                     <!-- Will -->
                     <Label Content="Will" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,770"  />
                     <TextBox x:Name="S_MinWill" Margin="214,90,765,770" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
@@ -152,24 +152,32 @@ End License block -->
 
                     <!-- Speed -->
                     <Label Content="Speed" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,646" />
-                    <TextBox x:Name="S_MinSpeed" Margin="214,214,765,646" Background="#7F120019" Foreground="#FFB400FF" />
-                    <TextBox x:Name="S_MaxSpeed" Margin="310,214,669,646" Background="#7F120019" Foreground="#FFB400FF" />
-                    <TextBox x:Name="S_Sk1Speed" Margin="406,214,573,646" Background="#7f120019" Foreground="#FFB400FF" />
-                    <TextBox x:Name="S_Sk2Speed" Margin="499,214,480,646" Background="#7F120019" Foreground="#FFB400FF" />
-                    <TextBox x:Name="S_Sk3Speed" Margin="595,214,384,646" Background="#7F120019" Foreground="#FFB400FF" />
+                    <TextBox x:Name="S_MinSpeed" Margin="214,214,765,646" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_MaxSpeed" Margin="310,214,669,646" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_Sk1Speed" Margin="406,214,573,646" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_Sk2Speed" Margin="499,214,480,646" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_Sk3Speed" Margin="595,214,384,646" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+
+                    <!-- HP -->
+                    <Label Content="HP" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,620" />
+                    <TextBox x:Name="S_MinHP" Margin="214,245,765,615" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_MaxHP" Margin="310,245,669,615" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_Sk1HP" Margin="406,244,573,616" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_Sk2HP" Margin="499,244,480,616" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_Sk3HP" Margin="595,244,384,616" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
 
                     <!-- Luck -->
-                    <Label Content="Luck" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,615"  />
+                    <Label Content="Luck" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,584"  />
                     <!--<TextBox x:Name="S_MinLuck" Margin="214,214,765,646" Background="#7F120019" Foreground="#FFB400FF" />-->
                     <!--<TextBox x:Name="S_MaxLuck" Margin="310,214,669,646" Background="#7F120019" Foreground="#FFB400FF" />-->
-                    <TextBox x:Name="S_Sk1Luck" Margin="406,245,573,615" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-                    <TextBox x:Name="S_Sk2Luck" Margin="499,245,480,615" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
-                    <TextBox x:Name="S_Sk3Luck" Margin="595,245,384,615" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk1Luck" Margin="406,275,573,584" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk2Luck" Margin="499,275,480,585" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
+                    <TextBox x:Name="S_Sk3Luck" Margin="595,275,384,585" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" />
 
                     <!-- Level -->
-                    <Label Content="Level" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,569"  />
-                    <TextBox x:Name="S_MinLevel" Margin="214,291,765,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
-                    <TextBox x:Name="S_MaxLevel" Margin="310,291,669,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <Label Content="Level" Foreground="#FFC800ff" Height="31" VerticalAlignment="Bottom" Margin="0,0,873,492"  />
+                    <TextBox x:Name="S_MinLevel" Margin="214,368,765,492" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
+                    <TextBox x:Name="S_MaxLevel" Margin="310,368,669,492" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange"/>
                     <TextBox x:Name="S_Sk1Level" Margin="406,291,573,569" Background="#7f120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden" />
                     <TextBox x:Name="S_Sk2Level" Margin="499,291,480,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden"/>
                     <TextBox x:Name="S_Sk3Level" Margin="595,291,384,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden"/>

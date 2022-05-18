@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.25
+// Version: 22.05.03
 // EndLic
 
 using System;
@@ -64,12 +64,13 @@ namespace StarStory2_Foe_Editor {
 			Data.RegCheckBox(ChkIsBoss, "Boss");
 			Data.RegCheckBox(Humanoid, "Humanoid");
 			new Stats("Power", S_MinPower, S_MaxPower, S_Sk1Power, S_Sk2Power, S_Sk3Power);
-			new Stats("Endurance", S_MinEndurance, S_MaxEndurance, S_Sk1Endurance, S_Sk2Endurance, S_Sk3Endurance);
+			new Stats("Defense", S_MinDefense, S_MaxDefense, S_Sk1Defense, S_Sk2Defense, S_Sk3Defense);
 			new Stats("Will", S_MinWill, S_MaxWill, S_Sk1Will, S_Sk2Will, S_Sk3Will);
 			new Stats("Resistance", S_MinResistance, S_MaxResistance, S_Sk1Resistance, S_Sk2Resistance, S_Sk3Resistance);
 			new Stats("Accuracy", S_MinAccuracy, S_MaxAccuracy, S_Sk1Accuracy, S_Sk2Accuracy, S_Sk3Accuracy);
 			new Stats("Evasion", S_MinEvasion, S_MaxEvasion, S_Sk1Evasion, S_Sk2Evasion, S_Sk3Evasion);
 			new Stats("Speed", S_MinSpeed, S_MaxSpeed, S_Sk1Speed, S_Sk2Speed, S_Sk3Speed);
+			new Stats("HP", S_MinHP, S_MaxHP, S_Sk1HP, S_Sk2HP, S_Sk3HP);
 			new Stats("Level", S_MinLevel, S_MaxLevel, S_Sk1Level, S_Sk2Level, S_Sk3Level);
 			Data.RegTextBox(S_Sk1Luck, "Luck", "SK1");
 			Data.RegTextBox(S_Sk2Luck, "Luck", "SK2");
