@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib.cs" Link="JCR6\zlib\zlib.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\Adler32.cs" Link="JCR6\zlib\Sutff\Adler32.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\AssemblyInfo.cs" Link="JCR6\zlib\Sutff\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\Deflate.cs" Link="JCR6\zlib\Sutff\Deflate.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\InfBlocks.cs" Link="JCR6\zlib\Sutff\InfBlocks.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\InfCodes.cs" Link="JCR6\zlib\Sutff\InfCodes.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\Inflate.cs" Link="JCR6\zlib\Sutff\Inflate.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\InfTree.cs" Link="JCR6\zlib\Sutff\InfTree.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\StaticTree.cs" Link="JCR6\zlib\Sutff\StaticTree.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\SupportClass.cs" Link="JCR6\zlib\Sutff\SupportClass.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\Tree.cs" Link="JCR6\zlib\Sutff\Tree.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\ZInputStream.cs" Link="JCR6\zlib\Sutff\ZInputStream.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\Zlib.cs" Link="JCR6\zlib\Sutff\Zlib.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\ZOutputStream.cs" Link="JCR6\zlib\Sutff\ZOutputStream.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\ZStream.cs" Link="JCR6\zlib\Sutff\ZStream.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\Drivers\Compression\zlib\zlib\ZStreamException.cs" Link="JCR6\zlib\Sutff\ZStreamException.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\JCR6\jcr6.cs" Link="JCR6\jcr6.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\Kthura\Source\Class\KthuraCore.cs" Link="Kthura\KthuraCore.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\Kthura\Source\Class\KthuraDraw.cs" Link="Kthura\KthuraDraw.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\Kthura\Source\Class\KthuraDrawFake.cs" Link="Kthura\KthuraDrawFake.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\Kthura\Source\Class\KthuraSave.cs" Link="Kthura\KthuraSave.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\Dijkstra.cs" Link="Units\Dijkstra.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\Dirry.cs" Link="Units\Dirry.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\FileList.cs" Link="Units\FileList.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\Fmt.cs" Link="Units\Fmt.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\GINIE.cs" Link="Units\GINIE.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\Maps.cs" Link="Units\Maps.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\mkl.cs" Link="Units\mkl.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\qstr.cs" Link="Units\qstr.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\qstream.cs" Link="Units\qstream.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\QuickConsoleColors.cs" Link="Units\QuickConsoleColors.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\Roman.cs" Link="Units\Roman.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="JCR6\zlib\Sutff\" />
+    <Folder Include="Kthura\" />
+    <Folder Include="Units\" />
+  </ItemGroup>
+
+</Project>
