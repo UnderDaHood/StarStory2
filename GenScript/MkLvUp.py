@@ -94,10 +94,10 @@ statlv1 = {
    'Rolf'      : {'Strength': 40, 'Defense': 40, 'Will':  0, 'Resistance':  0, 'Agility':  1, 'Accuracy':  1, 'Evasion':  0, 'HP': 90, 'AP':0 },
    'Johnson'   : {'Strength': 40, 'Defense': 40, 'Will':  0, 'Resistance':  0, 'Agility':-10, 'Accuracy':  1, 'Evasion':  0, 'HP': 90, 'AP':0 },
    """:{},
-   "Klahre":     {'Power':30, 'Defense': 30, 'Will':30, 'Resistance': 30, 'Accuracy':30, 'Evasion':30, 'HP':30, 'Critical': 1,"Speed":30,"AP":0 },
-   "Yorno":      {'Power':20, 'Defense': 10, 'Will':50, 'Resistance': 45, 'Accuracy':20, 'Evasion':10, 'HP':10, 'Critical': 0,"Speed":10,"AP":5 },
-   "Doctor":     {'Power': 0, 'Defense':  4, 'Will':90, 'Resistance': 90, 'Accuracy': 1, 'Evasion': 1, 'HP': 1, 'Critical': 0,"Speed":2 ,"AP":10},
-   "Ashley":     {'Power':40, 'Defense': 40, 'Will':10, 'Resistance':  5, 'Accuracy':80, 'Evasion':12, 'HP':60, 'Critical': 4,"Speed":1 ,"AP":100},
+   "Klahre":     {'Power':30, 'Defense': 30, 'Will':30, 'Resistance': 30, 'Accuracy':30, 'Evasion':30, 'HP':300, 'Critical': 1,"Speed":30,"AP":0 },
+   "Yorno":      {'Power':20, 'Defense': 10, 'Will':50, 'Resistance': 45, 'Accuracy':20, 'Evasion':10, 'HP':100, 'Critical': 0,"Speed":10,"AP":5 },
+   "Doctor":     {'Power': 0, 'Defense':  4, 'Will':90, 'Resistance': 90, 'Accuracy': 1, 'Evasion': 1, 'HP':  1, 'Critical': 0,"Speed":2 ,"AP":10},
+   "Ashley":     {'Power':40, 'Defense': 40, 'Will':10, 'Resistance':  5, 'Accuracy':80, 'Evasion':12, 'HP':600, 'Critical': 4,"Speed":1 ,"AP":100},
 }   
 
 #Basic Level 100 stats
@@ -114,10 +114,10 @@ statlv100 = {
    'Rolf'      : {'Strength':460, 'Defense':195, 'Will':220, 'Resistance': 70, 'Agility': 60, 'Accuracy': 85, 'Evasion': 16, 'HP':4500 , 'AP':340},
    'Johnson'   : {'Strength':455, 'Defense':185, 'Will':240, 'Resistance':100, 'Agility': 61, 'Accuracy': 90, 'Evasion': 18, 'HP':3950 , 'AP':360},
 """   : {},
-   "Klahre":     {'Power':300, 'Defense': 300, 'Will':300, 'Resistance': 300, 'Accuracy':300, 'Evasion':300, 'HP':3000, 'Critical': 3,  "Speed":300,"AP":0  },
-   "Yorno":      {'Power':190, 'Defense': 200, 'Will':500, 'Resistance': 450, 'Accuracy':200, 'Evasion': 75, 'HP':2000, 'Critical': 1,  "Speed":310,"AP":500  },
-   "Doctor":     {'Power':  0, 'Defense':  40, 'Will':900, 'Resistance': 600, 'Accuracy':  1, 'Evasion': 10, 'HP':4000, 'Critical': 0,  "Speed":200,"AP":750  },
-   "Ashley":     {'Power':999, 'Defense': 800, 'Will':100, 'Resistance': 100, 'Accuracy':999, 'Evasion':200, 'HP':5000, 'Critical': 10, "Speed":190,"AP":125 },
+   "Klahre":     {'Power':300, 'Defense': 300, 'Will':300, 'Resistance': 300, 'Accuracy':300, 'Evasion':300, 'HP':30000, 'Critical': 3,  "Speed":300,"AP":0  },
+   "Yorno":      {'Power':190, 'Defense': 200, 'Will':500, 'Resistance': 450, 'Accuracy':200, 'Evasion': 75, 'HP':25000, 'Critical': 1,  "Speed":310,"AP":500  },
+   "Doctor":     {'Power':  0, 'Defense':  40, 'Will':900, 'Resistance': 600, 'Accuracy':  1, 'Evasion': 10, 'HP':40000, 'Critical': 0,  "Speed":200,"AP":750  },
+   "Ashley":     {'Power':999, 'Defense': 800, 'Will':100, 'Resistance': 100, 'Accuracy':999, 'Evasion':200, 'HP':50000, 'Critical': 10, "Speed":190,"AP":125 },
 
 
 }
