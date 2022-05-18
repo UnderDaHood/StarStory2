@@ -27,6 +27,7 @@ MakeMiniFont/*.jfbf
 MakeMiniFont/MakeMini.bb_bak1
 MakeMiniFont/MakeMini.bb_bak2
 CardGenerator/out
+Sudoku/Classic
 
 
 # Sorry! Mine! Not gonna share
@@ -43,3 +44,5 @@ Foes/Editor/Yorno.png
 # No backups
 *.bb_bak*
 SS2MapData/Kirana.png
+
+
