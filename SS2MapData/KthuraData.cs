@@ -36,7 +36,7 @@ using TrickyUnits;
 using UseJCR6;
 
 namespace SS2MapData {
-	class KthuraData {
+	partial class KthuraData {
 		const string Author = "Jeroen P. Broks";
 		const string Notes = "Part of the Star Story universe or the Phantasar universe. Copyrighted and owned by Jeroen P. Broks. This file may only be distributed with an official UNMODIFIED version of the game and not be extracted from the game";
 		public const string _IAADir = "Scyndi:Projects/Applications/Apollo/Games/Star Story 2/src/Tricky Script/Data/IAA/";
@@ -133,6 +133,7 @@ namespace SS2MapData {
 							// May fall through. Old code no longer important!
 						case "RENCFOES": // Part of a fix 						
 							Foes = GINIE.FromSource(J.JCR_B(E));
+							ScanBosses();
 							break;
 						case "DOORS":
 							//Door.Data.Auto(J.JCR_B("DOORS"));

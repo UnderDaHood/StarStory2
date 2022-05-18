@@ -214,6 +214,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="KthuraData.cs" />
+    <Compile Include="KthuraData_Boss.cs" />
     <Compile Include="Layers.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -264,6 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Fractal Flower.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Kirana.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

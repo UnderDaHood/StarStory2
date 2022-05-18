@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.24
+// Version: 22.05.03
 // EndLic
 
 using System;
@@ -51,8 +51,13 @@ namespace SS2MapData {
 
 		public Visibility MyVis(bool k) { if (k) return Visibility.Visible; else return Visibility.Hidden; }
 
-		void AutoItemShow() { ItemSettingsGrid.Visibility = MyVis(ItemYes.SelectedItem != null); }
+		void AutoItemShow() {
+			ItemSettingsGrid.Visibility = MyVis(ItemYes.SelectedItem != null);
+			FoeSettingsGrid.Visibility = MyVis(FoeYes.SelectedItem != null);
+		}
 
+		TextBox[] BossFoe = new TextBox[10];
+		TextBox[,] BossSkill = new TextBox[10, 4];
 		#region Init
 		public MainWindow() {
 			MySelf = this;
@@ -123,6 +128,46 @@ namespace SS2MapData {
 			Meta.Register(FoeAMaxLevel3, "Foe_Maxlevel3");
 			FoeSettingsGrid.Visibility = MyVis(false);
 
+			// Boss
+			Grid_Boss.Visibility = Visibility.Hidden;
+			KthuraData.GadgetBossList = BossList;
+			BossFoe[1] = BOSS1_Foe;
+			BossSkill[1, 1] = BOSS1_Skill1;
+			BossSkill[1, 2] = BOSS1_Skill2;
+			BossSkill[1, 3] = BOSS1_Skill3;
+			BossFoe[2] = BOSS2_Foe;
+			BossSkill[2, 1] = BOSS2_Skill1;
+			BossSkill[2, 2] = BOSS2_Skill2;
+			BossSkill[2, 3] = BOSS2_Skill3;
+			BossFoe[3] = BOSS3_Foe;
+			BossSkill[3, 1] = BOSS3_Skill1;
+			BossSkill[3, 2] = BOSS3_Skill2;
+			BossSkill[3, 3] = BOSS3_Skill3;
+			BossFoe[4] = BOSS4_Foe;
+			BossSkill[4, 1] = BOSS4_Skill1;
+			BossSkill[4, 2] = BOSS4_Skill2;
+			BossSkill[4, 3] = BOSS4_Skill3;
+			BossFoe[5] = BOSS5_Foe;
+			BossSkill[5, 1] = BOSS5_Skill1;
+			BossSkill[5, 2] = BOSS5_Skill2;
+			BossSkill[5, 3] = BOSS5_Skill3;
+			BossFoe[6] = BOSS6_Foe;
+			BossSkill[6, 1] = BOSS6_Skill1;
+			BossSkill[6, 2] = BOSS6_Skill2;
+			BossSkill[6, 3] = BOSS6_Skill3;
+			BossFoe[7] = BOSS7_Foe;
+			BossSkill[7, 1] = BOSS7_Skill1;
+			BossSkill[7, 2] = BOSS7_Skill2;
+			BossSkill[7, 3] = BOSS7_Skill3;
+			BossFoe[8] = BOSS8_Foe;
+			BossSkill[8, 1] = BOSS8_Skill1;
+			BossSkill[8, 2] = BOSS8_Skill2;
+			BossSkill[8, 3] = BOSS8_Skill3;
+			BossFoe[9] = BOSS9_Foe;
+			BossSkill[9, 1] = BOSS9_Skill1;
+			BossSkill[9, 2] = BOSS9_Skill2;
+			BossSkill[9, 3] = BOSS9_Skill3;
+			// There really should be an easier way to do this!
 		}
 		#endregion
 
@@ -152,7 +197,7 @@ namespace SS2MapData {
 			KthuraData.Switch(Config.SelectedMap);
 			ListBox_Doors.Visibility = Visibility.Hidden;
 			GridDoor.Visibility = Visibility.Hidden;
-			GetLayers();			
+			GetLayers();
 		}
 
 		private void MetaChanged(object sender, TextChangedEventArgs e) => Meta.Update((TextBox)sender);
@@ -246,9 +291,9 @@ namespace SS2MapData {
 
 		public void UpdateItems() {
 			ItemYes.Items.Clear();
-			ItemNo.Items.Clear();				
-			foreach(var i in KthuraData.ItemFiles) {
-				if (qstr.Prefixed(i,"ITM_") || qstr.Prefixed(i, "JWL_")) {
+			ItemNo.Items.Clear();
+			foreach (var i in KthuraData.ItemFiles) {
+				if (qstr.Prefixed(i, "ITM_") || qstr.Prefixed(i, "JWL_")) {
 					var item = qstr.StripExt(i).Trim().ToUpper();
 #if DEBUG
 					Debug.WriteLine($"Do we have a {item}? {KthuraData.Current.HasItem(item)}");
@@ -262,12 +307,12 @@ namespace SS2MapData {
 			AutoItemShow();
 		}
 
-		
+
 
 		public void UpdateFoes() {
 			FoeYes.Items.Clear();
 			FoeNo.Items.Clear();
-			foreach(var i in KthuraData.FoeFiles) {
+			foreach (var i in KthuraData.FoeFiles) {
 				if (i.ToUpper() != "README.MD") {
 					Debug.WriteLine($"Foe '{i}' available {KthuraData.Current.HasFoe(i)} in '{KthuraData.Current}'");
 					if (KthuraData.Current.HasFoe(i))
@@ -283,7 +328,7 @@ namespace SS2MapData {
 			var Item = $"{SelItem}";
 			Debug.WriteLine($"Adding item: {Item}");
 			KthuraData.Current.HasItem(Item, true);
-			UpdateItems();			
+			UpdateItems();
 		}
 
 		private void RemItem_Click(object sender, RoutedEventArgs e) {
@@ -308,23 +353,23 @@ namespace SS2MapData {
 		}
 
 		Dictionary<bool, TextBox[]> LevelEnable;
-		private void OwnLevelCheck(object sender=null, RoutedEventArgs e=null) {
+		private void OwnLevelCheck(object sender = null, RoutedEventArgs e = null) {
 			var SelItem = FoeYes.SelectedItem;
-			
-			if (LevelEnable == null) { 
+
+			if (LevelEnable == null) {
 				LevelEnable = new Dictionary<bool, TextBox[]>();
 				LevelEnable[true] = new TextBox[] { FoeOMaxLevel1, FoeOMaxLevel2, FoeOMaxLevel3, FoeOMinLevel1, FoeOMinLevel2, FoeOMinLevel3 };
 				LevelEnable[false] = new TextBox[] { FoeAMaxLevel1, FoeAMaxLevel2, FoeAMaxLevel3, FoeAMinLevel1, FoeAMinLevel2, FoeAMinLevel3 };
 			}
 			var ch = FoeOwnlevel.IsChecked;
 			foreach (var item in LevelEnable) {
-				foreach(var texb in item.Value) {
+				foreach (var texb in item.Value) {
 					texb.IsEnabled = ch == item.Key;
 				}
 			}
 			if (SelItem != null) {
 				KthuraData.Current.Foes[$"Foe:{SelItem}", "UseOwnLevels"] = $"{ch}";
-			}			
+			}
 		}
 
 		private void AddFoe_Click(object sender, RoutedEventArgs e) {
@@ -356,6 +401,41 @@ namespace SS2MapData {
 			}
 			*/
 			FoeSettingsGrid.Visibility = MyVis(Goed);
+		}
+
+		private void BossList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+			var BS = KthuraData.Current.CurBoss;
+			if (BS == null) { Grid_Boss.Visibility = Visibility.Hidden; return; }
+			Grid_Boss.Visibility = Visibility.Visible;
+			Boss_Arena.Text = BS.Arena;
+			Boss_Tune.Text = BS.Music;
+			for (int idx = 1; idx <= 9; ++idx) {
+				BossFoe[idx].Text = BS[idx];
+				for (int skill = 1; skill <= 3; ++skill) BossSkill[idx, skill].Text = $"{BS[idx, skill]}";
+			}
+		}
+
+		private void ChangeArena(object sender, TextChangedEventArgs e) { KthuraData.Current.CurBoss.Arena = Boss_Arena.Text; }
+		private void Boss_Tune_TextChanged(object sender, TextChangedEventArgs e) { KthuraData.Current.CurBoss.Music = Boss_Tune.Text; }
+
+		private void BossFoeChange(object sender, TextChangedEventArgs e) {
+			var BS = KthuraData.Current.CurBoss;
+			var TB = (TextBox)sender;
+			if (BS == null) return;
+			for (var i = 1; i < 10; i++) {
+				if (BossFoe[i] == TB) { BS[i] = TB.Text; break; }
+			}
+		}
+
+		private void BossSkillChange(object sender, TextChangedEventArgs e) {
+			var BS = KthuraData.Current.CurBoss;
+			var TB = (TextBox)sender;
+			if (BS == null) return;
+			for (var idx = 1; idx < 10; idx++) {
+				for (var skill = 1; skill <= 3; skill++) {
+					if (BossSkill[idx, skill] == TB) { BS[idx, skill] = qstr.ToInt(TB.Text); break; }
+				}
+			}
 		}
 	}
 }
