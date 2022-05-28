@@ -387,6 +387,28 @@ End License block -->
 				</Grid>
 			</TabItem>
 
+			<TabItem Header="Sein">
+				<TabItem.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFFFB400" Offset="0"/>
+						<GradientStop Color="#FF0F0b00" Offset="1"/>
+					</LinearGradientBrush>
+				</TabItem.Background>
+				<Grid Background="#00000000">
+                    <TextBox x:Name="SeinSource" AcceptsReturn="True" TextChanged="MetaChanged">
+						<TextBox.Foreground>
+							<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+								<GradientStop Color="#FFFFB400" Offset="0.007"/>
+								<GradientStop Color="#FFFFFFB4" Offset="1"/>
+							</LinearGradientBrush>
+						</TextBox.Foreground>
+						<TextBox.Background>
+							<ImageBrush ImageSource="/quantum-physics.webp"/>
+						</TextBox.Background>
+					</TextBox>
+				</Grid>
+			</TabItem>
+
 			<TabItem Header="Behavior">
 				<TabItem.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">

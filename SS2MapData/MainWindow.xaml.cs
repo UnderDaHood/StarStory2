@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.19
+// Version: 22.05.28
 // EndLic
 
 using System;
@@ -168,6 +168,8 @@ namespace SS2MapData {
 			BossSkill[9, 2] = BOSS9_Skill2;
 			BossSkill[9, 3] = BOSS9_Skill3;
 			// There really should be an easier way to do this!
+
+			Meta.Register(SeinSource, "Sein!");
 		}
 		#endregion
 

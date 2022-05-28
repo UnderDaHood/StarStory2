@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.20
+// Version: 22.05.28
 // EndLic
 
 using System;
@@ -36,7 +36,7 @@ using TrickyUnits;
 namespace SS2MapData {
 
 	class Meta {
-		public enum MetaAlt { Meta, Item, Foe};
+		public enum MetaAlt { Meta, Item, Foe, Sein};
 
 		static Dictionary<TextBox, Meta> _Register = new Dictionary<TextBox, Meta>();
 		static Dictionary<CheckBox, Meta> _CheckBoxRegister = new Dictionary<CheckBox, Meta>();
@@ -72,6 +72,7 @@ namespace SS2MapData {
 				Field = fld.Substring(4);
 				Alt = MetaAlt.Foe;
 			}
+			if (fld == "Sein!") Alt = MetaAlt.Sein;
 			Debug.WriteLine($"Registered textbox for field {Field} as type {Alt}");
 		}
 
@@ -109,6 +110,17 @@ namespace SS2MapData {
 								a.TextB.Text = $"{qstr.ToInt(KthuraData.Current.Foes[$"Foe:{EI}", a.Field])}";
 							} else { Debug.WriteLine($"I cannot retrieve field {a.Field}. There doesn't seem to be an item selected"); }
 						}
+						break;
+					case MetaAlt.Sein:
+						/*if (!KthuraData.Current.TheMap.Unknown.ContainsKey("Sein")) {
+							a.TextB.Text = "# No sein data present\n";
+							string f = "";
+							//foreach (var k in KthuraData.Current.Unknown.Keys) f += $"# I do have: '{k}'\n";
+							a.TextB.Text += f;
+						} else {
+						*/
+							a.TextB.Text = KthuraData.Current.Sein;
+						//}
 						break;
 					default:
 						Confirm.Annoy($"No alteration(TB) action known for {a.Alt}! ({a.Field}");
@@ -148,6 +160,11 @@ namespace SS2MapData {
 				case MetaAlt.Foe: {
 						var EI = MainWindow.MySelf.EditFoe;
 						if (EI != "") KthuraData.Current.Foes[$"Foe:{EI}", e.Field] = tb.Text;
+					}
+					break;
+				case MetaAlt.Sein: {
+						//KthuraData.Current.TheMap.Unknown["Sein"]=qstr.StringToBytes(tb.Text);
+						KthuraData.Current.Sein = tb.Text;
 					}
 					break;
 				default:

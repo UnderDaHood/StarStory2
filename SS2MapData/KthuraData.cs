@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.19
+// Version: 22.05.28
 // EndLic
 
 using NSKthura;
@@ -68,6 +68,10 @@ namespace SS2MapData {
 		}
 
 		static public KthuraData Current { private set; get; } = null;
+		public string Sein {
+			get { if (Unknown.ContainsKey("Sein")) return qstr.BytesToString(Unknown["Sein"]); return $"# No sein data!\n# {DateTime.Now}\n"; }
+			set { Unknown["Sein"] = qstr.StringToBytes(value.Replace("\r", "")); }
+        }
 
 		public void KillBehavior(byte[] bh=null) {
 			void K(string k) { if (Unknown.ContainsKey(k)) Unknown.Remove(k); }
