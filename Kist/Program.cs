@@ -114,4 +114,3 @@ QCol.Doing("Analysing", _KthuraDir);
 var Maps = FileList.GetDir(KthuraDir());
 QCol.Doing("Found", $"{Maps.Length} maps");
 foreach (var Map in Maps) WorkMap(Map);
-
