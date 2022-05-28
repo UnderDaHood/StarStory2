@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.17
+// Version: 22.05.28
 // EndLic
 
 using TrickyUnits;
@@ -33,7 +33,7 @@ const string _kthura = "scyndi:Projects/Applications/Apollo/Games/Star Story 2/s
 string KthuraDir;
 
 void Init() {
-	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","22.05.17");
+	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","22.05.28");
 	MKL.Lic    ("Star Story 2 - The Virus Strikes Back - Program.cs","GNU General Public License 3");
 	JCR6_zlib.Init();
 	Dirry.InitAltDrives();
@@ -80,7 +80,7 @@ void Workout(string MFile) {
 						o.Tag = mkTag;
 					}
 					QCol.Doing("Tag", o.Tag);
-					if (!Sein.List("LAYERS", "Layers").Contains(Lay.Key)) { Sein.List("LAYERS", "Layers").Add(Lay.Key.Replace("#","[HASH]")); QCol.Doing("Listed", "Layer"); modified = true; }
+					if (!Sein.List("LAYERS", "Layers").Contains(Lay.Key)) { Sein.ListAddNew("LAYERS", "Layers",Lay.Key.Replace("#","[HASH]")); QCol.Doing("Listed", "Layer"); modified = true; }
 					//if (!Sein.List("LAYERS_BACKUP", "Layers").Contains(Lay.Key)) { Sein.List("LAYERS_BACKUP", "Layers").Add(Lay.Key); QCol.Doing("Listed", "Layer (backup)"); modified = true; }
 					if (!Sein.List(Lay.Key, "Seinen").Contains(o.Tag)) { Sein.List(Lay.Key, "Seinen").Add(o.Tag); QCol.Doing("Listed", "Sein"); modified = true; }
 					var Cat = $"::SEIN::{Lay.Key}::{o.Tag}::";
