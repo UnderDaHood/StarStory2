@@ -35,6 +35,7 @@ SK1=Random
 SK2=Random
 SK3=Best
 [META]
+DESCRIPTION=Watch out<<<<33>>>><<<<10>>>>These beasts are shocking
 NAME=Eel
 NEGASPRITE=GFX/Combat/Foes/gen/Eel.Negative.png
 NORMSPRITE=GFX/Combat/Foes/gen/Eel.png
@@ -48,7 +49,7 @@ FROST=1
 HEALING=6
 LIGHT=5
 THUNDER=6
-WATER=5
+WATER=4
 WIND=1
 [RESISTSTATUS]
 BIO=65
