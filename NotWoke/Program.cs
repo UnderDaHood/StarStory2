@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.02
+// Version: 22.05.28
 // EndLic
 
 #region Using
@@ -35,7 +35,9 @@ int Count = 0;
 string KthuraDir() => Dirry.AD("Scyndi:Projects/Applications/Apollo/Games/Star Story 2/src/Tricky Story/Kthura");
 string[] Maps;
 string DataDir() => Dirry.AD(@"Scyndi:Projects\Applications\Apollo\Games\Star Story 2\dev\NotWoke");
+string ScottyFile() => Dirry.AD(@"Scyndi:Projects\Applications\Apollo\Games\Star Story 2\src\Tricky Script\Data\General\Scotty.ini");
 GINIE OwnData;
+GINIE Scotty;
 
 string NCount(KthuraLayer L,string pref) {
 	var s = "";
@@ -45,7 +47,7 @@ string NCount(KthuraLayer L,string pref) {
 }
 
 void Init() {
-	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","22.05.02");
+	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","22.05.28");
 	MKL.Lic    ("Star Story 2 - The Virus Strikes Back - Program.cs","GNU General Public License 3");
 	JCR6_zlib.Init();
 	Dirry.InitAltDrives();
@@ -57,6 +59,10 @@ void Init() {
 	OwnData["ALG", "LASTUSED"] = $"{DateTime.Now}";
 	Count = qstr.ToInt(OwnData["Sys", "Count"]);
 	Kthura.LoadUnknown = true;
+	Scotty = GINIE.FromFile(ScottyFile());
+	Scotty.AutoSaveSource = ScottyFile();
+	if (Scotty["ALGEMEEN", "AANGEMAAKT"] == "") Scotty["ALGEMEEN", "AANGEMAAKT"] = $"{DateTime.Now}";
+	Scotty["ALGEMEEN", "LAATSTBIJGEWERKT"] = $"{DateTime.Now}";
 }
 
 void Head() {
@@ -71,19 +77,20 @@ void GetMaps() {
 	Maps = FileList.GetDir(KthuraDir());
 }
 
-string Ask(string cat,string key,string question,string defaultvalue = "") {
-	while (OwnData[cat, key] == "") {
+string XAsk(GINIE OD,string cat,string key,string question,string defaultvalue = "") {
+	while (OD[cat, key] == "") {
 		if (defaultvalue != "") QCol.Magenta($"[{defaultvalue}] ");
 		QCol.Yellow(question);
 		QCol.Cyan(" ");
 		var Answer = Console.ReadLine();
 		if (Answer == "")
-			OwnData[cat, key] = defaultvalue;
+			OD[cat, key] = defaultvalue;
 		else
-			OwnData[cat, key] = Answer;
+			OD[cat, key] = Answer;
 	}
-	return OwnData[cat, key];
+	return OD[cat, key];
 }
+string Ask(string cat, string key, string question, string defaultvalue = "") => XAsk(OwnData, cat, key, question, defaultvalue);
 
 void AdaptMap(string fname) {
 	QCol.Doing("Map", fname);	
@@ -102,8 +109,15 @@ void AdaptMap(string fname) {
 						obj.Tag = T;
 					}
 					var ktgtag=$"{fname}_{lay.Key}__{obj.Tag}";
-					Ask(ktgtag, "Map", $"{ktgtag} is part of map: ", kth.MetaData["Title"]);
-					Ask(ktgtag, "Loc", $"{ktgtag} as specific name to name it by in the menu: ");
+					var TLoc = $"Lokatie:{ktgtag}";
+					Scotty.ListAddNew("Kaarten", "Lijst", fname);
+					Scotty["Kaarten",fname] = Ask(ktgtag, "Map", $"{ktgtag} is part of map: ", kth.MetaData["Title"]);
+					Scotty.ListAddNew($"Kaart:{fname}", "Lokaties", ktgtag);
+					Scotty[TLoc, "Naam"] = Ask(ktgtag, "Loc", $"{ktgtag} as specific name to name it by in the menu: ");
+					Scotty[TLoc, "Kthura"] = fname;
+					Scotty[TLoc, "Laag"] = lay.Key;
+					Scotty[TLoc, "Object"] = obj.Tag;
+					XAsk(Scotty, TLoc, "OpenVanafAanvang", "This is transporter open from the start?", "NO");
 					Ask(ktgtag, "Tut", $"{ktgtag} has any hint tied to it? ", "NONE");
 					Loc[lay.Key, obj.Tag] = OwnData[ktgtag, "Tut"];
 					kth.Unknown["Trans"] = Encoding.ASCII.GetBytes(Loc.ToSource());
