@@ -60,6 +60,7 @@ void Head() {
 string MKTag(KthuraLayer L) {
 	string Tag;
 	do { Tag = $"CHEST_{Roman.ToRoman(++num)}"; } while (L.HasTag(Tag));
+	QuickStream.SaveString(numfile, $"{num}");
 	return Tag;
 }
 
@@ -77,6 +78,7 @@ void WorkMap(string m) {
 			if (o.Texture.ToUpper() == _Chest) {
 				QCol.Doing("==> Chest found", $"({o.x},{o.y}) {o.Tag}");
 				if (o.Tag == "") { o.Tag = MKTag(l.Value); QCol.Doing("===> AutoTagging", o.Tag); modified = true; }
+				//Console.WriteLine($"Sein for {o.Tag}. Treasure Data has Sein Data: {TRDat.HasList(o.Tag, "Sein")}; There are seinen on map: {SNDat.HasList(l.Key, "Seinen")}"); // Debug only
 				if (!TRDat.HasList(o.Tag, "Sein") && SNDat.HasList(l.Key, "Seinen")) {
 					TRDat.List(o.Tag, "Sein"); // Make sure the list is created
 					QCol.Yellow($"Er zijn {SNDat.List(l.Key, "Seinen").Count} sein(en) gevonden!\n");
