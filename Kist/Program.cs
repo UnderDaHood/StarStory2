@@ -79,7 +79,9 @@ void WorkMap(string m) {
 				QCol.Doing("==> Chest found", $"({o.x},{o.y}) {o.Tag}");
 				if (o.Tag == "") { o.Tag = MKTag(l.Value); QCol.Doing("===> AutoTagging", o.Tag); modified = true; }
 				//Console.WriteLine($"Sein for {o.Tag}. Treasure Data has Sein Data: {TRDat.HasList(o.Tag, "Sein")}; There are seinen on map: {SNDat.HasList(l.Key, "Seinen")}"); // Debug only
-				if (!TRDat.HasList(o.Tag, "Sein") && SNDat.HasList(l.Key, "Seinen")) {
+				//if (!TRDat.HasList(o.Tag, "Sein") && SNDat.HasList(l.Key, "Seinen")) {
+				if (TRDat[o.Tag,"SeinSet"]!="DONE" && SNDat.HasList(l.Key, "Seinen")) {
+					TRDat[o.Tag, "SeinSet"] = "DONE";
 					TRDat.List(o.Tag, "Sein"); // Make sure the list is created
 					QCol.Yellow($"Er zijn {SNDat.List(l.Key, "Seinen").Count} sein(en) gevonden!\n");
 					foreach (var s in SNDat.List(l.Key, "Seinen")) {
