@@ -206,7 +206,7 @@ End License block -->
 					</ListBox>
 					<Label Content="New Vital:" Margin="138,582,745,0" Foreground="White"/>
 					<TextBox x:Name="NewVital"  Margin="263,582,139,0" Foreground="Yellow" Background="Black"/>
-					<Button x:Name="NewVitalAdd" Margin="852,582,0,0" Content="Add" Foreground="#ffBFFF00" Background="#EF0b0f00"/>
+					<Button x:Name="NewVitalAdd" Margin="852,582,0,0" Content="Add" Foreground="#ffBFFF00" Background="#EF0b0f00" Click="NewVitalAdd_Click"/>
 					<Grid x:Name="Grid_Boss" Margin="152,0,0,0" Height="30" VerticalAlignment="Top">
 						<Label Content="Arena" Foreground="#ffffb400" Margin="0,0,751,0"/>
 						<TextBox x:Name="Boss_Arena" Foreground="#ff00b4ff" Background="#A0000b0f" Margin="83,0,0,0" TextChanged="ChangeArena"/>
@@ -395,7 +395,7 @@ End License block -->
 					</LinearGradientBrush>
 				</TabItem.Background>
 				<Grid Background="#00000000">
-                    <TextBox x:Name="SeinSource" AcceptsReturn="True" TextChanged="MetaChanged">
+					<TextBox x:Name="SeinSource" AcceptsReturn="True" TextChanged="MetaChanged">
 						<TextBox.Foreground>
 							<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 								<GradientStop Color="#FFFFB400" Offset="0.007"/>

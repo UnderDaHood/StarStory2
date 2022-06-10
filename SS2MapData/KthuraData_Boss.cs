@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.19
+// Version: 22.06.10
 // EndLic
 
 using System;
@@ -78,6 +78,13 @@ namespace SS2MapData {
 				return BossList[(string)B];
 			}
 		}
+
+		public void AddVital(string VitalBoss) {
+			string Tag = $"BOSS::VITAL::{VitalBoss.ToUpper()}";
+			if (Foes.HasSection(Tag)) { Confirm.Annoy("A vital boss tagged like that already exsts!", "Error", System.Windows.Forms.MessageBoxIcon.Error); return; }
+			Foes[Tag, "Creation"] = $"{DateTime.Now}"; // This only guarantees the tag exists, nothing more.
+		}
+        
 
 		void ScanBosses() {
 			BossList.Clear();

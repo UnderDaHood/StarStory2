@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\Dirry.cs" Link="Units\Dirry.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\FileList.cs" Link="Units\FileList.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\Fmt.cs" Link="Units\Fmt.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\GINIE.cs" Link="Units\GINIE.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\Maps.cs" Link="Units\Maps.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\mkl.cs" Link="Units\mkl.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\qstr.cs" Link="Units\qstr.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\qstream.cs" Link="Units\qstream.cs" />
+    <Compile Include="..\..\..\..\..\VisualStudio\TrickyUnits\QuickConsoleColors.cs" Link="Units\QuickConsoleColors.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Units\" />
+  </ItemGroup>
+
+</Project>

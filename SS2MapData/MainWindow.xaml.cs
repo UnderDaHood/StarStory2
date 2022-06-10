@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.28
+// Version: 22.06.10
 // EndLic
 
 using System;
@@ -438,6 +438,11 @@ namespace SS2MapData {
 					if (BossSkill[idx, skill] == TB) { BS[idx, skill] = qstr.ToInt(TB.Text); break; }
 				}
 			}
+		}
+
+		private void NewVitalAdd_Click(object sender, RoutedEventArgs e) {
+			KthuraData.Current.AddVital(NewVital.Text);
+			NewVital.Text = "";
 		}
 	}
 }

@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.28
+// Version: 22.06.01
 // EndLic
 
 #region Using
@@ -47,7 +47,7 @@ string NCount(KthuraLayer L,string pref) {
 }
 
 void Init() {
-	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","22.05.28");
+	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","22.06.01");
 	MKL.Lic    ("Star Story 2 - The Virus Strikes Back - Program.cs","GNU General Public License 3");
 	JCR6_zlib.Init();
 	Dirry.InitAltDrives();
@@ -117,6 +117,7 @@ void AdaptMap(string fname) {
 					Scotty[TLoc, "Kthura"] = fname;
 					Scotty[TLoc, "Laag"] = lay.Key;
 					Scotty[TLoc, "Object"] = obj.Tag;
+
 					XAsk(Scotty, TLoc, "OpenVanafAanvang", "This is transporter open from the start?", "NO");
 					Ask(ktgtag, "Tut", $"{ktgtag} has any hint tied to it? ", "NONE");
 					Loc[lay.Key, obj.Tag] = OwnData[ktgtag, "Tut"];
