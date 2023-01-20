@@ -96,11 +96,12 @@ void WorkMap(string m) {
 					} while (a.Length > 0);
 					modified = true;
 				}
-				while (TRDat[o.Tag, "ITEM"] == "") {
+				while (TRDat[o.Tag, "ITEM"].Trim() == "") {
 					QCol.Yellow("And what item should be put in? "); QCol.Cyan("");
 					TRDat[o.Tag, "ITEM"] = Console.ReadLine().Trim().ToUpper();
 					modified = true;
 				}
+				QCol.Doing("===> Item", TRDat[o.Tag, "ITEM"]);
 			}
 		}
 	}
