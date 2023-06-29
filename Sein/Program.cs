@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2022
+// (c) Jeroen P. Broks, 2022, 2023
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.28
+// Version: 23.01.25
 // EndLic
 
 using TrickyUnits;
@@ -33,12 +33,13 @@ const string _kthura = "scyndi:Projects/Applications/Apollo/Games/Star Story 2/s
 string KthuraDir;
 
 void Init() {
-	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","22.05.28");
+	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","23.01.25");
 	MKL.Lic    ("Star Story 2 - The Virus Strikes Back - Program.cs","GNU General Public License 3");
 	JCR6_zlib.Init();
 	Dirry.InitAltDrives();
 	KthuraDir = Dirry.AD(_kthura);
 	Kthura.LoadUnknown = true;
+	KthuraDraw.DrawDriver = new KthuraDrawFake();
 	QCol.DoingTab = 15;
 }
 
