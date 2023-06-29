@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2022
+// (c) Jeroen P. Broks, 2022, 2023
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.03
+// Version: 23.01.23
 // EndLic
 
 using System;
@@ -75,6 +75,11 @@ namespace StarStory2_Foe_Editor {
 			Data.RegTextBox(S_Sk1Luck, "Luck", "SK1");
 			Data.RegTextBox(S_Sk2Luck, "Luck", "SK2");
 			Data.RegTextBox(S_Sk3Luck, "Luck", "SK3");
+			Stats.Register.Add(S_Sk1Luck);
+			Stats.Register.Add(S_Sk2Luck);
+			Stats.Register.Add(S_Sk3Luck);
+
+			Data.RegTextBox(S_Script, "Stat", "Script");
 
 			Data.RegTextBox(AIScript, "AI", "Script");
 			IAA.AIReg(AblMinLevel1, "MinLevel1");
@@ -138,6 +143,14 @@ namespace StarStory2_Foe_Editor {
 		}
 
 		private void RegTexBoxChange(object sender, TextChangedEventArgs e) => Data.ActTextBox((TextBox)sender);
+
+		private void ScriptBoxChange(object sender, TextChangedEventArgs e) {
+			var snd=(TextBox)sender;
+			foreach(var tb in Stats.Register) {
+				tb.IsEnabled = snd.Text.Trim() == "";
+			}
+			Data.ActTextBox(snd);
+		}
 
 		private void NewFoe_Click(object sender, RoutedEventArgs e) {
 			var txt = NewFoeFileName.Text;

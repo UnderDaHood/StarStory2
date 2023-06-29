@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2022
+// (c) Jeroen P. Broks, 2022, 2023
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.04.20
+// Version: 23.01.23
 // EndLic
 
 using System;
@@ -50,24 +50,33 @@ namespace StarStory2_Foe_Editor {
 			Sk3;
 			*/
 
-		public Stats(string s, TextBox _min, TextBox _max, TextBox _1, TextBox _2, TextBox _3) {
-				/*
-			Min = _min;
-			Max = _max;
-			Sk1 = _1;
-			Sk2 = _2;
-			Sk3 = _3;
-			Register[Min] = new WStat("Min", this);
-			Register[Max] = new WStat("Max", this);
-			Register[Sk1] = new WStat("Sk1", this);
-			Register[Sk2] = new WStat("Sk2", this);
-			Register[Sk3] = new WStat("Sk3", this);
-				*/
-			Data.RegTextBox(_min, "STAT.MIN", s);
-			Data.RegTextBox(_max, "STAT.MAX", s);
-			Data.RegTextBox(_1, "STAT.SK1", s);
-			Data.RegTextBox(_2, "STAT.SK2", s);
-			Data.RegTextBox(_3, "STAT.SK3", s);
-		}
-	}
+		static public List<TextBox> Register = new List<TextBox>();
+
+
+        public Stats(string s, TextBox _min, TextBox _max, TextBox _1, TextBox _2, TextBox _3) {
+            /*
+        Min = _min;
+        Max = _max;
+        Sk1 = _1;
+        Sk2 = _2;
+        Sk3 = _3;
+        Register[Min] = new WStat("Min", this);
+        Register[Max] = new WStat("Max", this);
+        Register[Sk1] = new WStat("Sk1", this);
+        Register[Sk2] = new WStat("Sk2", this);
+        Register[Sk3] = new WStat("Sk3", this);
+            */
+            Data.RegTextBox(_min, "STAT.MIN", s);
+            Data.RegTextBox(_max, "STAT.MAX", s);
+            Data.RegTextBox(_1, "STAT.SK1", s);
+            Data.RegTextBox(_2, "STAT.SK2", s);
+            Data.RegTextBox(_3, "STAT.SK3", s);
+
+            Register.Add(_min);
+            Register.Add(_max);
+            Register.Add(_1);
+            Register.Add(_2);
+            Register.Add(_3);
+        }
+    }
 }

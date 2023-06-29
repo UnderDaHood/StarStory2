@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2022
+// (c) Jeroen P. Broks, 2022, 2023
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,13 +21,14 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.29
+// Version: 23.02.28
 // EndLic
 
 using System.Diagnostics;
 using TrickyUnits;
 using UseJCR6;
 using NSKthura;
+using Kist;
 
 const string _Chest = "GFX/TREASURE/TREASURECHEST.PNG";
 const string _KthuraDir = "Scyndi:Projects/Applications/Apollo/Games/Star Story 2/src/Tricky Story/Kthura";
@@ -42,11 +43,12 @@ int GetNum() {
 	
 int num = GetNum(); Debug.WriteLine($"StartNum = {num}");
 Kthura.LoadUnknown = true;
+KthuraDraw.DrawDriver = new KthuraDrawFake();
 
 void Init() {
 	Dirry.InitAltDrives();
 	JCR6_zlib.Init();
-	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","22.05.29");
+	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","23.02.28");
 	MKL.Lic    ("Star Story 2 - The Virus Strikes Back - Program.cs","GNU General Public License 3");
 }
 
@@ -75,7 +77,10 @@ void WorkMap(string m) {
 	foreach(var l in KM.Layers) {
 		QCol.Doing("=> Layer", l.Key);
 		foreach (var o in l.Value.Objects) {
-			if (o.Texture.ToUpper() == _Chest) {
+			if (qstr.Prefixed(o.Tag.ToUpper(), "ARM_")) {
+				QCol.Doing("==> ARM Found: ", o.Tag);
+				ARM.Add(o.Tag, m, l.Key);
+			} else if (o.Texture.ToUpper() == _Chest) {
 				QCol.Doing("==> Chest found", $"({o.x},{o.y}) {o.Tag}");
 				if (o.Tag == "") { o.Tag = MKTag(l.Value); QCol.Doing("===> AutoTagging", o.Tag); modified = true; }
 				//Console.WriteLine($"Sein for {o.Tag}. Treasure Data has Sein Data: {TRDat.HasList(o.Tag, "Sein")}; There are seinen on map: {SNDat.HasList(l.Key, "Seinen")}"); // Debug only
@@ -119,3 +124,10 @@ QCol.Doing("Analysing", _KthuraDir);
 var Maps = FileList.GetDir(KthuraDir());
 QCol.Doing("Found", $"{Maps.Length} maps");
 foreach (var Map in Maps) WorkMap(Map);
+
+Console.WriteLine();
+QCol.Doing("Showing", "ARMS");
+foreach(var A in ARM.ARMs) {
+	QCol.Doing($"-> {A.Key}", $"{A.Value.Map} => {A.Value.Layer}");
+}
+Console.ResetColor();

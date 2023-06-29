@@ -114,10 +114,10 @@ statlv100 = {
    'Rolf'      : {'Strength':460, 'Defense':195, 'Will':220, 'Resistance': 70, 'Agility': 60, 'Accuracy': 85, 'Evasion': 16, 'HP':4500 , 'AP':340},
    'Johnson'   : {'Strength':455, 'Defense':185, 'Will':240, 'Resistance':100, 'Agility': 61, 'Accuracy': 90, 'Evasion': 18, 'HP':3950 , 'AP':360},
 """   : {},
-   "Klahre":     {'Power':300, 'Defense': 300, 'Will':300, 'Resistance': 300, 'Accuracy':300, 'Evasion':300, 'HP':30000, 'Critical': 3,  "Speed":300,"AP":0  },
-   "Yorno":      {'Power':190, 'Defense': 200, 'Will':500, 'Resistance': 450, 'Accuracy':200, 'Evasion': 75, 'HP':25000, 'Critical': 1,  "Speed":310,"AP":500  },
-   "Doctor":     {'Power':  0, 'Defense':  40, 'Will':900, 'Resistance': 600, 'Accuracy':  1, 'Evasion': 10, 'HP':40000, 'Critical': 0,  "Speed":200,"AP":750  },
-   "Ashley":     {'Power':999, 'Defense': 800, 'Will':100, 'Resistance': 100, 'Accuracy':999, 'Evasion':200, 'HP':50000, 'Critical': 10, "Speed":190,"AP":125 },
+   "Klahre":     {'Power':800, 'Defense': 600, 'Will':800, 'Resistance': 600, 'Accuracy':600, 'Evasion':400, 'HP':30000, 'Critical': 3,  "Speed":350,"AP":0  },
+   "Yorno":      {'Power':590, 'Defense': 500, 'Will':700, 'Resistance': 750, 'Accuracy':500, 'Evasion':175, 'HP':25000, 'Critical': 1,  "Speed":320,"AP":500  },
+   "Doctor":     {'Power':  0, 'Defense':  40, 'Will':900, 'Resistance': 800, 'Accuracy':  1, 'Evasion': 30, 'HP':40000, 'Critical': 0,  "Speed":210,"AP":750  },
+   "Ashley":     {'Power':999, 'Defense': 800, 'Will':100, 'Resistance': 300, 'Accuracy':999, 'Evasion':300, 'HP':50000, 'Critical': 10, "Speed":199,"AP":175 },
 
 
 }

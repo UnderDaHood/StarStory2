@@ -106,7 +106,7 @@ SK3=Random
 [META]
 DESCRIPTION=Uh oh<<<<33>>>> You are in trouble now<<<<33>>>><<<<10>>>>These guys are instructed to shoot to kill anybody they see in the area you are in.<<<<10>>>>That must mean you've entered a really really top secret area.
 HUMANOID=TRUE
-NAME=Security Guard
+NAME=Security
 NEGASPRITE=GFX/Combat/Foes/Gen/SecuGuard/
 NORMSPRITE=GFX/Combat/Foes/Gen/SecuGuard/
 VOCALTAG=gen/SecuGuard
@@ -130,7 +130,7 @@ ACCURACY=196
 DEFENSE=127
 EVASION=7
 HP=3500
-LEVEL=2
+LEVEL=10
 POWER=155
 RESISTANCE=141
 SPEED=62

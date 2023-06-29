@@ -4,7 +4,7 @@ Main Window (XAML)
 
 
 
-(c) Jeroen P. Broks, 2022
+(c) Jeroen P. Broks, 2022, 2023
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Please note that some references to data like pictures or audio, do not automatically
 fall under this licenses. Mostly this is noted in the respective files.
 
-Version: 22.05.03
+Version: 23.01.23
 End License block -->
 <Window x:Class="StarStory2_Foe_Editor.MainWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -182,6 +182,9 @@ End License block -->
                     <TextBox x:Name="S_Sk2Level" Margin="499,291,480,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden"/>
                     <TextBox x:Name="S_Sk3Level" Margin="595,291,384,569" Background="#7F120019" Foreground="#FFB400FF" TextChanged="RegTexBoxChange" Visibility="Hidden"/>
 
+                    <!-- Script -->
+                    <Label Content="Script" Foreground="#FFC800ff" Height="31" VerticalAlignment="Center" Margin="0,0,873,0" />
+                    <TextBox x:Name="S_Script" Margin="214,430,379,430" Background="#7F120019" Foreground="#FFB400FF" TextChanged="ScriptBoxChange" Visibility="Visible"/>
                 </Grid>
             </TabItem>
 
