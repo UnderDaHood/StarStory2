@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2022
+// (c) Jeroen P. Broks, 2022, 2023
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,9 +21,10 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.06.10
+// Version: 23.01.25
 // EndLic
 
+using NSKthura;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -170,6 +171,8 @@ namespace SS2MapData {
 			// There really should be an easier way to do this!
 
 			Meta.Register(SeinSource, "Sein!");
+
+			KthuraDraw.DrawDriver = new KthuraDrawFake();
 		}
 		#endregion
 
