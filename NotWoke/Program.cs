@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2022
+// (c) Jeroen P. Broks, 2022, 2023
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.06.01
+// Version: 23.01.25
 // EndLic
 
 #region Using
@@ -39,6 +39,8 @@ string ScottyFile() => Dirry.AD(@"Scyndi:Projects\Applications\Apollo\Games\Star
 GINIE OwnData;
 GINIE Scotty;
 
+KthuraDraw.DrawDriver = new KthuraDrawFake();
+
 string NCount(KthuraLayer L,string pref) {
 	var s = "";
 	do { s = $"TRANS_{pref}__{Roman.ToRoman(Count++)}"; } while (L.HasTag(s));
@@ -47,7 +49,7 @@ string NCount(KthuraLayer L,string pref) {
 }
 
 void Init() {
-	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","22.06.01");
+	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","23.01.25");
 	MKL.Lic    ("Star Story 2 - The Virus Strikes Back - Program.cs","GNU General Public License 3");
 	JCR6_zlib.Init();
 	Dirry.InitAltDrives();
@@ -110,11 +112,18 @@ void AdaptMap(string fname) {
 					}
 					var ktgtag=$"{fname}_{lay.Key}__{obj.Tag}";
 					var TLoc = $"Lokatie:{ktgtag}";
-					Scotty.ListAddNew("Kaarten", "Lijst", fname);
+					if (fname.ToUpper() != "015_EFU_HQ_2")
+						Scotty.ListAddNew("Kaarten", "Lijst", fname);
 					Scotty["Kaarten",fname] = Ask(ktgtag, "Map", $"{ktgtag} is part of map: ", kth.MetaData["Title"]);
-					Scotty.ListAddNew($"Kaart:{fname}", "Lokaties", ktgtag);
 					Scotty[TLoc, "Naam"] = Ask(ktgtag, "Loc", $"{ktgtag} as specific name to name it by in the menu: ");
 					Scotty[TLoc, "Kthura"] = fname;
+					if (fname.ToUpper() == "015_EFU_HQ_2") {
+						Scotty[TLoc, "Lijst"] = "014_EFU_HQ_1";
+						QCol.Doing("Relocate", "HQ Part 1 and 2 merge!\x7");
+					} else
+						Scotty[TLoc, "Lijst"] = fname;
+					//Scotty.ListAddNew($"Kaart:{fname}", "Lokaties", ktgtag);
+					Scotty.ListAddNew($"Kaart:{Scotty[TLoc, "Lijst"]}", "Lokaties", ktgtag);
 					Scotty[TLoc, "Laag"] = lay.Key;
 					Scotty[TLoc, "Object"] = obj.Tag;
 
