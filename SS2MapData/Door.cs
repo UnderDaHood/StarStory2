@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2022
+// (c) Jeroen P. Broks, 2022, 2023
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.05.13
+// Version: 23.04.27
 // EndLic
 
 using System;
@@ -65,8 +65,8 @@ namespace SS2MapData {
 			foreach (var p in Parent.TheMap.Layers) {
 				Debug.WriteLine($"DOORS> Scanning layer: {p.Key}");				
 				foreach (var o in p.Value.Objects) {
-					if (qstr.Prefixed(o.Tag, "DOOR")) {
-						if (o.kind == "TiledArea" || o.kind == "StretchedArea") {
+					if (qstr.Prefixed(o.Tag.ToUpper(), "DOOR")) {
+						if (o.kind == "TiledArea" || o.kind == "StretchedArea" || o.kind=="Rect") {
 							var OTS = o.Tag.Trim().ToUpper().Split('_');
 							if (OTS.Length >= 2 && OTS[0].Length == 5) {
 								Debug.WriteLine($"DOORS> Door found: {p.Key}::{o.Tag}");
