@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 23.01.25
+// Version: 23.07.05
 // EndLic
 
 #region Using
@@ -49,7 +49,7 @@ string NCount(KthuraLayer L,string pref) {
 }
 
 void Init() {
-	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","23.01.25");
+	MKL.Version("Star Story 2 - The Virus Strikes Back - Program.cs","23.07.05");
 	MKL.Lic    ("Star Story 2 - The Virus Strikes Back - Program.cs","GNU General Public License 3");
 	JCR6_zlib.Init();
 	Dirry.InitAltDrives();
