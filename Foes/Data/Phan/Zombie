@@ -44,7 +44,6 @@ SCRIPT=Default
 	ACT_ATTACK
 	FOE_GLOOM
 	FOE_INVADE
-	FOE_TAKEOVER
 *end
 [ALG]
 CREATIONFILE=E:/Projects/Applications/Apollo/Games/Star Story 2/Dev/Foes/Data/Phan/Zombie

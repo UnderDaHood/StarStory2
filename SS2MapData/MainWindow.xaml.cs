@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 23.01.25
+// Version: 23.09.07
 // EndLic
 
 using NSKthura;
@@ -414,6 +414,7 @@ namespace SS2MapData {
 			Grid_Boss.Visibility = Visibility.Visible;
 			Boss_Arena.Text = BS.Arena;
 			Boss_Tune.Text = BS.Music;
+			OpenDoor.IsChecked = BS.OpenDoor;
 			for (int idx = 1; idx <= 9; ++idx) {
 				BossFoe[idx].Text = BS[idx];
 				for (int skill = 1; skill <= 3; ++skill) BossSkill[idx, skill].Text = $"{BS[idx, skill]}";
@@ -446,6 +447,12 @@ namespace SS2MapData {
 		private void NewVitalAdd_Click(object sender, RoutedEventArgs e) {
 			KthuraData.Current.AddVital(NewVital.Text);
 			NewVital.Text = "";
+		}
+
+		private void OpenDoor_Checked(object sender, RoutedEventArgs e) {
+			var CH=(CheckBox)sender;
+			var BS = KthuraData.Current.CurBoss;
+			BS.OpenDoor = CH.IsChecked==true;
 		}
 	}
 }

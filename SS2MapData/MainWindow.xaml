@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Please note that some references to data like pictures or audio, do not automatically
 fall under this licenses. Mostly this is noted in the respective files.
 
-Version: 23.01.08
+Version: 23.09.07
 End License block -->
 <Window x:Class="SS2MapData.MainWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -279,8 +279,8 @@ End License block -->
 							<TextBox x:Name="BOSS9_Skill2" Foreground="#ffffb400" Background="#ff0f0b00" Margin="274,0,-274,0" TextChanged="BossSkillChange"/>
 							<TextBox x:Name="BOSS9_Skill3" Foreground="#ffff0000" Background="#ff0f0000" Margin="411,0,-411,0" TextChanged="BossSkillChange"/>
 						</Grid>
-
-					</Grid>
+                        <CheckBox x:Name="OpenDoor" Foreground="#ffb400" Content="Open door after fight" VerticalAlignment="Bottom" Margin="-9,0,9,-420" Checked="OpenDoor_Checked" Unchecked="OpenDoor_Checked" />
+                    </Grid>
 				</Grid>
 			</TabItem>
 

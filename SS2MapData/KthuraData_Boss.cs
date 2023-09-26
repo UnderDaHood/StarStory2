@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2022
+// (c) Jeroen P. Broks, 2022, 2023
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 22.06.10
+// Version: 23.09.07
 // EndLic
 
 using System;
@@ -46,6 +46,11 @@ namespace SS2MapData {
 			public string this[int idx] {
 				get => Parent.Foes[Tag, $"Foe{idx}"];
 				set { Parent.Foes[Tag, $"Foe{idx}"] = value; }
+			}
+
+			public bool OpenDoor {
+				get => Parent.Foes[Tag, "OpenDoor"].ToUpper() != "FALSE";
+				set => Parent.Foes[Tag, "OpenDoor"] = value.ToString().ToLower();
 			}
 			
 			public string Arena {
@@ -84,7 +89,7 @@ namespace SS2MapData {
 			if (Foes.HasSection(Tag)) { Confirm.Annoy("A vital boss tagged like that already exsts!", "Error", System.Windows.Forms.MessageBoxIcon.Error); return; }
 			Foes[Tag, "Creation"] = $"{DateTime.Now}"; // This only guarantees the tag exists, nothing more.
 		}
-        
+		
 
 		void ScanBosses() {
 			BossList.Clear();
